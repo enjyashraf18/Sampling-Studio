@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1379</width>
+    <height>870</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1256</width>
+    <height>870</height>
+   </size>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+background-color: rgb(42, 42, 42);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="Channel1Viewer">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>100</y>
+      <width>731</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(24, 24, 24);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+   <widget class="QFrame" name="Channel1Editor">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>100</y>
+      <width>261</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color: rgb(24, 24, 24);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QFrame" name="InnerWindowChannel1">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>241</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+border-radius: 20px;
+background-color: rgb(42, 42, 42);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QPushButton" name="zoomOutChannel1">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>80</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 20px;
+font-weight:800;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>Deliverables/zoom-out (1).png</normaloff>Deliverables/zoom-out (1).png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>24</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="RewindChannel1">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>140</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+      </property>
+      <property name="text">
+       <string> Rewind</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>Deliverables/rewind-button.png</normaloff>Deliverables/rewind-button.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="zoomInChannel1">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>80</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 20px;
+font-weight:800;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>Deliverables/zoom-in (1).png</normaloff>Deliverables/zoom-in (1).png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>24</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Channel1Label">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>10</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:white;
+font-size: 18px</string>
+      </property>
+      <property name="text">
+       <string>Channel 1</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rabbitChannel2">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>180</y>
+        <width>31</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>Deliverables/rabbit (2).png</pixmap>
+      </property>
+     </widget>
+     <widget class="QSlider" name="SpeedSliderChannel1">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>200</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QSlider::groove:horizontal {
+    height: 5px;
+    background: white;  
+    border-radius: 6px;    
+}
+
+QSlider::handle:horizontal { 
+	background-color: rgb(0, 170, 255);
+    border: 1px solid #333333;
+    width: 10px;
+    height: 10px;
+    border-radius: 6px;    
+    margin: -4px 0;       
+}
+</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="turtleChannel1">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>180</y>
+        <width>31</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>Deliverables/turtle (2).png</pixmap>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="Channel2Viewer">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>500</y>
+      <width>731</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(24, 24, 24);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+   <widget class="QFrame" name="ScrollableBarForSignals">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>251</width>
+      <height>791</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QFrame" name="SignalEditingWindow">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>231</width>
+       <height>251</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(24, 24, 24);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QFrame" name="InnerSignalWindow">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>211</width>
+        <height>231</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+border-radius: 20px;
+background-color: rgb(42, 42, 42);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="Signal1Label">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>10</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);
+font-size: 18px</string>
+       </property>
+       <property name="text">
+        <string>Signal#1</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="RenameButton">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>70</y>
+         <width>131</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+       </property>
+       <property name="text">
+        <string>Rename</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>Deliverables/rename.png</normaloff>Deliverables/rename.png</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="ColorButton">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>120</y>
+         <width>131</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+       </property>
+       <property name="text">
+        <string>Change Color</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>Deliverables/color-wheel.png</normaloff>Deliverables/color-wheel.png</iconset>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="channel1Chaeckbox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>170</y>
+         <width>81</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Channel 1</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="channel2Checkbox">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>170</y>
+         <width>81</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Channel 2</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="TaskBar">
+    <property name="geometry">
+     <rect>
+      <x>-1</x>
+      <y>0</y>
+      <width>1381</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(24, 24, 24);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="UploadButton">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>10</y>
+       <width>121</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+background-color:transparent;
+font-weight:800;</string>
+     </property>
+     <property name="text">
+      <string>Upload File</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>Deliverables/downloads.png</normaloff>Deliverables/downloads.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ConnectToWebsite">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>10</y>
+       <width>171</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+background-color:transparent;
+font-weight:800;</string>
+     </property>
+     <property name="text">
+      <string>Connect to website</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>Deliverables/world-wide-web.png</normaloff>Deliverables/world-wide-web.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ExportButton">
+     <property name="geometry">
+      <rect>
+       <x>850</x>
+       <y>10</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+background-color:transparent;
+font-weight:800;</string>
+     </property>
+     <property name="text">
+      <string>Export to PDF</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>Deliverables/share (1).png</normaloff>Deliverables/share (1).png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>450</y>
+      <width>1061</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_13">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>400</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+background-color:rgb(24,24,24);
+font-weight:800;
+border-radius: 15px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Deliverables/play-button.png</normaloff>Deliverables/play-button.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>25</width>
+      <height>25</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_14">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>400</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+background-color:rgb(24,24,24);
+font-weight:800;
+border-radius: 15px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Deliverables/video-pause-button.png</normaloff>Deliverables/video-pause-button.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>25</width>
+      <height>25</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QSlider" name="horizontalSlider_2">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>410</y>
+      <width>611</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QSlider::groove:horizontal {
+    height: 5px;
+    background: white;  
+    border-radius: 3px;    
+}
+
+QSlider::handle:horizontal {
+    background: #000000;  
+    border: 1px solid #333333;
+    width: 10px;
+    height: 10px;
+    border-radius: 6px;    
+    margin: -4px 0;       
+}
+</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QSlider" name="verticalSlider">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>110</y>
+      <width>16</width>
+      <height>261</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QSlider::groove:vertical {
+    width: 6px;
+    background: white;  
+    border-radius: 3px;   
+}
+
+QSlider::handle:vertical {
+    background: #000000;   
+    border: 1px solid #333333;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;    
+    margin: 0 -4px;       
+}
+</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_7">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>60</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+    </property>
+    <property name="text">
+     <string> Link channels</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Deliverables/link.png</normaloff>Deliverables/link.png</iconset>
+    </property>
+   </widget>
+   <widget class="QSlider" name="verticalSlider_2">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>510</y>
+      <width>16</width>
+      <height>261</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QSlider::groove:vertical {
+    width: 6px;
+    background: white;  
+    border-radius: 3px;   
+}
+
+QSlider::handle:vertical {
+    background: #000000;   
+    border: 1px solid #333333;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;    
+    margin: 0 -4px;       
+}
+</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QSlider" name="horizontalSlider_3">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>810</y>
+      <width>611</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QSlider::groove:horizontal {
+    height: 5px;
+    background: white;  
+    border-radius: 3px;    
+}
+
+QSlider::handle:horizontal {
+    background: #000000;  
+    border: 1px solid #333333;
+    width: 10px;
+    height: 10px;
+    border-radius: 6px;    
+    margin: -4px 0;       
+}
+</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_15">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>800</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+background-color:rgb(24,24,24);
+font-weight:800;
+border-radius: 15px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Deliverables/video-pause-button.png</normaloff>Deliverables/video-pause-button.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>25</width>
+      <height>25</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_16">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>800</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+background-color:rgb(24,24,24);
+font-weight:800;
+border-radius: 15px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Deliverables/play-button.png</normaloff>Deliverables/play-button.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>25</width>
+      <height>25</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QFrame" name="Channel2Editor">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>500</y>
+      <width>261</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color: rgb(24, 24, 24);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QFrame" name="InnerWindowChannel2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>241</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+border-radius: 20px;
+background-color: rgb(42, 42, 42);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QPushButton" name="ZoomOutChannel2">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>80</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 20px;
+font-weight:800;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>Deliverables/zoom-out (1).png</normaloff>Deliverables/zoom-out (1).png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>24</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="RewindButtonChannel2">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>140</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+      </property>
+      <property name="text">
+       <string> Rewind</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>Deliverables/rewind-button.png</normaloff>Deliverables/rewind-button.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="zoomInChannel2">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>80</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 20px;
+font-weight:800;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>Deliverables/zoom-in (1).png</normaloff>Deliverables/zoom-in (1).png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>24</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Channel2Label">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>10</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white;
+font-size: 18px</string>
+      </property>
+      <property name="text">
+       <string>Channel 2</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="RabbitChannel2">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>180</y>
+        <width>31</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>Deliverables/rabbit (2).png</pixmap>
+      </property>
+     </widget>
+     <widget class="QSlider" name="SpeedSliderChannel2">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>200</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QSlider::groove:horizontal {
+    height: 5px;
+    background: white;  
+    border-radius: 6px;    
+}
+
+QSlider::handle:horizontal { 
+	background-color: rgb(0, 170, 255);
+    border: 1px solid #333333;
+    width: 10px;
+    height: 10px;
+    border-radius: 6px;    
+    margin: -4px 0;       
+}
+</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TurtleChannel2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>180</y>
+        <width>31</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>Deliverables/turtle (2).png</pixmap>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <zorder>ScrollableBarForSignals</zorder>
+   <zorder>Channel1Viewer</zorder>
+   <zorder>Channel1Editor</zorder>
+   <zorder>Channel2Viewer</zorder>
+   <zorder>TaskBar</zorder>
+   <zorder>line</zorder>
+   <zorder>pushButton_13</zorder>
+   <zorder>pushButton_14</zorder>
+   <zorder>horizontalSlider_2</zorder>
+   <zorder>verticalSlider</zorder>
+   <zorder>pushButton_7</zorder>
+   <zorder>verticalSlider_2</zorder>
+   <zorder>horizontalSlider_3</zorder>
+   <zorder>pushButton_15</zorder>
+   <zorder>pushButton_16</zorder>
+   <zorder>Channel2Editor</zorder>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
