@@ -38,6 +38,109 @@ background-color: rgb(42, 42, 42);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_9">
+    <item row="1" column="0">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QWidget" name="widget" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>1300</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(24, 24, 24);</string>
+          </property>
+          <widget class="QPushButton" name="pushButton">
+           <property name="geometry">
+            <rect>
+             <x>680</x>
+             <y>0</y>
+             <width>250</width>
+             <height>50</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+background-color:transparent;
+font-weight:800;</string>
+           </property>
+           <property name="text">
+            <string>Signal Mixer/Compressor</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>GUI/Deliverables/SignalMixer.png</normaloff>GUI/Deliverables/SignalMixer.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="geometry">
+            <rect>
+             <x>520</x>
+             <y>0</y>
+             <width>150</width>
+             <height>50</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+background-color:transparent;
+font-weight:800;</string>
+           </property>
+           <property name="text">
+            <string>Upload file</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>GUI/Deliverables/upload.png</normaloff>GUI/Deliverables/upload.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
     <item row="2" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
@@ -49,65 +152,51 @@ background-color: rgb(42, 42, 42);</string>
             <property name="minimumSize">
              <size>
               <width>273</width>
-              <height>0</height>
+              <height>380</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>273</width>
-              <height>16777215</height>
+              <height>380</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">background-color: rgb(24, 24, 24);</string>
             </property>
-            <widget class="QWidget" name="widget_5" native="true">
+            <widget class="QWidget" name="horizontalLayoutWidget">
              <property name="geometry">
               <rect>
                <x>10</x>
                <y>10</y>
                <width>251</width>
-               <height>371</height>
+               <height>361</height>
               </rect>
              </property>
-             <property name="maximumSize">
-              <size>
-               <width>270</width>
-               <height>1000</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius: 20px;
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QWidget" name="widget_5" native="true">
+                <property name="maximumSize">
+                 <size>
+                  <width>270</width>
+                  <height>1000</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border-radius: 20px;
 background-color: rgb(42, 42, 42);</string>
-             </property>
-             <widget class="QLineEdit" name="lineEdit">
-              <property name="geometry">
-               <rect>
-                <x>40</x>
-                <y>20</y>
-                <width>161</width>
-                <height>41</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(24, 24, 24);
-color: rgb(255, 255, 255);
-border: 1px solid transparent;
-border-radius: 20px;
-padding-left: 10px;</string>
-              </property>
-             </widget>
-             <widget class="QSlider" name="horizontalSlider">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>120</y>
-                <width>201</width>
-                <height>22</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QSlider::groove:horizontal {
+                </property>
+                <widget class="QSlider" name="horizontalSlider">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>120</y>
+                   <width>201</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QSlider::groove:horizontal {
     height: 5px;
     background: white;  
     border-radius: 3px;    
@@ -122,77 +211,77 @@ QSlider::handle:horizontal {
     margin: -4px 0;       
 }
 </string>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label">
-              <property name="geometry">
-               <rect>
-                <x>30</x>
-                <y>90</y>
-                <width>31</width>
-                <height>41</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color:transparent;</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="pixmap">
-               <pixmap>GUI/Deliverables/Amplitude.png</pixmap>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_2">
-              <property name="geometry">
-               <rect>
-                <x>70</x>
-                <y>100</y>
-                <width>81</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color:white;
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label">
+                 <property name="geometry">
+                  <rect>
+                   <x>30</x>
+                   <y>90</y>
+                   <width>31</width>
+                   <height>41</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color:transparent;</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="pixmap">
+                  <pixmap>GUI/Deliverables/Amplitude.png</pixmap>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>70</x>
+                   <y>100</y>
+                   <width>81</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:white;
 font-size: 14px;
 font-weight:600;</string>
-              </property>
-              <property name="text">
-               <string>Amplitude</string>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_3">
-              <property name="geometry">
-               <rect>
-                <x>190</x>
-                <y>100</y>
-                <width>21</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color:white;
+                 </property>
+                 <property name="text">
+                  <string>Amplitude</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_3">
+                 <property name="geometry">
+                  <rect>
+                   <x>190</x>
+                   <y>100</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:white;
 font-size: 11px;
 font-weight:800;</string>
-              </property>
-              <property name="text">
-               <string>10</string>
-              </property>
-             </widget>
-             <widget class="QSlider" name="horizontalSlider_3">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>190</y>
-                <width>201</width>
-                <height>22</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QSlider::groove:horizontal {
+                 </property>
+                 <property name="text">
+                  <string>10</string>
+                 </property>
+                </widget>
+                <widget class="QSlider" name="horizontalSlider_3">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>190</y>
+                   <width>201</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QSlider::groove:horizontal {
     height: 5px;
     background: white;  
     border-radius: 3px;    
@@ -207,94 +296,94 @@ QSlider::handle:horizontal {
     margin: -4px 0;       
 }
 </string>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_4">
-              <property name="geometry">
-               <rect>
-                <x>70</x>
-                <y>170</y>
-                <width>81</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color:white;
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_4">
+                 <property name="geometry">
+                  <rect>
+                   <x>70</x>
+                   <y>170</y>
+                   <width>81</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:white;
 font-size: 14px;
 font-weight:500;</string>
-              </property>
-              <property name="text">
-               <string>Frequency</string>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_5">
-              <property name="geometry">
-               <rect>
-                <x>190</x>
-                <y>170</y>
-                <width>31</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color:white;
+                 </property>
+                 <property name="text">
+                  <string>Frequency</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_5">
+                 <property name="geometry">
+                  <rect>
+                   <x>190</x>
+                   <y>170</y>
+                   <width>31</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:white;
 font-size: 11px;
 font-weight:800;</string>
-              </property>
-              <property name="text">
-               <string>120</string>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_6">
-              <property name="geometry">
-               <rect>
-                <x>210</x>
-                <y>100</y>
-                <width>21</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color:white;
+                 </property>
+                 <property name="text">
+                  <string>120</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_6">
+                 <property name="geometry">
+                  <rect>
+                   <x>210</x>
+                   <y>100</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:white;
 font-size: 11px;
 font-weight:800;</string>
-              </property>
-              <property name="text">
-               <string>m</string>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_7">
-              <property name="geometry">
-               <rect>
-                <x>210</x>
-                <y>170</y>
-                <width>21</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color:white;
+                 </property>
+                 <property name="text">
+                  <string>m</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_7">
+                 <property name="geometry">
+                  <rect>
+                   <x>210</x>
+                   <y>170</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:white;
 font-size: 11px;
 font-weight:800;</string>
-              </property>
-              <property name="text">
-               <string>Hz</string>
-              </property>
-             </widget>
-             <widget class="QSlider" name="horizontalSlider_4">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>260</y>
-                <width>201</width>
-                <height>22</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QSlider::groove:horizontal {
+                 </property>
+                 <property name="text">
+                  <string>Hz</string>
+                 </property>
+                </widget>
+                <widget class="QSlider" name="horizontalSlider_4">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>260</y>
+                   <width>201</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QSlider::groove:horizontal {
     height: 5px;
     background: white;  
     border-radius: 3px;    
@@ -309,108 +398,166 @@ QSlider::handle:horizontal {
     margin: -4px 0;       
 }
 </string>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_8">
-              <property name="geometry">
-               <rect>
-                <x>70</x>
-                <y>240</y>
-                <width>81</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color:white;
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_8">
+                 <property name="geometry">
+                  <rect>
+                   <x>70</x>
+                   <y>240</y>
+                   <width>81</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:white;
 font-size: 14px;
 font-weight:500;</string>
-              </property>
-              <property name="text">
-               <string>Phase Shift</string>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_9">
-              <property name="geometry">
-               <rect>
-                <x>190</x>
-                <y>240</y>
-                <width>31</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color:white;
+                 </property>
+                 <property name="text">
+                  <string>Phase Shift</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_9">
+                 <property name="geometry">
+                  <rect>
+                   <x>190</x>
+                   <y>240</y>
+                   <width>31</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:white;
 font-size: 11px;
 font-weight:800;</string>
-              </property>
-              <property name="text">
-               <string>90</string>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_10">
-              <property name="geometry">
-               <rect>
-                <x>210</x>
-                <y>240</y>
-                <width>21</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color:white;
+                 </property>
+                 <property name="text">
+                  <string>90</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_10">
+                 <property name="geometry">
+                  <rect>
+                   <x>210</x>
+                   <y>240</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:white;
 font-size: 11px;
 font-weight:800;</string>
-              </property>
-              <property name="text">
-               <string>°</string>
-              </property>
-             </widget>
-             <widget class="QPushButton" name="pushButton_3">
-              <property name="geometry">
-               <rect>
-                <x>70</x>
-                <y>310</y>
-                <width>101</width>
-                <height>31</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(24, 24, 24);
+                 </property>
+                 <property name="text">
+                  <string>°</string>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="pushButton_3">
+                 <property name="geometry">
+                  <rect>
+                   <x>70</x>
+                   <y>310</y>
+                   <width>101</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(24, 24, 24);
 color: rgb(255, 255, 255);
 border: 1px;
 border-radius: 15px;
 font-weight:800;</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>GUI/Deliverables/bin.png</normaloff>GUI/Deliverables/bin.png</iconset>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_11">
-              <property name="geometry">
-               <rect>
-                <x>30</x>
-                <y>160</y>
-                <width>31</width>
-                <height>41</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color:transparent;</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="pixmap">
-               <pixmap>GUI/Deliverables/Frequency.png</pixmap>
-              </property>
-             </widget>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>GUI/Deliverables/bin.png</normaloff>GUI/Deliverables/bin.png</iconset>
+                 </property>
+                </widget>
+                <widget class="QComboBox" name="comboBox">
+                 <property name="geometry">
+                  <rect>
+                   <x>50</x>
+                   <y>30</y>
+                   <width>141</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QComboBox {
+                color: rgb(255, 255, 255);
+                font-size: 18px;
+                background-color: rgb(24, 24, 24);
+                padding-left: 15px;
+                border: 1px solid transparent;
+                border-radius: 15px; /* Rounded corners */
+            }
+            
+            QComboBox QAbstractItemView {
+                background-color: #444444;    /* Dropdown list background */
+                color: #ffffff;               /* Dropdown list text color */
+                selection-background-color: #555555;  /* Highlight background */
+                selection-color: #FF5757;     /* Highlighted text color */
+            }
+
+            /* Remove the default arrow */
+            QComboBox::drop-down {
+                margin-right: 10px;
+                border-top-right-radius: 15px; /* Apply radius to the top-right */
+                border-bottom-right-radius: 15px; /* Apply radius to the bottom-right */
+            }
+
+            /* Customize the arrow (triangle) */
+            QComboBox::down-arrow {
+                image: url(Deliverables/down-arrow.png); /* Optional: use a custom image for the arrow */
+                width: 10px;
+                height: 10px;
+                margin-right: 10px; /* Moves the arrow more to the right */
+            }</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_20">
+                 <property name="geometry">
+                  <rect>
+                   <x>30</x>
+                   <y>170</y>
+                   <width>31</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="pixmap">
+                  <pixmap>GUI/Deliverables/pulse.png</pixmap>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_21">
+                 <property name="geometry">
+                  <rect>
+                   <x>30</x>
+                   <y>240</y>
+                   <width>31</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="pixmap">
+                  <pixmap>GUI/Deliverables/phi.png</pixmap>
+                 </property>
+                </widget>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </widget>
           </item>
@@ -423,13 +570,13 @@ font-weight:800;</string>
             <property name="minimumSize">
              <size>
               <width>273</width>
-              <height>0</height>
+              <height>380</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>273</width>
-              <height>16777215</height>
+              <height>380</height>
              </size>
             </property>
             <property name="styleSheet">
@@ -441,7 +588,7 @@ font-weight:800;</string>
                <x>10</x>
                <y>10</y>
                <width>251</width>
-               <height>371</height>
+               <height>361</height>
               </rect>
              </property>
              <property name="maximumSize">
@@ -505,7 +652,7 @@ QSlider::handle:horizontal {
              <widget class="QLabel" name="label_13">
               <property name="geometry">
                <rect>
-                <x>60</x>
+                <x>70</x>
                 <y>110</y>
                 <width>81</width>
                 <height>21</height>
@@ -622,6 +769,22 @@ font-weight:500</string>
                <string>Normalize</string>
               </property>
              </widget>
+             <widget class="QLabel" name="label_22">
+              <property name="geometry">
+               <rect>
+                <x>30</x>
+                <y>110</y>
+                <width>31</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap>GUI/Deliverables/pulse.png</pixmap>
+              </property>
+             </widget>
             </widget>
            </widget>
           </item>
@@ -630,9 +793,645 @@ font-weight:500</string>
        </layout>
       </item>
       <item>
-       <spacer name="horizontalSpacer">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_11">
+            <property name="minimumSize">
+             <size>
+              <width>110</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:white;
+font-size: 14px;
+font-weight:600;</string>
+            </property>
+            <property name="text">
+             <string>Original Signal:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/zoom-in (1).png</normaloff>GUI/Deliverables/zoom-in (1).png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/zoom-out (1).png</normaloff>GUI/Deliverables/zoom-out (1).png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_6">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/bin.png</normaloff>GUI/Deliverables/bin.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_11">
+          <item>
+           <widget class="QWidget" name="widget_9" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>1000</width>
+              <height>140</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="label_17">
+            <property name="minimumSize">
+             <size>
+              <width>110</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:white;
+font-size: 14px;
+font-weight:600;</string>
+            </property>
+            <property name="text">
+             <string>Reconstructed Signal:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_7">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/zoom-in (1).png</normaloff>GUI/Deliverables/zoom-in (1).png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_8">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/zoom-out (1).png</normaloff>GUI/Deliverables/zoom-out (1).png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_9">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/bin.png</normaloff>GUI/Deliverables/bin.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_10">
+          <item>
+           <widget class="QWidget" name="widget_8" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>140</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLabel" name="label_18">
+            <property name="minimumSize">
+             <size>
+              <width>120</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:white;
+font-size: 14px;
+font-weight:600;</string>
+            </property>
+            <property name="text">
+             <string>Difference (Error) Signal:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_10">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/zoom-in (1).png</normaloff>GUI/Deliverables/zoom-in (1).png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_11">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/zoom-out (1).png</normaloff>GUI/Deliverables/zoom-out (1).png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_12">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/bin.png</normaloff>GUI/Deliverables/bin.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <widget class="QWidget" name="widget_2" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>140</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QLabel" name="label_19">
+            <property name="minimumSize">
+             <size>
+              <width>110</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:white;
+font-size: 14px;
+font-weight:600;</string>
+            </property>
+            <property name="text">
+             <string>Frequency Domain:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_14">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/zoom-in (1).png</normaloff>GUI/Deliverables/zoom-in (1).png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_13">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/zoom-out (1).png</normaloff>GUI/Deliverables/zoom-out (1).png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_15">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>GUI/Deliverables/bin.png</normaloff>GUI/Deliverables/bin.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <widget class="QWidget" name="widget_7" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>140</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(24, 24, 24);</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -642,176 +1441,23 @@ font-weight:500</string>
         </property>
        </spacer>
       </item>
-      <item>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="1" column="1">
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QWidget" name="widget_2" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>500</width>
-              <height>400</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(24, 24, 24);</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="0" column="1">
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QWidget" name="widget_7" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>500</width>
-              <height>400</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(24, 24, 24);</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="0" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_8">
-          <item>
-           <widget class="QWidget" name="widget_8" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>500</width>
-              <height>400</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(24, 24, 24);</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_9">
-          <item>
-           <widget class="QWidget" name="widget_9" native="true">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(24, 24, 24);</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </item>
      </layout>
     </item>
-    <item row="1" column="0">
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QWidget" name="widget" native="true">
-          <property name="minimumSize">
-           <size>
-            <width>1300</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(24, 24, 24);</string>
-          </property>
-          <widget class="QPushButton" name="pushButton">
-           <property name="geometry">
-            <rect>
-             <x>680</x>
-             <y>0</y>
-             <width>250</width>
-             <height>50</height>
-            </rect>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>250</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color: rgb(255, 255, 255);
-font-size: 15px;
-background-color:transparent;
-font-weight:800;</string>
-           </property>
-           <property name="text">
-            <string>Signal Mixer/Compressor</string>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>GUI/Deliverables/SignalMixer.png</normaloff>GUI/Deliverables/SignalMixer.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>20</width>
-             <height>20</height>
-            </size>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="pushButton_2">
-           <property name="geometry">
-            <rect>
-             <x>520</x>
-             <y>0</y>
-             <width>150</width>
-             <height>50</height>
-            </rect>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>150</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color: rgb(255, 255, 255);
-font-size: 15px;
-background-color:transparent;
-font-weight:800;</string>
-           </property>
-           <property name="text">
-            <string>Upload file</string>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>GUI/Deliverables/upload.png</normaloff>GUI/Deliverables/upload.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>20</width>
-             <height>20</height>
-            </size>
-           </property>
-          </widget>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
+    <item row="3" column="0">
+     <spacer name="verticalSpacer_6">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>
