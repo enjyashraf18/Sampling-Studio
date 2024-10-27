@@ -16,52 +16,49 @@ def whittaker_shannon_interpolation(x_points, sampled_x, sampled_y, sampling_per
     reconstructed = np.dot(sampled_y, np.sinc(sinc_matrix / sampling_period))
     return reconstructed
 
-class signal_class:
+
+class SignalClass:
     def __init__(self, data_x, data_y, signal_type, amplitude, plot_widget, color, signal_number, signal_id):
         self.x_data = data_x
         self.y_data = data_y
         self.type = signal_type  # original, reconstructed, difference
-        self.amplitude_data = self.y_data
-        self.amplitude = amplitude
+        # self.amplitude_data = self.y_data
+        # self.amplitude = amplitude
         self.plot_widget = plot_widget
         self.color = color
-        self.signal_number = signal_number
+        # self.signal_number = signal_number
         self.signal_id = signal_id
-        self.line = self.plot_widget.plot(data_x, self.amplitude_data, pen=pg.mkPen(color=self.color, width=2), name=f"Signal{str(self.signal_number)}")
+        # self.line = self.plot_widget.plot(data_x, self.amplitude_data, pen=pg.mkPen(color=self.color, width=2), name=f"Signal{str(self.signal_number)}")
 
 
-    def update_amplitude(self, amplitude):
-        self.amplitude_data = [amplitude + val for val in self.amplitude_data]
-        self.amplitude = int(max(self.amplitude_data))
-        self.line.setData(self.x_data, self.amplitude_data)
-
-class reconstructed_signal_class:
-    def __init__(self, data_x, data_y, signal_type):
-        self.x = data_x
-        self.y = data_y
-        self.type = signal_type  # original, reconstructed, difference
-        # self.plot_widget = plot_widget
-        self.color = None
+    def plot_original_signal(self, data_x, data_y, amplitude, first_plot, color, signal_id):
+        # signal = SignalClass(data_x, data_y, 'original', amplitude, first_plot, color, len(original_signals_list) + 1, signal_id)
+        # chosen_signal = signal
+        # original_signals_list.append(signal)
+        pass
 
 
+    def plot_reconstructed_signal(self, data_x, data_y, sampling_period, second_plot):
+        x_sampled = np.arange(np.min(data_x), np.max(data_x), sampling_period)
+        y_sampled = np.interp(x_sampled, data_x, data_y)
+        # reconstructed_signal = reconstructed_signal_class(x_sampled, y_sampled, 'reconstructed')
+        # recovered_y, recovered_x = scipy.signal.resample(x_sampled)
+        y_reconstructed = whittaker_shannon_interpolation(data_x, x_sampled, y_sampled, sampling_period)
+        second_plot.plot(data_x, y_reconstructed, pen='r')
+
+    # def update_amplitude(self, amplitude):
+    #     self.amplitude_data = [amplitude + val for val in self.amplitude_data]
+    #     self.amplitude = int(max(self.amplitude_data))
+    #     self.line.setData(self.x_data, self.amplitude_data)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# class reconstructed_signal_class:
+#     def __init__(self, data_x, data_y, signal_type):
+#         self.x = data_x
+#         self.y = data_y
+#         self.type = signal_type  # original, reconstructed, difference
+#         # self.plot_widget = plot_widget
+#         self.color = None
 
 
     # def plot_original(self):

@@ -2,14 +2,15 @@ import sys
 import pandas as pd
 import random
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QFileDialog, QPushButton
-from PyQt5.QtGui import QColor
 import pyqtgraph as pg
-from main import *
+
+from SignalClass import SignalClass
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.original_signals_list = []
         self.first_plot_widget = pg.PlotWidget()
         self.second_plot_widget = pg.PlotWidget()
         self.third_plot_widget = pg.PlotWidget()
@@ -33,7 +34,7 @@ class MainWindow(QMainWindow):
 
         upload_amplitude_button = QPushButton("Change Amplitude")
         upload_amplitude_button.setGeometry(0, 100, 50, 50)
-        upload_amplitude_button.clicked.connect(change_amplitude)
+        # upload_amplitude_button.clicked.connect(change_amplitude)
 
         widget = QWidget()
         self.setCentralWidget(widget)
@@ -62,8 +63,8 @@ class MainWindow(QMainWindow):
             color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
             amplitude = int(max(data_y))
             self.signal_id += 1
-            plot_original_signal(data_x, data_y, amplitude, self.first_plot_widget, color, self.signal_id)
-            plot_reconstructed_signal(data_x, data_y, 1 / 500, self.second_plot_widget)
+            # plot_original_signal(data_x, data_y, amplitude, self.first_plot_widget, color, self.signal_id)
+            # plot_reconstructed_signal(data_x, data_y, 1 / 500, self.second_plot_widget)
 
 
     def open_file(self):
