@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SamplingStudio</class>
- <widget class="QMainWindow" name="SamplingStudio">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -24,7 +24,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>C:/Users/habib/.designer/backup/GUI/Deliverables/downloads.png</normaloff>C:/Users/habib/.designer/backup/GUI/Deliverables/downloads.png</iconset>
+    <normaloff>C:/Users/habib/.designer/backup/Deliverables/downloads.png</normaloff>C:/Users/habib/.designer/backup/Deliverables/downloads.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">
@@ -85,7 +85,7 @@ font-weight:800;</string>
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>GUI/Deliverables/SignalMixer.png</normaloff>GUI/Deliverables/SignalMixer.png</iconset>
+             <normaloff>Deliverables/SignalMixer.png</normaloff>Deliverables/SignalMixer.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -126,7 +126,7 @@ font-weight:800;</string>
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>GUI/Deliverables/upload.png</normaloff>GUI/Deliverables/upload.png</iconset>
+             <normaloff>Deliverables/upload.png</normaloff>Deliverables/upload.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -233,7 +233,7 @@ QSlider::handle:horizontal {
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap>GUI/Deliverables/pulse.png</pixmap>
+              <pixmap>Deliverables/pulse.png</pixmap>
              </property>
             </widget>
             <widget class="QLabel" name="frequencyLabel">
@@ -291,9 +291,9 @@ QSlider::handle:horizontal {
             <widget class="QLabel" name="frequencyQuantity">
              <property name="geometry">
               <rect>
-               <x>200</x>
+               <x>187</x>
                <y>350</y>
-               <width>31</width>
+               <width>35</width>
                <height>21</height>
               </rect>
              </property>
@@ -304,7 +304,7 @@ font-weight:800;
 border-color:transparent;</string>
              </property>
              <property name="text">
-              <string>60</string>
+              <string>0</string>
              </property>
             </widget>
             <widget class="QLabel" name="hz">
@@ -452,7 +452,7 @@ border-color:transparent;</string>
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap>GUI/Deliverables/Amplitude.png</pixmap>
+              <pixmap>Deliverables/Amplitude.png</pixmap>
              </property>
             </widget>
             <widget class="QCheckBox" name="normalize">
@@ -537,7 +537,7 @@ font-weight:800;</string>
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>GUI/Deliverables/bin.png</normaloff>GUI/Deliverables/bin.png</iconset>
+               <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
              </property>
             </widget>
             <widget class="QComboBox" name="reconstructionComboBox">
@@ -681,7 +681,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/zoom-in (1).png</normaloff>GUI/Deliverables/zoom-in (1).png</iconset>
+              <normaloff>Deliverables/zoom-in (1).png</normaloff>Deliverables/zoom-in (1).png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -717,7 +717,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/zoom-out (1).png</normaloff>GUI/Deliverables/zoom-out (1).png</iconset>
+              <normaloff>Deliverables/zoom-out (1).png</normaloff>Deliverables/zoom-out (1).png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -753,7 +753,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/bin.png</normaloff>GUI/Deliverables/bin.png</iconset>
+              <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
             </property>
            </widget>
           </item>
@@ -835,7 +835,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/zoom-in (1).png</normaloff>GUI/Deliverables/zoom-in (1).png</iconset>
+              <normaloff>Deliverables/zoom-in (1).png</normaloff>Deliverables/zoom-in (1).png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -871,7 +871,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/zoom-out (1).png</normaloff>GUI/Deliverables/zoom-out (1).png</iconset>
+              <normaloff>Deliverables/zoom-out (1).png</normaloff>Deliverables/zoom-out (1).png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -907,7 +907,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/bin.png</normaloff>GUI/Deliverables/bin.png</iconset>
+              <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
             </property>
            </widget>
           </item>
@@ -989,7 +989,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/zoom-in (1).png</normaloff>GUI/Deliverables/zoom-in (1).png</iconset>
+              <normaloff>Deliverables/zoom-in (1).png</normaloff>Deliverables/zoom-in (1).png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -1025,7 +1025,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/zoom-out (1).png</normaloff>GUI/Deliverables/zoom-out (1).png</iconset>
+              <normaloff>Deliverables/zoom-out (1).png</normaloff>Deliverables/zoom-out (1).png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -1061,7 +1061,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/bin.png</normaloff>GUI/Deliverables/bin.png</iconset>
+              <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
             </property>
            </widget>
           </item>
@@ -1070,7 +1070,7 @@ font-weight:800;</string>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_8">
           <item>
-           <widget class="QWidget" name="widget_2" native="true">
+           <widget class="QWidget" name="differenceWindow" native="true">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -1143,7 +1143,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/zoom-in (1).png</normaloff>GUI/Deliverables/zoom-in (1).png</iconset>
+              <normaloff>Deliverables/zoom-in (1).png</normaloff>Deliverables/zoom-in (1).png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -1179,7 +1179,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/zoom-out (1).png</normaloff>GUI/Deliverables/zoom-out (1).png</iconset>
+              <normaloff>Deliverables/zoom-out (1).png</normaloff>Deliverables/zoom-out (1).png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -1215,7 +1215,7 @@ font-weight:800;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>GUI/Deliverables/bin.png</normaloff>GUI/Deliverables/bin.png</iconset>
+              <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
             </property>
            </widget>
           </item>

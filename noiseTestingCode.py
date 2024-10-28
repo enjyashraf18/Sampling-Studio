@@ -5,7 +5,7 @@ from pyqtgraph.Qt import QtWidgets, QtCore
 import pandas as pd
 
 
-csv_path = "Signals/ECG_DATA.csv"
+csv_path = "delete/ECG_DATA.csv"
 csvFile = pd.read_csv(csv_path)   
 x= csvFile.iloc[:, 0].values
 y= csvFile.iloc[:, 1].values
@@ -13,7 +13,7 @@ y= csvFile.iloc[:, 1].values
 
 
 # User-defined SNR value in dB
-snr_db = float(10)
+snr_db = float(100)
 # snr range from -10 to 50 dB
 # Calculate signal power as the mean square of the signal
 signal_power = np.mean(y ** 2)
