@@ -57,11 +57,13 @@ class SignalClass:
         self.before_band_width_line = None
         self.after_band_width_line = None
         self.frequency_line = None
+        self.snr = None
+        self.noisy_data_y = self.data_y
 
 
     def calculate_maximum_frequency(self):
         time = np.array(self.data_x)
-        magnitude = np.array(self.data_y)
+        magnitude = np.array(self.noisy_data_y)
         fft_result = np.fft.fft(magnitude)  # time domain to freq domain
         frequencies = np.fft.fftfreq(len(fft_result), time[1] - time[0])
         positive_frequencies = frequencies[frequencies >= 0]
@@ -71,13 +73,13 @@ class SignalClass:
         self.sampling_period = 1/self.sampling_frequency
 
     def plot_original_signal(self):
-        self.plot_widget.plot(self.data_x, self.data_y, pen=self.color)
+        self.plot_widget.plot(self.data_x, self.noisy_data_y, pen=self.color)
 
     def plot_sample_points(self):
         self.start_time = np.min(self.data_x)
         self.end_time = np.max(self.data_x)
         self.x_sampled = np.arange(self.start_time, self.end_time, self.sampling_period)
-        self.y_sampled = np.interp(self.x_sampled, self.data_x, self.data_y)
+        self.y_sampled = np.interp(self.x_sampled, self.data_x, self.noisy_data_y)
         # for x, y in zip(self.data_x, self.data_y):
         #     if x in x_sampled:
         #         y_sampled.append(y)
@@ -97,7 +99,7 @@ class SignalClass:
         second_plot_widget.plot(self.data_x, self.y_reconstructed, pen=(50, 100, 240))
 
     def plot_difference(self, third_plot_widget):
-        difference_y = self.data_y - self.y_reconstructed
+        difference_y = self.noisy_data_y - self.y_reconstructed
         third_plot_widget.plot(self.data_x, difference_y, pen=(200, 50, 50))
 
     def create_frequency_domain(self, plot_widget_frequency_domain):
@@ -120,9 +122,8 @@ class SignalClass:
         self.before_band_width_line = plot_widget_frequency_domain.plot(
             self.frequencies - self.sampling_frequency , self.amplitude , pen = pg.mkPen(color = "red")
         )
-
-    def adding_noise(self,value):
-        snr_db = float(value)
+    def adding_noise(self):
+        snr_db = float(self.snr)
         # snr range from -10 to 50 dB
         # Calculate signal power as the mean square of the signal
         signal_power = np.mean(self.data_y ** 2)
@@ -135,9 +136,13 @@ class SignalClass:
         noise = np.random.normal(0, np.sqrt(noise_power), self.data_y.shape)
 
         # Create the noisy signal by adding noise to the y-axis values
-        noisy_y = self.data_y + noise
+        self.noisy_data_y = self.data_y + noise
 
-        return noisy_y
+        # return noisy_y
+    
+    def remove_noise(self):
+        self.noisy_data_y = self.data_y
+
 
     # def update_amplitude(self, amplitude):
     #     self.amplitude_data = [amplitude + val for val in self.amplitude_data]

@@ -3,6 +3,7 @@ import random
 import numpy as np
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton, QFileDialog, QSlider, QLabel, QLineEdit
 import pyqtgraph as pg
+from PyQt5 import QtWidgets, uic
 
 
 class composed_signal_class:
@@ -19,6 +20,9 @@ class composed_signal_class:
 class SignalComposer(QMainWindow):
     def __init__(self):
         super().__init__()
+
+        # Load the second window UI
+        uic.loadUi("compose.ui", self)
 
         self.composed_signals = []
         self.wave_type = None
