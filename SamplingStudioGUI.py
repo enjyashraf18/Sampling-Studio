@@ -1,10 +1,11 @@
 import pandas as pd
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QPushButton, QMessageBox, QFileDialog, QSlider, QWidget, QVBoxLayout, QLabel, QComboBox
+from PyQt5.QtWidgets import QPushButton, QMessageBox, QFileDialog, QSlider, QWidget, QVBoxLayout, QLabel, QComboBox,QCheckBox
+from PyQt5.QtCore import Qt
 import pyqtgraph as pg
 from SignalClass import SignalClass
-
+from composer import SignalComposer
 
 class MyWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -17,6 +18,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.current_original_signal = None
         self.original_signals_list = []
         self.signals_uploaded_count = 0
+        self.mixer_window = None
 
         self.upload_button = self.findChild(QPushButton, 'uploadButton')
         self.upload_button.clicked.connect(self.upload_signal)
@@ -70,7 +72,18 @@ class MyWindow(QtWidgets.QMainWindow):
         self.signalCombobox.currentIndexChanged.connect(self.update_signal)
 
         self.removeButton = self.findChild(QPushButton, 'binButton')
+        self.composerButton = self.findChild(QPushButton, 'mixerButton')
+        self.addNoiseCheckBox = self.findChild(QCheckBox, 'addNoise')
+        self.snrSlider = self.findChild(QSlider, 'snr')
+        self.snrLabel = self.findChild(QtWidgets.QLabel, 'snrQuantity')
+
         self.removeButton.clicked.connect(self.delete_signal)
+        self.composerButton.clicked.connect(self.open_mixer_window)
+        self.addNoiseCheckBox.stateChanged.connect(
+            lambda state: self.snr_state(state))
+        self.snrSlider.setEnabled(False)
+
+        
 
         # Removing the QWidgets from ui file to add PlotWidgets
         self.vertical_layout_11.removeWidget(self.first_plot_widget)
@@ -96,6 +109,44 @@ class MyWindow(QtWidgets.QMainWindow):
         self.frequency_slider = self.findChild(QSlider, 'frequencyCombobox')
         self.frequency_slider.valueChanged.connect(self.change_sampling_frequency)
         self.frequency_label = self.findChild(QLabel, 'frequencyQuantity')
+
+        # the zoomin into the orignal signal
+        self.zoomIn_originalSignal = self.findChild(QPushButton, 'zoomIn1')
+        self.zoomOut_origninalSignal = self.findChild(QPushButton, 'zoomOut1')
+
+
+        # the zooming into the reconstructed signal
+        self.zoomIn_reconstructedSignal = self.findChild(QPushButton, 'zoomIn2')
+        self.zoomOut_reconstructedSignal = self.findChild(QPushButton, 'zoomOut2')
+
+
+        # the zooming into the difference signal
+        self.zoomIn_differenceSignal = self.findChild(QPushButton, 'zoomIn3')
+        self.zoomOut_differenceSignal = self.findChild(QPushButton, 'zoomOut3')
+
+
+        # the zooming into the frequency graph
+        self.zoomIn_frequencySignal = self.findChild(QPushButton, 'zoomIn4')
+        self.zoomOut_frequencySignal = self.findChild(QPushButton, 'zoomOut4')
+
+
+        # link the zooming buttons to function
+
+        self.zoomIn_originalSignal.clicked.connect(lambda: self.zoom(self.first_plot, True))
+        self.zoomOut_origninalSignal.clicked.connect(lambda: self.zoom(self.first_plot, False))
+
+        self.zoomIn_reconstructedSignal.clicked.connect(lambda: self.zoom(self.second_plot, True))
+        self.zoomOut_reconstructedSignal.clicked.connect(lambda: self.zoom(self.second_plot, False))
+
+        self.zoomIn_differenceSignal.clicked.connect(lambda: self.zoom(self.third_plot, True))
+        self.zoomOut_differenceSignal.clicked.connect(lambda: self.zoom(self.third_plot, False))
+
+        self.zoomIn_frequencySignal.clicked.connect(lambda: self.zoom(self.fourth_plot, True))
+        self.zoomOut_frequencySignal.clicked.connect(lambda: self.zoom(self.fourth_plot, False))
+
+        # remove the plots
+        self.remove_plots = self.findChild(QPushButton, "bin1")
+        self.remove_plots.clicked.connect(lambda : self.clear_plots())
 
     def open_file(self):
         filename = QFileDialog.getOpenFileName(self, "Open CSV File", "", "CSV Files (*.csv)")
@@ -154,7 +205,7 @@ class MyWindow(QtWidgets.QMainWindow):
 
         self.first_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
         self.second_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
-        self.second_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
+        self.third_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
 
         print(f"max freq: {self.current_original_signal.maximum_frequency}")
 
@@ -194,6 +245,83 @@ class MyWindow(QtWidgets.QMainWindow):
         
         self.initialise_signals()
 
+    def open_mixer_window(self):
+        # Initialize the mixer window if it hasn't been created
+        if self.mixer_window is None:
+            self.mixer_window = SignalComposer()
+        # Show the mixer window
+        self.mixer_window.show()
+        self.mixer_window = None
+
+    def snr_state(self,state):
+        if state == Qt.Checked:  # checked, so apply noise
+            self.snrSlider.setRange(1,100)
+            self.snrSlider.setEnabled(True)
+            self.snrSlider.setValue(100)
+            self.snrLabel.setText(str(self.snrSlider.value()))
+            self.snrSlider.valueChanged.connect(self.snr_slider)
+        elif state == Qt.Unchecked:  # unchecked, so remove noise
+            self.snrSlider.setValue(1)
+            self.snrSlider.setEnabled(False)
+            self.snrSlider.valueChanged.disconnect()
+            self.current_original_signal.remove_noise()
+            self.clear_plots()
+            self.initialise_signals()
+
+    def snr_slider(self):
+        try:
+            self.current_original_signal.snr = self.snrSlider.value()
+        except AttributeError as e:
+            print(e)
+        
+        self.current_original_signal.adding_noise()
+        self.snrLabel.setText(str(self.snrSlider.value()))
+        self.clear_plots()
+        self.initialise_signals()
+
+    def zoom(self,plot_graph, zoomIn=True):
+        # Get the current view range
+        x_range, y_range = plot_graph.viewRange()
+
+        self.min_x_range = 0.1
+        self.max_x_range = 10
+        self.min_y_range = 0.1
+        self.max_y_range = 50
+
+        x_center = (x_range[0] + x_range[1]) / 2
+        y_center = (y_range[0] + y_range[1]) / 2
+        zoom_factor = 0.8
+
+        if zoomIn:
+            new_x_range = [(x_center - (x_center - x_range[0]) * zoom_factor),
+                           (x_center + (x_range[1] - x_center) * zoom_factor)]
+            new_y_range = [(y_center - (y_center - y_range[0]) * zoom_factor),
+                           (y_center + (y_range[1] - y_center) * zoom_factor)]
+        else:
+            new_x_range = [(x_center - (x_center - x_range[0]) / zoom_factor),
+                           (x_center + (x_range[1] - x_center) / zoom_factor)]
+            new_y_range = [(y_center - (y_center - y_range[0]) / zoom_factor),
+                           (y_center + (y_range[1] - y_center) / zoom_factor)]
+
+        new_x_span = new_x_range[1] - new_x_range[0]
+        new_y_span = new_y_range[1] - new_y_range[0]
+
+        # Apply limits to x-axis
+        if new_x_span < self.min_x_range:
+            new_x_range = [x_center - self.min_x_range / 2, x_center + self.min_x_range / 2]
+
+        elif new_x_span > self.max_x_range:
+            new_x_range = [x_center - self.max_x_range / 2, x_center + self.max_x_range / 2]
+
+        # Apply limits to y-axis
+        if new_y_span < self.min_y_range:
+            new_y_range = [y_center - self.min_y_range / 2, y_center + self.min_y_range / 2]
+
+        elif new_y_span > self.max_y_range:
+            new_y_range = [y_center - self.max_y_range / 2, y_center + self.max_y_range / 2]
+
+        plot_graph.setXRange(new_x_range[0], new_x_range[1], padding=0)
+        plot_graph.setYRange(new_y_range[0], new_y_range[1], padding=0)
         
 
 

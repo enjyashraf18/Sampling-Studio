@@ -387,7 +387,7 @@ border-color: transparent;</string>
              <property name="geometry">
               <rect>
                <x>50</x>
-               <y>440</y>
+               <y>450</y>
                <width>41</width>
                <height>21</height>
               </rect>
@@ -459,7 +459,7 @@ border-color:transparent;</string>
              <property name="geometry">
               <rect>
                <x>90</x>
-               <y>530</y>
+               <y>560</y>
                <width>101</width>
                <height>20</height>
               </rect>
@@ -599,6 +599,44 @@ border-color: transparent;</string>
              </property>
              <property name="text">
               <string>Reconstruction:</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="addNoise">
+             <property name="geometry">
+              <rect>
+               <x>90</x>
+               <y>500</y>
+               <width>101</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+font-size:14px;
+font-weight:500;
+border-color:transparent;</string>
+             </property>
+             <property name="text">
+              <string>Add Noise</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="snrQuantity">
+             <property name="geometry">
+              <rect>
+               <x>200</x>
+               <y>450</y>
+               <width>41</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color:white;
+font-size: 11px;
+font-weight:800;
+border-color: transparent;</string>
+             </property>
+             <property name="text">
+              <string/>
              </property>
             </widget>
            </widget>
@@ -881,36 +919,6 @@ font-weight:800;</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QPushButton" name="bin2">
-            <property name="minimumSize">
-             <size>
-              <width>30</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(24, 24, 24);
-color: rgb(255, 255, 255);
-border: 1px;
-border-radius: 15px;
-font-weight:800;</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item>
@@ -1035,36 +1043,6 @@ font-weight:800;</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QPushButton" name="bin3">
-            <property name="minimumSize">
-             <size>
-              <width>30</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(24, 24, 24);
-color: rgb(255, 255, 255);
-border: 1px;
-border-radius: 15px;
-font-weight:800;</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item>
@@ -1186,36 +1164,6 @@ font-weight:800;</string>
               <width>20</width>
               <height>20</height>
              </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="bin4">
-            <property name="minimumSize">
-             <size>
-              <width>30</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>30</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(24, 24, 24);
-color: rgb(255, 255, 255);
-border: 1px;
-border-radius: 15px;
-font-weight:800;</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
             </property>
            </widget>
           </item>
