@@ -27,6 +27,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.frequency_slider = self.findChild(QSlider, 'frequencyCombobox')
         self.frequency_slider.valueChanged.connect(self.change_sampling_frequency)
         self.frequency_label = self.findChild(QLabel, 'frequencyQuantity')
+        self.frequency_unit = self.findChild(QLabel,'hz')
 
         self.normalize_frequency = self.findChild(QCheckBox, 'normalize')
         self.normalize_frequency.stateChanged.connect(self.update_frequency_range)
@@ -46,6 +47,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.second_plot_widget = self.findChild(QWidget, 'reconstructedWindow')
         self.third_plot_widget = self.findChild(QWidget, 'differenceWindow')
         self.fourth_plot_widget = self.findChild(QWidget, 'frequencyWindow')
+
+
         
 
         self.signalCombobox = self.findChild(QComboBox, 'signalComboBox')
@@ -242,6 +245,7 @@ class MyWindow(QtWidgets.QMainWindow):
         if self.normalize_frequency.isChecked():
             self.current_original_signal.sampling_period = 1 / (
                         self.frequency_slider.value() * self.current_original_signal.maximum_frequency)
+            self.current_original_signal.sampling_frequency = self.frequency_slider.value() * self.current_original_signal.maximum_frequency
         else:
             self.current_original_signal.sampling_period = 1 / self.frequency_slider.value()
         self.frequency_label.setText(str(self.frequency_slider.value()))
@@ -344,11 +348,21 @@ class MyWindow(QtWidgets.QMainWindow):
         if self.normalize_frequency.isChecked():
             current_value = self.frequency_slider.value()
             self.frequency_slider.setRange(1, 4)
-            self.frequency_slider.setValue(math.ceil(current_value / self.current_original_signal.maximum_frequency))
+            four_fmax = 4* self.current_original_signal.maximum_frequency
+            # if current_value > (3/4) * four_fmax:
+            #     self.frequency_slider.setValue(4)
+            # elif (3 / 4) * four_fmax > current_value > (1 / 2) * four_fmax:
+            #     self.frequency_slider.setValue(3)
+            mapped_value = (current_value - 1) * 4 // four_fmax + 1
+            self.frequency_slider.setValue(int(mapped_value))
+            self.frequency_unit.setText('Fmax')
+            self.frequency_unit.setGeometry(200, 350, 40, 21)
         else:
             current_value = self.frequency_slider.value()
             self.frequency_slider.setRange(1, 4 * int(self.current_original_signal.maximum_frequency))
-            self.frequency_slider.setValue(math.ceil(current_value / self.current_original_signal.maximum_frequency))
+            self.frequency_slider.setValue(int(current_value * self.current_original_signal.maximum_frequency))
+            self.frequency_unit.setText('Hz')
+            self.frequency_unit.setGeometry(220, 350, 21, 21)
 
     def update_reconstruction_method(self, previous_value):
         reconstruction_method = self.reconstruction_method.currentText()
