@@ -623,7 +623,7 @@ border-color:transparent;</string>
             <widget class="QLabel" name="snrQuantity">
              <property name="geometry">
               <rect>
-               <x>200</x>
+               <x>210</x>
                <y>450</y>
                <width>41</width>
                <height>21</height>
@@ -636,7 +636,7 @@ font-weight:800;
 border-color: transparent;</string>
              </property>
              <property name="text">
-              <string/>
+              <string>100</string>
              </property>
             </widget>
            </widget>
@@ -792,6 +792,12 @@ font-weight:800;</string>
             <property name="icon">
              <iconset>
               <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>14</width>
+              <height>14</height>
+             </size>
             </property>
            </widget>
           </item>

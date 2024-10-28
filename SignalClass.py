@@ -86,13 +86,16 @@ class SignalClass:
         self.plot_widget.plot(self.x_sampled, self.y_sampled, pen=None, symbol='o', symbolSize=4, symbolBrush='w')
 
     def plot_reconstructed_signal(self, second_plot_widget, method):
-        if method == 'shannon':
+        if method == 'Whittaker-Shannon':
+            print("Reconstruction Method: Whittaker-Shannon")
             reconstructed_time = np.linspace(self.start_time, self.end_time, 1000)
             self.y_reconstructed = whittaker_shannon_interpolation(self.x_sampled, self.y_sampled,
                                                                    reconstructed_time)
-        elif method == 'lanczos':
+        elif method == 'Lanczos':
+            print("Reconstruction Method: Lanczos")
             self.y_reconstructed = lanczos_interpolation(self.data_x, self.x_sampled, self.y_sampled, a=3)
-        elif method == 'cubic_spline':
+        elif method == 'Cubic Spline':
+            print("Reconstruction Method: Cubic Spline")
             self.y_reconstructed = cubic_spline_interpolation(self.data_x, self.x_sampled, self.y_sampled)
         else:
             raise ValueError("Invalid reconstruction method. Choose 'shannon' or 'lanczos'.")

@@ -18,7 +18,7 @@ class composed_signal_class:
         self.signal_id = signal_id
 
 
-class SignalComposer(QDialog):
+class SignalComposer(QMainWindow):
     def __init__(self):
         super().__init__()
         # Load the second window UI

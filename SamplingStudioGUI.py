@@ -6,6 +6,7 @@ from PyQt5.QtCore import Qt
 import pyqtgraph as pg
 from SignalClass import SignalClass
 from composer import SignalComposer
+import math
 
 class MyWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -22,6 +23,19 @@ class MyWindow(QtWidgets.QMainWindow):
 
         self.upload_button = self.findChild(QPushButton, 'uploadButton')
         self.upload_button.clicked.connect(self.upload_signal)
+
+        self.frequency_slider = self.findChild(QSlider, 'frequencyCombobox')
+        self.frequency_slider.valueChanged.connect(self.change_sampling_frequency)
+        self.frequency_label = self.findChild(QLabel, 'frequencyQuantity')
+
+        self.normalize_frequency = self.findChild(QCheckBox, 'normalize')
+        self.normalize_frequency.stateChanged.connect(self.update_frequency_range)
+
+        self.reconstruction_method = self.findChild(QComboBox, 'reconstructionComboBox')
+        self.reconstruction_method.addItems(["Whittaker-Shannon", "Cubic Spline", "Lanczos"])
+        current_reconstruction_method = self.reconstruction_method.currentText()
+        self.reconstruction_method.currentIndexChanged.connect(lambda: self.update_reconstruction_method(
+                                                               current_reconstruction_method))
 
         self.vertical_layout_11 = self.findChild(QVBoxLayout, 'verticalLayout_11')
         self.vertical_layout_10 = self.findChild(QVBoxLayout, 'verticalLayout_10')
@@ -167,13 +181,7 @@ class MyWindow(QtWidgets.QMainWindow):
         data_x, data_y = self.open_file()
         print(len(data_x))
         if len(data_x) != 1000:
-            error_message = QMessageBox()
-            error_icon = QIcon("Deliverables/error_icon.png")
-            error_message.setWindowIcon(error_icon)
-            error_message.setWindowTitle("Data Size Error")
-            error_message.setText("Please upload data of size <b>1000x2</b>.")
-            error_message.exec_()
-
+            self.popup_messages("Please upload data of size <b>1000x2</b>.")
         elif data_x is not None and data_y is not None:
             original_color = (20, 200, 150)
             self.signals_uploaded_count += 1
@@ -195,7 +203,7 @@ class MyWindow(QtWidgets.QMainWindow):
 
     def initialise_signals(self):
         self.current_original_signal.calculate_maximum_frequency()
-        self.frequency_slider.setRange(0, 4 * int(self.current_original_signal.maximum_frequency))
+        self.frequency_slider.setRange(1, 4 * int(self.current_original_signal.maximum_frequency))
         self.frequency_slider.setValue(int(self.current_original_signal.sampling_frequency))
 
         min_x = min(self.current_original_signal.data_x)
@@ -207,33 +215,41 @@ class MyWindow(QtWidgets.QMainWindow):
         self.second_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
         self.third_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
         self.third_plot.setYRange(-0.05, 0.05)
-
+        reconstruction_method = self.reconstruction_method.currentText()
+        self.plot_signals(reconstruction_method)  # initial reconstruction method
         print(f"max freq: {self.current_original_signal.maximum_frequency}")
 
-        self.plot_signals()
 
-    def plot_signals(self):
+    def plot_signals(self,reconstruction_method):
         self.current_original_signal.plot_original_signal()
         self.current_original_signal.plot_sample_points()
-        self.current_original_signal.plot_reconstructed_signal(self.second_plot, 'shannon')  # replace with choice from dropdown
+        self.current_original_signal.plot_reconstructed_signal(self.second_plot, reconstruction_method)  # replace with choice from dropdown
         self.current_original_signal.plot_difference(self.third_plot)
+        self.current_original_signal.create_frequency_domain(self.fourth_plot)
 
-        print(f"sampling freq: {self.current_original_signal.sampling_frequency}")
 
     def clear_plots(self):
         self.first_plot.clear()
         self.second_plot.clear()
         self.third_plot.clear()
+        self.fourth_plot.clear()
 
     def change_sampling_frequency(self):
         try:
             self.current_original_signal.sampling_frequency = self.frequency_slider.value()
         except AttributeError as e:
             print(e)
-        self.current_original_signal.sampling_period = 1/self.frequency_slider.value()
+        if self.normalize_frequency.isChecked():
+            self.current_original_signal.sampling_period = 1 / (
+                        self.frequency_slider.value() * self.current_original_signal.maximum_frequency)
+        else:
+            self.current_original_signal.sampling_period = 1 / self.frequency_slider.value()
         self.frequency_label.setText(str(self.frequency_slider.value()))
+        reconstruction_method = self.reconstruction_method.currentText()
         self.clear_plots()
-        self.plot_signals()
+        self.plot_signals(reconstruction_method)
+
+        print(f"sampling frequency: {self.current_original_signal.sampling_frequency}")
 
     def delete_signal(self):
         
@@ -249,9 +265,8 @@ class MyWindow(QtWidgets.QMainWindow):
     def open_mixer_window(self):
         if self.mixer_window is None:
             self.mixer_window = SignalComposer()
-        # Open the mixer window modally
-        self.mixer_window.exec_()
-        self.mixer_window = None
+
+        self.mixer_window.show()
 
     def snr_state(self,state):
         if state == Qt.Checked:  # checked, so apply noise
@@ -323,6 +338,40 @@ class MyWindow(QtWidgets.QMainWindow):
         plot_graph.setXRange(new_x_range[0], new_x_range[1], padding=0)
         plot_graph.setYRange(new_y_range[0], new_y_range[1], padding=0)
         
+
+
+    def update_frequency_range(self):
+        if self.normalize_frequency.isChecked():
+            current_value = self.frequency_slider.value()
+            self.frequency_slider.setRange(1, 4)
+            self.frequency_slider.setValue(math.ceil(current_value / self.current_original_signal.maximum_frequency))
+        else:
+            current_value = self.frequency_slider.value()
+            self.frequency_slider.setRange(1, 4 * int(self.current_original_signal.maximum_frequency))
+            self.frequency_slider.setValue(math.ceil(current_value / self.current_original_signal.maximum_frequency))
+
+    def update_reconstruction_method(self, previous_value):
+        reconstruction_method = self.reconstruction_method.currentText()
+        try:
+            self.clear_plots()
+            self.plot_signals(reconstruction_method)
+        except AttributeError:
+            print(previous_value)
+            # To avoid a double popup
+            self.reconstruction_method.blockSignals(True)
+            self.reconstruction_method.setCurrentText(previous_value)
+            self.reconstruction_method.blockSignals(False)
+
+            self.popup_messages('Please upload a signal first.')
+
+    def popup_messages(self, message):
+        print("inside popup")
+        error_message = QMessageBox()
+        error_icon = QIcon("Deliverables/error_icon.png")
+        error_message.setWindowIcon(error_icon)
+        error_message.setWindowTitle('Error')
+        error_message.setText(message)
+        error_message.exec_()
 
 
 app = QtWidgets.QApplication([])
