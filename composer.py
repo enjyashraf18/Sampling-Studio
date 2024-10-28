@@ -1,7 +1,8 @@
 import sys
 import random
 import numpy as np
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton, QFileDialog, QSlider, QLabel, QLineEdit
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton, QFileDialog, QSlider, QLabel, \
+    QLineEdit, QDialog
 import pyqtgraph as pg
 from PyQt5 import QtWidgets, uic
 
@@ -17,10 +18,9 @@ class composed_signal_class:
         self.signal_id = signal_id
 
 
-class SignalComposer(QMainWindow):
+class SignalComposer(QDialog):
     def __init__(self):
         super().__init__()
-
         # Load the second window UI
         uic.loadUi("compose.ui", self)
 
@@ -37,7 +37,7 @@ class SignalComposer(QMainWindow):
         self.setWindowTitle("Signal Composer")
         self.setGeometry(100, 100, 1200, 800)
         main_widget = QWidget(self)
-        self.setCentralWidget(main_widget)
+        # self.setCentralWidget(main_widget)
         self.main_layout = QVBoxLayout(main_widget)
 
         self.freq_input = QLineEdit(self)
@@ -116,9 +116,3 @@ class SignalComposer(QMainWindow):
 
 
 
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = SignalComposer()
-    window.show()
-    sys.exit(app.exec_())

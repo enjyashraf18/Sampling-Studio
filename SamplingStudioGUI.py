@@ -247,11 +247,10 @@ class MyWindow(QtWidgets.QMainWindow):
         self.initialise_signals()
 
     def open_mixer_window(self):
-        # Initialize the mixer window if it hasn't been created
         if self.mixer_window is None:
             self.mixer_window = SignalComposer()
-        # Show the mixer window
-        self.mixer_window.show()
+        # Open the mixer window modally
+        self.mixer_window.exec_()
         self.mixer_window = None
 
     def snr_state(self,state):
