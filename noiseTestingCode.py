@@ -5,7 +5,7 @@ from pyqtgraph.Qt import QtWidgets, QtCore
 import pandas as pd
 
 
-csv_path = "Signals/ECG_DATA.csv"
+csv_path = "delete/ECG_DATA.csv"
 csvFile = pd.read_csv(csv_path)   
 x= csvFile.iloc[:, 0].values
 y= csvFile.iloc[:, 1].values

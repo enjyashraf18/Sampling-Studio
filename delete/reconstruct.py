@@ -54,7 +54,7 @@ class MainWindow(QMainWindow):
         return np.dot(sampled_y, np.sinc(sinc_matrix / (sampled_x[1] - sampled_x[0])))
 
     def plot_original(self):
-        ecg_data = pd.read_csv('../Signals/ECG_DATA.csv')
+        ecg_data = pd.read_csv('ECG_DATA.csv')
         self.signal_x = np.array(ecg_data['time'])
         self.signal_y = np.array(ecg_data['signal'])
         self.first_plot_widget.plot(self.signal_x, self.signal_y, pen='r')

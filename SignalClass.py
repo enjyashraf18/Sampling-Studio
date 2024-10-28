@@ -1,19 +1,25 @@
-import sys
-import pandas as pd
+# import sys
+# import pandas as pd
 import numpy as np
-import scipy.signal
+# import scipy.signal
 # from MainWindowTemp import MainWindow
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
-import pyqtgraph as pg
+# from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
+# import pyqtgraph as pg
+#
+# from pyqtgraph import ScatterPlotItem
+# from scipy.interpolate import interp1d
+# from scipy import special  # For sinc function
 
-from pyqtgraph import ScatterPlotItem
-from scipy.interpolate import interp1d
-from scipy import special  # For sinc function
 
+# def whittaker_shannon_interpolation(x_points, sampled_x, sampled_y, sampling_period):
+#     sinc_matrix = np.tile(x_points, (len(sampled_x), 1)) - np.tile(sampled_x[:, None], (1, len(x_points)))
+#     reconstructed_y = np.dot(sampled_y, np.sinc(sinc_matrix / sampling_period))
+#     return reconstructed_y
 
-def whittaker_shannon_interpolation(x_points, sampled_x, sampled_y, sampling_period):
-    sinc_matrix = np.tile(x_points, (len(sampled_x), 1)) - np.tile(sampled_x[:, None], (1, len(x_points)))
-    reconstructed_y = np.dot(sampled_y, np.sinc(sinc_matrix / sampling_period))
+def whittaker_shannon_interpolation(sampled_x, sampled_y, reconstructed_time):
+    interval_time = sampled_x[1] - sampled_x[0]
+    reconstructed_y = np.array([np.sum(sampled_y * np.sinc((t - sampled_x) / interval_time))
+                                for t in reconstructed_time])
     return reconstructed_y
 
 
@@ -26,11 +32,13 @@ class SignalClass:
         self.color = color
         self.signal_id = signal_id
         self.maximum_frequency = None
-        self.sampling_frequency = 360
-        self.sampling_period = 1 / self.sampling_frequency
+        self.sampling_frequency = None
+        self.sampling_period = None
         self.x_sampled = None
         self.y_sampled = None
         self.y_reconstructed = None
+        self.start_time = None
+        self.end_time = None
 
         # self.signal_number = signal_number
         # self.amplitude_data = self.y_data
@@ -39,25 +47,33 @@ class SignalClass:
         # name=f"Signal{str(self.signal_number)}")
 
     def calculate_maximum_frequency(self):
-        self.maximum_frequency = None
+        time = np.array(self.data_x)
+        magnitude = np.array(self.data_y)
+        fft_result = np.fft.fft(magnitude)  # time domain to freq domain
+        frequencies = np.fft.fftfreq(len(fft_result), time[1] - time[0])
+        positive_frequencies = frequencies[frequencies >= 0]
+        self.maximum_frequency = positive_frequencies[-1]
+        self.sampling_frequency = 2*self.maximum_frequency
+        print(f"SAMPLING FREQUENCY: {self.sampling_frequency}")
+        self.sampling_period = 1/self.sampling_frequency
 
     def plot_original_signal(self):
         self.plot_widget.plot(self.data_x, self.data_y, pen=self.color)
 
     def plot_sample_points(self):
-        sample_start = np.min(self.data_x)
-        sample_end = np.max(self.data_x)
-        self.x_sampled = np.arange(sample_start, sample_end, self.sampling_period)
+        self.start_time = np.min(self.data_x)
+        self.end_time = np.max(self.data_x)
+        self.x_sampled = np.arange(self.start_time, self.end_time, self.sampling_period)
         self.y_sampled = np.interp(self.x_sampled, self.data_x, self.data_y)
         # for x, y in zip(self.data_x, self.data_y):
         #     if x in x_sampled:
         #         y_sampled.append(y)
-        self.plot_widget.plot(self.x_sampled, self.y_sampled, pen=None, symbol='o', symbolSize=5, symbolBrush='w')
-        print(self.y_sampled)
+        self.plot_widget.plot(self.x_sampled, self.y_sampled, pen=None, symbol='o', symbolSize=4, symbolBrush='w')
 
     def plot_reconstructed_signal(self, second_plot_widget):
-        self.y_reconstructed = whittaker_shannon_interpolation(self.data_x, self.x_sampled, self.y_sampled,
-                                                               self.sampling_period)
+        reconstructed_time = np.linspace(self.start_time, self.end_time, 1000)
+        self.y_reconstructed = whittaker_shannon_interpolation(self.x_sampled, self.y_sampled,
+                                                               reconstructed_time)
         second_plot_widget.plot(self.data_x, self.y_reconstructed, pen=(50, 100, 240))
 
         # do we need to create an object for reconstructed signal?
