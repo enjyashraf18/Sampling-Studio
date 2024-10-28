@@ -5,7 +5,7 @@ class MyWindow(QtWidgets.QMainWindow):
         super().__init__()
         uic.loadUi("SamplingStudio.ui", self)
 
-        self.binButton= self.findChild(QButton, bin2)
+        # self.binButton= self.findChild(QButton, bin2)
 
 app = QtWidgets.QApplication([])
 window = MyWindow()
