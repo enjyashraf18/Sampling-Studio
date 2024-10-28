@@ -206,6 +206,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.first_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
         self.second_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
         self.third_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
+        self.third_plot.setYRange(-0.05, 0.05)
 
         print(f"max freq: {self.current_original_signal.maximum_frequency}")
 
@@ -214,7 +215,7 @@ class MyWindow(QtWidgets.QMainWindow):
     def plot_signals(self):
         self.current_original_signal.plot_original_signal()
         self.current_original_signal.plot_sample_points()
-        self.current_original_signal.plot_reconstructed_signal(self.second_plot)
+        self.current_original_signal.plot_reconstructed_signal(self.second_plot, 'shannon')  # replace with choice from dropdown
         self.current_original_signal.plot_difference(self.third_plot)
 
         print(f"sampling freq: {self.current_original_signal.sampling_frequency}")
