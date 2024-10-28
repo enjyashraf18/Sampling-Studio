@@ -88,6 +88,25 @@ class SignalClass:
         difference_y = self.data_y - self.y_reconstructed
         third_plot_widget.plot(self.data_x, difference_y, pen=(200, 50, 50))
 
+
+    def adding_noise(self,value):
+        snr_db = float(value)
+        # snr range from -10 to 50 dB
+        # Calculate signal power as the mean square of the signal
+        signal_power = np.mean(self.data_y ** 2)
+
+        # Calculate noise power based on desired SNR
+        snr_linear = 10 ** (snr_db / 10)  # Convert dB to linear scale
+        noise_power = signal_power / snr_linear
+
+        # Generate Gaussian noise and scale it to match the desired noise power
+        noise = np.random.normal(0, np.sqrt(noise_power), self.data_y.shape)
+
+        # Create the noisy signal by adding noise to the y-axis values
+        noisy_y = self.data_y + noise
+
+        return noisy_y
+
     # def update_amplitude(self, amplitude):
     #     self.amplitude_data = [amplitude + val for val in self.amplitude_data]
     #     self.amplitude = int(max(self.amplitude_data))

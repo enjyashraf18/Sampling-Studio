@@ -13,7 +13,7 @@ y= csvFile.iloc[:, 1].values
 
 
 # User-defined SNR value in dB
-snr_db = float(10)
+snr_db = float(100)
 # snr range from -10 to 50 dB
 # Calculate signal power as the mean square of the signal
 signal_power = np.mean(y ** 2)

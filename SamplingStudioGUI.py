@@ -1,7 +1,7 @@
 import pandas as pd
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QPushButton, QMessageBox, QFileDialog, QSlider, QWidget, QVBoxLayout, QLabel
+from PyQt5.QtWidgets import QPushButton, QMessageBox, QFileDialog, QSlider, QWidget, QVBoxLayout, QLabel, QComboBox
 import pyqtgraph as pg
 from SignalClass import SignalClass
 
@@ -30,6 +30,47 @@ class MyWindow(QtWidgets.QMainWindow):
         self.second_plot_widget = self.findChild(QWidget, 'reconstructedWindow')
         self.third_plot_widget = self.findChild(QWidget, 'differenceWindow')
         self.fourth_plot_widget = self.findChild(QWidget, 'frequencyWindow')
+        
+
+        self.signalCombobox = self.findChild(QComboBox, 'signalComboBox')
+        self.signalCombobox.setStyleSheet("""
+            QComboBox {
+                color: rgb(255, 255, 255);
+                font-size: 18px;
+                background-color: rgb(24, 24, 24);
+                padding-left: 15px;
+                border: 1px solid transparent;
+                border-radius: 15px; /* Rounded corners */
+            }
+            
+            QComboBox QAbstractItemView {
+                background-color: #444444;    /* Dropdown list background */
+                color: #ffffff;               /* Dropdown list text color */
+                selection-background-color: #555555;  /* Highlight background */
+                selection-color: #FF5757;     /* Highlighted text color */
+                border: None;
+            }
+
+            /* Remove the default arrow */
+            QComboBox::drop-down {
+                margin-right: 10px;
+                border-top-right-radius: 15px; /* Apply radius to the top-right */
+                border-bottom-right-radius: 15px; /* Apply radius to the bottom-right */
+            }
+
+            /* Customize the arrow (triangle) */
+            QComboBox::down-arrow {
+                image: url(Deliverables/down-arrow.png); /* Optional: use a custom image for the arrow */
+                width: 10px;
+                height: 10px;
+                margin-right: 10px; /* Moves the arrow more to the right */
+            }
+        """)
+        self.signalCombobox.setEditable(False)
+        self.signalCombobox.currentIndexChanged.connect(self.update_signal)
+
+        self.removeButton = self.findChild(QPushButton, 'binButton')
+        self.removeButton.clicked.connect(self.delete_signal)
 
         # Removing the QWidgets from ui file to add PlotWidgets
         self.vertical_layout_11.removeWidget(self.first_plot_widget)
@@ -89,8 +130,17 @@ class MyWindow(QtWidgets.QMainWindow):
                                           self.signals_uploaded_count)
             self.original_signals_list.append(original_signal)
             self.current_original_signal = original_signal
+            new_signal_label = f"signal {self.signals_uploaded_count}"
+            self.signalCombobox.addItem(new_signal_label)
+            self.signalCombobox.setCurrentIndex(self.signalCombobox.count() - 1)
             self.clear_plots()
             self.initialise_signals()
+
+    def update_signal(self):
+        self.clear_plots()
+        self.signal_id= self.signalCombobox.currentIndex()
+        self.current_original_signal = self.original_signals_list[self.signal_id]
+        self.initialise_signals()
 
     def initialise_signals(self):
         self.current_original_signal.calculate_maximum_frequency()
@@ -132,6 +182,19 @@ class MyWindow(QtWidgets.QMainWindow):
         self.frequency_label.setText(str(self.frequency_slider.value()))
         self.clear_plots()
         self.plot_signals()
+
+    def delete_signal(self):
+        
+        self.original_signals_list.pop(self.signalCombobox.currentIndex())
+        self.signalCombobox.removeItem(self.signalCombobox.currentIndex())
+        self.clear_plots()
+        if len(self.original_signals_list) == 0:
+            return
+        self.current_original_signal = self.original_signals_list[0]
+        
+        self.initialise_signals()
+
+        
 
 
 app = QtWidgets.QApplication([])
