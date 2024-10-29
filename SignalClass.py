@@ -113,8 +113,8 @@ class SignalClass:
         self.amplitude = np.abs(np.fft.fft(self.data_y))
         # self.frequencies = np.fft.fftfreq(len(self.y_reconstructed), d=(self.x_sampled[1] - self.x_sampled[0]))
         # self.amplitude = np.abs(np.fft.fft(self.y_reconstructed))
-        print(f"Frequencies: {self.frequencies}")
-        print(f"Amplitude: {self.amplitude}")
+        # print(f"Frequencies: {self.frequencies}")
+        # print(f"Amplitude: {self.amplitude}")
         # plot the frequency domain signal
         self.frequency_line = plot_widget_frequency_domain.plot(
             self.frequencies,

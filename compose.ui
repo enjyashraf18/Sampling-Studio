@@ -238,7 +238,7 @@ font-weight:800;
 border-color: transparent;</string>
         </property>
         <property name="text">
-         <string>10</string>
+         <string>1</string>
         </property>
        </widget>
        <widget class="QLabel" name="frequencyLabel_3">
@@ -306,7 +306,7 @@ font-weight:800;
 border-color:transparent;</string>
         </property>
         <property name="text">
-         <string>60</string>
+         <string>1</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_8">

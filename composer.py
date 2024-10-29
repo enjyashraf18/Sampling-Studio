@@ -2,6 +2,7 @@ import sys
 import random
 import numpy as np
 from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton, QFileDialog, QSlider, QLabel, \
     QLineEdit, QDialog, QComboBox
 import pyqtgraph as pg
@@ -30,7 +31,8 @@ class SignalComposer(QMainWindow):
         self.main_plot = main_plot
         # Load the second window UI
         uic.loadUi("compose.ui", self)
-
+        self.setWindowIcon(QIcon('Deliverables/sampling_icon.png'))
+        self.setWindowTitle("Signal Composer")
         self.amplitude_slider = self.findChild(QSlider, 'amplitudeCombobox_3')
         self.amplitude_slider.setValue(1)
         self.amplitude_slider.setRange(1,10 )
@@ -63,8 +65,8 @@ class SignalComposer(QMainWindow):
         self.signal_id = 0
         self.cnt = 0
         self.data_x = np.linspace(0, 3, 1000)
-        self.amplitude_slider_value = None
-        self.frequency_slider_value = None
+        self.amplitude_slider_value = 1
+        self.frequency_slider_value = 1
         self.composed_y_data = None
         self.save_enabled = False
         self.add_default_signal()

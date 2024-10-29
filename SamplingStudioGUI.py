@@ -274,12 +274,16 @@ class MyWindow(QtWidgets.QMainWindow):
         self.mixer_window.composition_complete.connect(self.handle_composed_signal)
         self.mixer_window.show()
 
-    def handle_composed_signal(self, data_x,data_y):
+    def handle_composed_signal(self, data_x, data_y):
         original_color = (20, 200, 150)
+        self.signals_uploaded_count += 1
         composed_signal = SignalClass(data_x, data_y, 'composed', self.first_plot, original_color,
                                       self.signals_uploaded_count)
         self.original_signals_list.append(composed_signal)
         self.current_original_signal = composed_signal
+        new_signal_label = f"signal {self.signals_uploaded_count}"
+        self.signalCombobox.addItem(new_signal_label)
+        self.signalCombobox.setCurrentIndex(self.signalCombobox.count() - 1)
         self.mixer_window = None
         self.clear_plots()
         self.initialise_signals()
