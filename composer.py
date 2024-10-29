@@ -1,6 +1,7 @@
 import sys
 import random
 import numpy as np
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton, QFileDialog, QSlider, QLabel, \
     QLineEdit, QDialog, QComboBox
 import pyqtgraph as pg
@@ -10,7 +11,8 @@ import os
 from fileName import fileName
 
 
-class composed_signal_class:
+
+class composed_signal_class():
     def __init__(self, y_data, wave_type, amplitude, frequency, phase_shift, vertical_shift, signal_id):
         self.y_data = y_data
         self.wave_type = wave_type
@@ -22,8 +24,10 @@ class composed_signal_class:
 
 
 class SignalComposer(QMainWindow):
-    def __init__(self):
+    composition_complete = pyqtSignal(np.ndarray, np.ndarray)
+    def __init__(self, main_plot):
         super().__init__()
+        self.main_plot = main_plot
         # Load the second window UI
         uic.loadUi("compose.ui", self)
 
@@ -62,6 +66,8 @@ class SignalComposer(QMainWindow):
         self.amplitude_slider_value = None
         self.frequency_slider_value = None
         self.composed_y_data = None
+        self.save_enabled = False
+
 
         self.add_button.clicked.connect(self.add_signal)
         self.delete_button.clicked.connect(self.delete_signal)
@@ -70,6 +76,7 @@ class SignalComposer(QMainWindow):
 
 
     def add_signal(self):
+        self.save_enabled = False
         self.cnt+=1
         if self.cnt == 1:
             self.wave_type = 'sine'
@@ -128,22 +135,23 @@ class SignalComposer(QMainWindow):
         self.composed_y_data = np.zeros_like(self.data_x)
         for signal in self.composed_signals:
             self.composed_y_data += signal.y_data
-            print(self.composed_y_data)
         self.plot_graph.plot(self.data_x, self.composed_y_data, pen='r', name='Composed Signal')
 
     def save_data_to_csv(self, file_name):
-
+        # convert it to csv file
         save_directory = 'composed_signals/'
         df = pd.DataFrame({
             'X': self.data_x,
             'Y': self.composed_y_data
         })
-        file_name =file_name
+        file_name = file_name
         file_path = os.path.join(save_directory, file_name)
         df.to_csv(file_path, index=False)
         print(f"Data saved to {file_path}")
-        #convert it to csv file
-        #close the window
+        self.save_enabled = True
+        self.composition_complete.emit(self.data_x, self.composed_y_data)
+        self.close()
+        # close the window
         # plot it fl first graph
 
     def enter_file_name(self):
@@ -153,6 +161,17 @@ class SignalComposer(QMainWindow):
         if dialog.exec_():
             file_name = dialog.file_name
             self.save_data_to_csv(file_name)
+
+    # def plot_main_window(self):
+    #     if self.save_enabled:
+    #         print("save is enabled")
+    #         # self.main_plot.clear()
+    #         # print("compose and delete")
+    #         # self.main_plot.plot(self.data_x, self.composed_y_data, pen='r')
+    #         return self.data_x, self.composed_y_data
+    #     else:
+    #         return None, None
+
 
 
 

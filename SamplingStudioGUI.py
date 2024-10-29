@@ -20,6 +20,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.original_signals_list = []
         self.signals_uploaded_count = 0
         self.mixer_window = None
+        self.composed_datax = []
+        self.composed_datay = []
 
         self.upload_button = self.findChild(QPushButton, 'uploadButton')
         self.upload_button.clicked.connect(self.upload_signal)
@@ -268,9 +270,20 @@ class MyWindow(QtWidgets.QMainWindow):
 
     def open_mixer_window(self):
         if self.mixer_window is None:
-            self.mixer_window = SignalComposer()
+            self.mixer_window = SignalComposer(self.first_plot)
+            self.mixer_window.composition_complete.connect(self.handle_composed_signal)
+            self.mixer_window.show()
 
-        self.mixer_window.show()
+    def handle_composed_signal(self, data_x,data_y):
+        original_color = (20, 200, 150)
+        composed_signal = SignalClass(data_x, data_y, 'composed', self.first_plot, original_color,
+                                      self.signals_uploaded_count)
+        self.original_signals_list.append(composed_signal)
+        self.current_original_signal = composed_signal
+        self.mixer_window = None
+        self.clear_plots()
+        self.initialise_signals()
+
 
     def snr_state(self,state):
         if state == Qt.Checked:  # checked, so apply noise
