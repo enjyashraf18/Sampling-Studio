@@ -39,7 +39,7 @@ def lanczos_interpolation(x_points, sampled_x, sampled_y, a=3):
 
 
 class SignalClass:
-    def __init__(self, data_x, data_y, signal_type, plot_widget, color, signal_id):
+    def __init__(self, data_x, data_y, signal_type, plot_widget, color, signal_id, name):
         self.data_x = data_x
         self.data_y = data_y
         self.type = signal_type  # original, reconstructed, difference, composed
@@ -61,7 +61,13 @@ class SignalClass:
         self.frequency_line = None
         self.snr = None
         self.noisy_data_y = self.data_y
-
+        self.current_snr_CheckBox = False
+        self.current_snr_value = 0
+        self.current_frequency = self.maximum_frequency
+        self.current_reconstruction_method = "shannon"
+        self.current_amplitude = 0
+        self.current_normalize_checkbox = False
+        self.name = name
 
     def calculate_maximum_frequency(self):
         time = np.array(self.data_x)

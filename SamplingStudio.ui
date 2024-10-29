@@ -39,233 +39,109 @@ background-color: rgb(42, 42, 42);</string>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_9">
     <item row="1" column="0">
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QWidget" name="taskBar" native="true">
-          <property name="minimumSize">
-           <size>
-            <width>1300</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(24, 24, 24);</string>
-          </property>
-          <widget class="QPushButton" name="mixerButton">
-           <property name="geometry">
-            <rect>
-             <x>680</x>
-             <y>0</y>
-             <width>250</width>
-             <height>50</height>
-            </rect>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>250</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color: rgb(255, 255, 255);
-font-size: 15px;
-background-color:transparent;
-font-weight:800;</string>
-           </property>
-           <property name="text">
-            <string>Signal Mixer/Composer</string>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>Deliverables/SignalMixer.png</normaloff>Deliverables/SignalMixer.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>20</width>
-             <height>20</height>
-            </size>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="uploadButton">
-           <property name="geometry">
-            <rect>
-             <x>520</x>
-             <y>0</y>
-             <width>150</width>
-             <height>50</height>
-            </rect>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>150</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color: rgb(255, 255, 255);
-font-size: 15px;
-background-color:transparent;
-font-weight:800;</string>
-           </property>
-           <property name="text">
-            <string>Upload file</string>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>Deliverables/upload.png</normaloff>Deliverables/upload.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>20</width>
-             <height>20</height>
-            </size>
-           </property>
-          </widget>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </item>
-    <item row="2" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QWidget" name="controlWidget" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>273</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>273</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">border: 2px solid white;
-border-radius: 20px;</string>
-            </property>
-            <widget class="QLabel" name="sampleControls">
-             <property name="geometry">
-              <rect>
-               <x>60</x>
-               <y>30</y>
-               <width>161</width>
-               <height>31</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border: 1px solid transparent;
+       <widget class="QWidget" name="compose" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <widget class="QPushButton" name="uploadButton">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>20</y>
+           <width>191</width>
+           <height>50</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>2000</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+font-size: 15px;
+background-color:rgb(24,24,24);
+font-weight:800;
+border: 1px;
+border-radius: 25px;</string>
+         </property>
+         <property name="text">
+          <string>Upload file</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>Deliverables/upload.png</normaloff>Deliverables/upload.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>100</y>
+           <width>51</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
+font-size: 14px;
+font-weight:600;</string>
+         </property>
+         <property name="text">
+          <string>Or </string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="composeSignal">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>140</y>
+           <width>161</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: 1px solid transparent;
 color:white;
 font-size: 18px;
 font-weight: 800</string>
-             </property>
-             <property name="text">
-              <string>Sample Controls</string>
-             </property>
-            </widget>
-            <widget class="QSlider" name="amplitudeCombobox">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>290</y>
-               <width>201</width>
-               <height>22</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QSlider {
-    border: none;
-}
-QSlider::groove:horizontal {
-    height: 5px;
-    background: white;  
-    border-radius: 3px;   
-}
-
-QSlider::handle:horizontal {
-    background: #ffffff;  
-    border: 2px solid #1e6e9e;
-    width: 10px;
-    height: 10px;
-    border-radius: 6px;    
-    margin: -4px 0;       
-}
-</string>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-            <widget class="QLabel" name="iconFreq">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>350</y>
-               <width>31</width>
-               <height>21</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-color: transparent;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap>Deliverables/pulse.png</pixmap>
-             </property>
-            </widget>
-            <widget class="QLabel" name="frequencyLabel">
-             <property name="geometry">
-              <rect>
-               <x>80</x>
-               <y>350</y>
-               <width>81</width>
-               <height>21</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color:white;
-font-size: 14px;
-font-weight:500;
-border-color: transparent;</string>
-             </property>
-             <property name="text">
-              <string>Frequency</string>
-             </property>
-            </widget>
-            <widget class="QSlider" name="frequencyCombobox">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>380</y>
-               <width>201</width>
-               <height>22</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QSlider {
+         </property>
+         <property name="text">
+          <string>Compose Signal</string>
+         </property>
+        </widget>
+        <widget class="QSlider" name="frequencyCombobox_3">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>330</y>
+           <width>201</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QSlider {
     border: none;
 }
 QSlider::groove:horizontal {
@@ -283,136 +159,276 @@ QSlider::handle:horizontal {
     margin: -4px 0;       
 }
 </string>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-            <widget class="QLabel" name="frequencyQuantity">
-             <property name="geometry">
-              <rect>
-               <x>187</x>
-               <y>350</y>
-               <width>35</width>
-               <height>21</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color:white;
-font-size: 11px;
-font-weight:800;
-border-color:transparent;</string>
-             </property>
-             <property name="text">
-              <string>0</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="hz">
-             <property name="geometry">
-              <rect>
-               <x>220</x>
-               <y>350</y>
-               <width>21</width>
-               <height>21</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color:white;
-font-size: 11px;
-font-weight:800;
-border-color: transparent;</string>
-             </property>
-             <property name="text">
-              <string>Hz</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="ampLabel">
-             <property name="geometry">
-              <rect>
-               <x>80</x>
-               <y>260</y>
-               <width>81</width>
-               <height>21</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color:white;
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QSlider" name="amplitudeCombobox_3">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>270</y>
+           <width>201</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QSlider {
+    border: none;
+}
+QSlider::groove:horizontal {
+    height: 5px;
+    background: white;  
+    border-radius: 3px;   
+}
+
+QSlider::handle:horizontal {
+    background: #ffffff;  
+    border: 2px solid #1e6e9e;
+    width: 10px;
+    height: 10px;
+    border-radius: 6px;    
+    margin: -4px 0;       
+}
+</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QLabel" name="ampLabel_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>250</y>
+           <width>81</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
 font-size: 14px;
 font-weight:600;
 border-color: transparent;</string>
-             </property>
-             <property name="text">
-              <string>Amplitude</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="ampQuantity">
-             <property name="geometry">
-              <rect>
-               <x>200</x>
-               <y>260</y>
-               <width>21</width>
-               <height>21</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color:white;
+         </property>
+         <property name="text">
+          <string>Amplitude</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>520</y>
+           <width>31</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>Deliverables/add.png</normaloff>Deliverables/add.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>26</width>
+           <height>26</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QLabel" name="hz_3">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>310</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
 font-size: 11px;
 font-weight:800;
 border-color: transparent;</string>
-             </property>
-             <property name="text">
-              <string>10</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="label_6">
-             <property name="geometry">
-              <rect>
-               <x>220</x>
-               <y>260</y>
-               <width>21</width>
-               <height>21</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color:white;
+         </property>
+         <property name="text">
+          <string>Hz</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_8">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>250</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
 font-size: 11px;
 font-weight:800;
 border-color: transparent;</string>
-             </property>
-             <property name="text">
-              <string>m</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="snrLabel">
-             <property name="geometry">
-              <rect>
-               <x>50</x>
-               <y>450</y>
-               <width>41</width>
-               <height>21</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color:white;
+         </property>
+         <property name="text">
+          <string>m</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="iconFreq_3">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>310</y>
+           <width>31</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap>Deliverables/pulse.png</pixmap>
+         </property>
+        </widget>
+        <widget class="QLabel" name="frequencyLabel_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>310</y>
+           <width>81</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
 font-size: 14px;
 font-weight:500;
 border-color: transparent;</string>
-             </property>
-             <property name="text">
-              <string>SNR</string>
-             </property>
-            </widget>
-            <widget class="QSlider" name="snr">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>470</y>
-               <width>201</width>
-               <height>22</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QSlider {
+         </property>
+         <property name="text">
+          <string>Frequency</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="ampQuantity_3">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>250</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
+font-size: 11px;
+font-weight:800;
+border-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="frequencyQuantity_3">
+         <property name="geometry">
+          <rect>
+           <x>215</x>
+           <y>310</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
+font-size: 11px;
+font-weight:800;
+border-color:transparent;</string>
+         </property>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="iconAmp_3">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>240</y>
+           <width>31</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:transparent;
+border-color:transparent;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap>Deliverables/Amplitude.png</pixmap>
+         </property>
+        </widget>
+        <widget class="QLabel" name="phaseQuantity">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>380</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
+font-size: 11px;
+font-weight:800;
+border-color:transparent;</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="phaseLabel">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>380</y>
+           <width>81</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
+font-size: 14px;
+font-weight:500;
+border-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string>Phase Shift</string>
+         </property>
+        </widget>
+        <widget class="QSlider" name="phaseSlider">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>400</y>
+           <width>201</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QSlider {
     border: none;
 }
 QSlider::groove:horizontal {
@@ -423,134 +439,86 @@ QSlider::groove:horizontal {
 
 QSlider::handle:horizontal {
     background: #ffffff;  
-    border: 2px solid #0c7743;
+    border: 2px solid #cc3c3c;
     width: 10px;
     height: 10px;
     border-radius: 6px;    
     margin: -4px 0;       
 }
 </string>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-            <widget class="QLabel" name="iconAmp">
-             <property name="geometry">
-              <rect>
-               <x>50</x>
-               <y>250</y>
-               <width>31</width>
-               <height>41</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color:transparent;
-border-color:transparent;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap>Deliverables/Amplitude.png</pixmap>
-             </property>
-            </widget>
-            <widget class="QCheckBox" name="normalize">
-             <property name="geometry">
-              <rect>
-               <x>90</x>
-               <y>560</y>
-               <width>101</width>
-               <height>20</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(255, 255, 255);
-font-size:14px;
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QLabel" name="degree">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>380</y>
+           <width>21</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
+font-size: 11px;
+font-weight:800;
+border-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="iconPhase">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>380</y>
+           <width>31</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap>Deliverables/phase.png</pixmap>
+         </property>
+        </widget>
+        <widget class="QLabel" name="waveType">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>440</y>
+           <width>101</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
+font-size: 14px;
 font-weight:500;
-border-color:transparent;</string>
-             </property>
-             <property name="text">
-              <string>Normalize</string>
-             </property>
-            </widget>
-            <widget class="QComboBox" name="signalComboBox">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>90</y>
-               <width>201</width>
-               <height>41</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QComboBox {
-                color: rgb(255, 255, 255);
-                font-size: 18px;
-                background-color: rgb(24, 24, 24);
-                padding-left: 15px;
-                border: 1px solid transparent;
-                border-radius: 20px; /* Rounded corners */
-            }
-            
-            QComboBox QAbstractItemView {
-                background-color: #444444;    /* Dropdown list background */
-                color: #ffffff;               /* Dropdown list text color */
-                selection-background-color: #555555;  /* Highlight background */
-                selection-color: #FF5757;     /* Highlighted text color */
-            }
-
-            /* Remove the default arrow */
-            QComboBox::drop-down {
-                margin-right: 10px;
-                border-top-right-radius: 15px; /* Apply radius to the top-right */
-                border-bottom-right-radius: 15px; /* Apply radius to the bottom-right */
-            }
-
-            /* Customize the arrow (triangle) */
-            QComboBox::down-arrow {
-                image: url(Deliverables/down-arrow.png); /* Optional: use a custom image for the arrow */
-                width: 10px;
-                height: 10px;
-                margin-right: 10px; /* Moves the arrow more to the right */
-            }</string>
-             </property>
-            </widget>
-            <widget class="QPushButton" name="binButton">
-             <property name="geometry">
-              <rect>
-               <x>90</x>
-               <y>600</y>
-               <width>101</width>
-               <height>41</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(24, 24, 24);
-color: rgb(255, 255, 255);
-border: 1px;
-border-radius: 20px;
-font-weight:800;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
-             </property>
-            </widget>
-            <widget class="QComboBox" name="reconstructionComboBox">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>200</y>
-               <width>201</width>
-               <height>31</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QComboBox {
+border-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string>Wave Type:</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="waveCompobox">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>470</y>
+           <width>201</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox {
                 color: rgb(255, 255, 255);
                 font-size: 18px;
                 background-color: rgb(24, 24, 24);
@@ -580,83 +548,129 @@ font-weight:800;</string>
                 height: 10px;
                 margin-right: 10px; /* Moves the arrow more to the right */
             }</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="reconstructionLabel">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>170</y>
-               <width>191</width>
-               <height>21</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color:white;
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>650</y>
+           <width>81</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>14</width>
+           <height>14</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="reconstructionComboBox_3">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>610</y>
+           <width>201</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox {
+                color: rgb(255, 255, 255);
+                font-size: 18px;
+                background-color: rgb(24, 24, 24);
+                padding-left: 15px;
+                border: 1px solid transparent;
+                border-radius: 15px; /* Rounded corners */
+            }
+            
+            QComboBox QAbstractItemView {
+                background-color: #444444;    /* Dropdown list background */
+                color: #ffffff;               /* Dropdown list text color */
+                selection-background-color: #555555;  /* Highlight background */
+                selection-color: #FF5757;     /* Highlighted text color */
+            }
+
+            /* Remove the default arrow */
+            QComboBox::drop-down {
+                margin-right: 10px;
+                border-top-right-radius: 15px; /* Apply radius to the top-right */
+                border-bottom-right-radius: 15px; /* Apply radius to the bottom-right */
+            }
+
+            /* Customize the arrow (triangle) */
+            QComboBox::down-arrow {
+                image: url(Deliverables/down-arrow.png); /* Optional: use a custom image for the arrow */
+                width: 10px;
+                height: 10px;
+                margin-right: 10px; /* Moves the arrow more to the right */
+            }</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="componentLabel">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>580</y>
+           <width>101</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white;
 font-size: 14px;
-font-weight:600;
-border-color: transparent;</string>
-             </property>
-             <property name="text">
-              <string>Reconstruction:</string>
-             </property>
-            </widget>
-            <widget class="QCheckBox" name="addNoise">
-             <property name="geometry">
-              <rect>
-               <x>90</x>
-               <y>500</y>
-               <width>101</width>
-               <height>20</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(255, 255, 255);
-font-size:14px;
 font-weight:500;
-border-color:transparent;</string>
-             </property>
-             <property name="text">
-              <string>Add Noise</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="snrQuantity">
-             <property name="geometry">
-              <rect>
-               <x>210</x>
-               <y>450</y>
-               <width>41</width>
-               <height>21</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color:white;
-font-size: 11px;
-font-weight:800;
 border-color: transparent;</string>
-             </property>
-             <property name="text">
-              <string>100</string>
-             </property>
-            </widget>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
+         </property>
+         <property name="text">
+          <string>Component:</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
+           <y>760</y>
+           <width>101</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 15px;
+font-weight:800;</string>
+         </property>
+         <property name="text">
+          <string>Save</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>14</width>
+           <height>14</height>
+          </size>
+         </property>
+        </widget>
+       </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
+       <layout class="QVBoxLayout" name="verticalLayout"/>
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -809,7 +823,7 @@ font-weight:800;</string>
            <widget class="QWidget" name="originalWindow" native="true">
             <property name="minimumSize">
              <size>
-              <width>1000</width>
+              <width>500</width>
               <height>140</height>
              </size>
             </property>
@@ -1210,25 +1224,9 @@ font-weight:800;</string>
         </item>
        </layout>
       </item>
-      <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>60</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
      </layout>
     </item>
-    <item row="3" column="0">
+    <item row="2" column="0">
      <spacer name="verticalSpacer_2">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -1243,6 +1241,507 @@ font-weight:800;</string>
        </size>
       </property>
      </spacer>
+    </item>
+    <item row="1" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QWidget" name="controlWidget" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>273</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>273</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <widget class="QLabel" name="sampleControls">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>30</y>
+             <width>161</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border: 1px solid transparent;
+color:white;
+font-size: 18px;
+font-weight: 800</string>
+           </property>
+           <property name="text">
+            <string>Sample Controls</string>
+           </property>
+          </widget>
+          <widget class="QSlider" name="amplitudeCombobox">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>290</y>
+             <width>201</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QSlider {
+    border: none;
+}
+QSlider::groove:horizontal {
+    height: 5px;
+    background: white;  
+    border-radius: 3px;   
+}
+
+QSlider::handle:horizontal {
+    background: #ffffff;  
+    border: 2px solid #1e6e9e;
+    width: 10px;
+    height: 10px;
+    border-radius: 6px;    
+    margin: -4px 0;       
+}
+</string>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QLabel" name="iconFreq">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>350</y>
+             <width>31</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-color: transparent;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>Deliverables/pulse.png</pixmap>
+           </property>
+          </widget>
+          <widget class="QLabel" name="frequencyLabel">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>350</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:white;
+font-size: 14px;
+font-weight:500;
+border-color: transparent;</string>
+           </property>
+           <property name="text">
+            <string>Frequency</string>
+           </property>
+          </widget>
+          <widget class="QSlider" name="frequencyCombobox">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>380</y>
+             <width>201</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QSlider {
+    border: none;
+}
+QSlider::groove:horizontal {
+    height: 5px;
+    background: white;  
+    border-radius: 3px;    
+}
+
+QSlider::handle:horizontal {
+    background: #ffffff;  
+    border: 2px solid #cc3c3c;
+    width: 10px;
+    height: 10px;
+    border-radius: 6px;    
+    margin: -4px 0;       
+}
+</string>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QLabel" name="frequencyQuantity">
+           <property name="geometry">
+            <rect>
+             <x>187</x>
+             <y>350</y>
+             <width>35</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:white;
+font-size: 11px;
+font-weight:800;
+border-color:transparent;</string>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="hz">
+           <property name="geometry">
+            <rect>
+             <x>220</x>
+             <y>350</y>
+             <width>21</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:white;
+font-size: 11px;
+font-weight:800;
+border-color: transparent;</string>
+           </property>
+           <property name="text">
+            <string>Hz</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="ampLabel">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>260</y>
+             <width>81</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:white;
+font-size: 14px;
+font-weight:600;
+border-color: transparent;</string>
+           </property>
+           <property name="text">
+            <string>Amplitude</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="ampQuantity">
+           <property name="geometry">
+            <rect>
+             <x>200</x>
+             <y>260</y>
+             <width>21</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:white;
+font-size: 11px;
+font-weight:800;
+border-color: transparent;</string>
+           </property>
+           <property name="text">
+            <string>10</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_6">
+           <property name="geometry">
+            <rect>
+             <x>220</x>
+             <y>260</y>
+             <width>21</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:white;
+font-size: 11px;
+font-weight:800;
+border-color: transparent;</string>
+           </property>
+           <property name="text">
+            <string>m</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="snrLabel">
+           <property name="geometry">
+            <rect>
+             <x>50</x>
+             <y>450</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:white;
+font-size: 14px;
+font-weight:500;
+border-color: transparent;</string>
+           </property>
+           <property name="text">
+            <string>SNR</string>
+           </property>
+          </widget>
+          <widget class="QSlider" name="snr">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>470</y>
+             <width>201</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QSlider {
+    border: none;
+}
+QSlider::groove:horizontal {
+    height: 5px;
+    background: white;  
+    border-radius: 3px;    
+}
+
+QSlider::handle:horizontal {
+    background: #ffffff;  
+    border: 2px solid #0c7743;
+    width: 10px;
+    height: 10px;
+    border-radius: 6px;    
+    margin: -4px 0;       
+}
+</string>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QLabel" name="iconAmp">
+           <property name="geometry">
+            <rect>
+             <x>50</x>
+             <y>250</y>
+             <width>31</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color:transparent;
+border-color:transparent;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>Deliverables/Amplitude.png</pixmap>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="normalize">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>560</y>
+             <width>101</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);
+font-size:14px;
+font-weight:500;
+border-color:transparent;</string>
+           </property>
+           <property name="text">
+            <string>Normalize</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="signalComboBox">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>90</y>
+             <width>201</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QComboBox {
+                color: rgb(255, 255, 255);
+                font-size: 18px;
+                background-color: rgb(24, 24, 24);
+                padding-left: 15px;
+                border: 1px solid transparent;
+                border-radius: 20px; /* Rounded corners */
+            }
+            
+            QComboBox QAbstractItemView {
+                background-color: #444444;    /* Dropdown list background */
+                color: #ffffff;               /* Dropdown list text color */
+                selection-background-color: #555555;  /* Highlight background */
+                selection-color: #FF5757;     /* Highlighted text color */
+            }
+
+            /* Remove the default arrow */
+            QComboBox::drop-down {
+                margin-right: 10px;
+                border-top-right-radius: 15px; /* Apply radius to the top-right */
+                border-bottom-right-radius: 15px; /* Apply radius to the bottom-right */
+            }
+
+            /* Customize the arrow (triangle) */
+            QComboBox::down-arrow {
+                image: url(Deliverables/down-arrow.png); /* Optional: use a custom image for the arrow */
+                width: 10px;
+                height: 10px;
+                margin-right: 10px; /* Moves the arrow more to the right */
+            }</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="binButton">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>610</y>
+             <width>101</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(24, 24, 24);
+color: rgb(255, 255, 255);
+border: 1px;
+border-radius: 20px;
+font-weight:800;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>Deliverables/bin.png</normaloff>Deliverables/bin.png</iconset>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="reconstructionComboBox">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>200</y>
+             <width>201</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QComboBox {
+                color: rgb(255, 255, 255);
+                font-size: 18px;
+                background-color: rgb(24, 24, 24);
+                padding-left: 15px;
+                border: 1px solid transparent;
+                border-radius: 15px; /* Rounded corners */
+            }
+            
+            QComboBox QAbstractItemView {
+                background-color: #444444;    /* Dropdown list background */
+                color: #ffffff;               /* Dropdown list text color */
+                selection-background-color: #555555;  /* Highlight background */
+                selection-color: #FF5757;     /* Highlighted text color */
+            }
+
+            /* Remove the default arrow */
+            QComboBox::drop-down {
+                margin-right: 10px;
+                border-top-right-radius: 15px; /* Apply radius to the top-right */
+                border-bottom-right-radius: 15px; /* Apply radius to the bottom-right */
+            }
+
+            /* Customize the arrow (triangle) */
+            QComboBox::down-arrow {
+                image: url(Deliverables/down-arrow.png); /* Optional: use a custom image for the arrow */
+                width: 10px;
+                height: 10px;
+                margin-right: 10px; /* Moves the arrow more to the right */
+            }</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="reconstructionLabel">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>170</y>
+             <width>191</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:white;
+font-size: 14px;
+font-weight:600;
+border-color: transparent;</string>
+           </property>
+           <property name="text">
+            <string>Reconstruction:</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="addNoise">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>500</y>
+             <width>101</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);
+font-size:14px;
+font-weight:500;
+border-color:transparent;</string>
+           </property>
+           <property name="text">
+            <string>Add Noise</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="snrQuantity">
+           <property name="geometry">
+            <rect>
+             <x>210</x>
+             <y>450</y>
+             <width>41</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:white;
+font-size: 11px;
+font-weight:800;
+border-color: transparent;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

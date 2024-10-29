@@ -25,36 +25,15 @@ class composed_signal_class():
 
 
 class SignalComposer(QMainWindow):
-    composition_complete = pyqtSignal(np.ndarray, np.ndarray)
-    def __init__(self, main_plot):
+    composition_complete = pyqtSignal(np.ndarray,np.ndarray)
+    def __init__(self, signals, plot_graph, amplitude_slider, frequency_slider,amplitude_label, frequency_label):
         super().__init__()
-        self.main_plot = main_plot
-        # Load the second window UI
-        uic.loadUi("compose.ui", self)
-        self.setWindowIcon(QIcon('Deliverables/sampling_icon.png'))
-        self.setWindowTitle("Signal Composer")
-        self.amplitude_slider = self.findChild(QSlider, 'amplitudeCombobox_3')
-        self.amplitude_slider.setValue(1)
-        self.amplitude_slider.setRange(1,10 )
-        self.frequency_slider = self.findChild(QSlider, 'frequencyCombobox_3')
-        self.frequency_slider.setValue(1)
-        self.frequency_slider.setRange(1, 100)
-        self.frequency_label = self.findChild(QLabel, 'frequencyQuantity_3')
-        self.amplitude_label = self.findChild(QLabel, 'ampQuantity_3')
-
-        self.signals = self.findChild(QComboBox,'reconstructionComboBox_2')
-        self.delete_button = self.findChild(QPushButton, 'pushButton')
-        self.add_button = self.findChild(QPushButton, 'pushButton_2')
-        self.save_button = self.findChild(QPushButton, 'pushButton_3')
-        self.plot_graph = self.findChild(QWidget, 'widget_3')
-
-        self.ay_7aga = self.findChild(QVBoxLayout, 'verticalLayout')
-        self.ay_7aga .removeWidget(self.plot_graph)
-        self.plot_graph = pg.PlotWidget()
-        self.ay_7aga.addWidget(self.plot_graph)
-
-        self.amplitude_slider.valueChanged.connect(self.update_amplitude_slider)
-        self.frequency_slider.valueChanged.connect(self.update_frequency_slider)
+        self.signals = signals
+        self.plot_graph = plot_graph
+        self.amplitude_slider = amplitude_slider
+        self.frequency_slider = frequency_slider
+        self.amplitude_label = amplitude_label
+        self.frequency_label = frequency_label
 
         self.composed_signals = []
         self.wave_type = None
@@ -69,13 +48,15 @@ class SignalComposer(QMainWindow):
         self.frequency_slider_value = 1
         self.composed_y_data = None
         self.save_enabled = False
+
+        self.amplitude_slider.setValue(1)
+        self.amplitude_slider.setRange(1,10 )
+        self.frequency_slider.setValue(1)
+        self.frequency_slider.setRange(1, 100)
+
+        self.amplitude_slider.valueChanged.connect(self.update_amplitude_slider)
+        self.frequency_slider.valueChanged.connect(self.update_frequency_slider)
         self.add_default_signal()
-
-
-        self.add_button.clicked.connect(self.add_signal)
-        self.delete_button.clicked.connect(self.delete_signal)
-        self.save_button.clicked.connect(self.enter_file_name)
-
 
 
     def add_signal(self):
@@ -93,7 +74,7 @@ class SignalComposer(QMainWindow):
         self.phase_shift = 0
         self.vertical_shift = 0
         self.signal_id +=1
-
+        
         if self.wave_type == 'sine':
             y_values = (self.amplitude * np.sin(self.frequency * self.data_x + self.phase_shift) + self.vertical_shift)
         elif self.wave_type == 'cosine':
@@ -114,7 +95,7 @@ class SignalComposer(QMainWindow):
 
         created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency, self.phase_shift, self.vertical_shift, self.signal_id)
         self.composed_signals.append(created_signal)
-        self.signals.addItem(f'signal {self.signal_id}')
+        self.signals.addItem(f'Component {self.signal_id}')
         self.compose_and_plot()
 
 
@@ -138,7 +119,6 @@ class SignalComposer(QMainWindow):
 
 
     def delete_signal(self):
-        print("delete")
         signal_id_to_delete = self.signals.currentIndex() + 1
         if signal_id_to_delete is not None:
             self.composed_signals = [signal for signal in self.composed_signals if
@@ -165,11 +145,8 @@ class SignalComposer(QMainWindow):
         file_path = os.path.join(save_directory, file_name)
         df.to_csv(file_path, index=False)
         print(f"Data saved to {file_path}")
-        self.save_enabled = True
-        self.composition_complete.emit(self.data_x, self.composed_y_data)
-        self.close()
-        # close the window
-        # plot it fl first graph
+        
+
 
     def enter_file_name(self):
         print("enter file name")
@@ -178,16 +155,9 @@ class SignalComposer(QMainWindow):
         if dialog.exec_():
             file_name = dialog.file_name
             self.save_data_to_csv(file_name)
+            return self.data_x, self.composed_y_data
 
-    # def plot_main_window(self):
-    #     if self.save_enabled:
-    #         print("save is enabled")
-    #         # self.main_plot.clear()
-    #         # print("compose and delete")
-    #         # self.main_plot.plot(self.data_x, self.composed_y_data, pen='r')
-    #         return self.data_x, self.composed_y_data
-    #     else:
-    #         return None, None
+
 
 
 
