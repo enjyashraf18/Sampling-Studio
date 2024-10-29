@@ -1,6 +1,8 @@
 import numpy as np
 from scipy.interpolate import CubicSpline
 import pyqtgraph as pg
+from composer import SignalComposer
+
 
 
 def whittaker_shannon_interpolation(sampled_x, sampled_y, reconstructed_time):
@@ -40,7 +42,7 @@ class SignalClass:
     def __init__(self, data_x, data_y, signal_type, plot_widget, color, signal_id):
         self.data_x = data_x
         self.data_y = data_y
-        self.type = signal_type  # original, reconstructed, difference
+        self.type = signal_type  # original, reconstructed, difference, composed
         self.plot_widget = plot_widget
         self.color = color
         self.signal_id = signal_id
@@ -111,8 +113,8 @@ class SignalClass:
         self.amplitude = np.abs(np.fft.fft(self.data_y))
         # self.frequencies = np.fft.fftfreq(len(self.y_reconstructed), d=(self.x_sampled[1] - self.x_sampled[0]))
         # self.amplitude = np.abs(np.fft.fft(self.y_reconstructed))
-        print(f"Frequencies: {self.frequencies}")
-        print(f"Amplitude: {self.amplitude}")
+        # print(f"Frequencies: {self.frequencies}")
+        # print(f"Amplitude: {self.amplitude}")
         # plot the frequency domain signal
         self.frequency_line = plot_widget_frequency_domain.plot(
             self.frequencies,

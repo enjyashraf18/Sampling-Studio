@@ -20,6 +20,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.original_signals_list = []
         self.signals_uploaded_count = 0
         self.mixer_window = None
+        self.composed_datax = []
+        self.composed_datay = []
 
         self.upload_button = self.findChild(QPushButton, 'uploadButton')
         self.upload_button.clicked.connect(self.upload_signal)
@@ -27,6 +29,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.frequency_slider = self.findChild(QSlider, 'frequencyCombobox')
         self.frequency_slider.valueChanged.connect(self.change_sampling_frequency)
         self.frequency_label = self.findChild(QLabel, 'frequencyQuantity')
+        self.frequency_unit = self.findChild(QLabel,'hz')
 
         self.normalize_frequency = self.findChild(QCheckBox, 'normalize')
         self.normalize_frequency.stateChanged.connect(self.update_frequency_range)
@@ -46,6 +49,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.second_plot_widget = self.findChild(QWidget, 'reconstructedWindow')
         self.third_plot_widget = self.findChild(QWidget, 'differenceWindow')
         self.fourth_plot_widget = self.findChild(QWidget, 'frequencyWindow')
+
+
         
 
         self.signalCombobox = self.findChild(QComboBox, 'signalComboBox')
@@ -242,6 +247,7 @@ class MyWindow(QtWidgets.QMainWindow):
         if self.normalize_frequency.isChecked():
             self.current_original_signal.sampling_period = 1 / (
                         self.frequency_slider.value() * self.current_original_signal.maximum_frequency)
+            self.current_original_signal.sampling_frequency = self.frequency_slider.value() * self.current_original_signal.maximum_frequency
         else:
             self.current_original_signal.sampling_period = 1 / self.frequency_slider.value()
         self.frequency_label.setText(str(self.frequency_slider.value()))
@@ -263,10 +269,25 @@ class MyWindow(QtWidgets.QMainWindow):
         self.initialise_signals()
 
     def open_mixer_window(self):
-        if self.mixer_window is None:
-            self.mixer_window = SignalComposer()
-
+        # if self.mixer_window is None:
+        self.mixer_window = SignalComposer(self.first_plot)
+        self.mixer_window.composition_complete.connect(self.handle_composed_signal)
         self.mixer_window.show()
+
+    def handle_composed_signal(self, data_x, data_y):
+        original_color = (20, 200, 150)
+        self.signals_uploaded_count += 1
+        composed_signal = SignalClass(data_x, data_y, 'composed', self.first_plot, original_color,
+                                      self.signals_uploaded_count)
+        self.original_signals_list.append(composed_signal)
+        self.current_original_signal = composed_signal
+        new_signal_label = f"signal {self.signals_uploaded_count}"
+        self.signalCombobox.addItem(new_signal_label)
+        self.signalCombobox.setCurrentIndex(self.signalCombobox.count() - 1)
+        self.mixer_window = None
+        self.clear_plots()
+        self.initialise_signals()
+
 
     def snr_state(self,state):
         if state == Qt.Checked:  # checked, so apply noise
@@ -344,11 +365,21 @@ class MyWindow(QtWidgets.QMainWindow):
         if self.normalize_frequency.isChecked():
             current_value = self.frequency_slider.value()
             self.frequency_slider.setRange(1, 4)
-            self.frequency_slider.setValue(math.ceil(current_value / self.current_original_signal.maximum_frequency))
+            four_fmax = 4* self.current_original_signal.maximum_frequency
+            # if current_value > (3/4) * four_fmax:
+            #     self.frequency_slider.setValue(4)
+            # elif (3 / 4) * four_fmax > current_value > (1 / 2) * four_fmax:
+            #     self.frequency_slider.setValue(3)
+            mapped_value = (current_value - 1) * 4 // four_fmax + 1
+            self.frequency_slider.setValue(int(mapped_value))
+            self.frequency_unit.setText('Fmax')
+            self.frequency_unit.setGeometry(200, 350, 40, 21)
         else:
             current_value = self.frequency_slider.value()
             self.frequency_slider.setRange(1, 4 * int(self.current_original_signal.maximum_frequency))
-            self.frequency_slider.setValue(math.ceil(current_value / self.current_original_signal.maximum_frequency))
+            self.frequency_slider.setValue(int(current_value * self.current_original_signal.maximum_frequency))
+            self.frequency_unit.setText('Hz')
+            self.frequency_unit.setGeometry(220, 350, 21, 21)
 
     def update_reconstruction_method(self, previous_value):
         reconstruction_method = self.reconstruction_method.currentText()
