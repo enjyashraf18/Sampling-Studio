@@ -269,10 +269,10 @@ class MyWindow(QtWidgets.QMainWindow):
         self.initialise_signals()
 
     def open_mixer_window(self):
-        if self.mixer_window is None:
-            self.mixer_window = SignalComposer(self.first_plot)
-            self.mixer_window.composition_complete.connect(self.handle_composed_signal)
-            self.mixer_window.show()
+        # if self.mixer_window is None:
+        self.mixer_window = SignalComposer(self.first_plot)
+        self.mixer_window.composition_complete.connect(self.handle_composed_signal)
+        self.mixer_window.show()
 
     def handle_composed_signal(self, data_x,data_y):
         original_color = (20, 200, 150)
