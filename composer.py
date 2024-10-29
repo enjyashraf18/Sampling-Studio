@@ -67,6 +67,7 @@ class SignalComposer(QMainWindow):
         self.frequency_slider_value = None
         self.composed_y_data = None
         self.save_enabled = False
+        self.add_default_signal()
 
 
         self.add_button.clicked.connect(self.add_signal)
@@ -98,6 +99,22 @@ class SignalComposer(QMainWindow):
         created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency, self.phase_shift, self.vertical_shift, self.signal_id)
         self.composed_signals.append(created_signal)
         self.signals.addItem(f'signal {self.signal_id}' )
+        self.compose_and_plot()
+
+    def add_default_signal(self):
+        self.wave_type = 'sine'
+        self.amplitude = 2
+        self.frequency = 8
+        self.phase_shift = 0
+        self.vertical_shift = 0
+        self.signal_id +=1
+
+
+        y_values = (self.amplitude * np.sin(self.frequency * self.data_x + self.phase_shift) + self.vertical_shift)
+
+        created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency, self.phase_shift, self.vertical_shift, self.signal_id)
+        self.composed_signals.append(created_signal)
+        self.signals.addItem(f'signal {self.signal_id}')
         self.compose_and_plot()
 
 
