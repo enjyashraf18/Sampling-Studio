@@ -52,6 +52,13 @@ class MyWindow(QtWidgets.QMainWindow):
         self.second_plot_widget = self.findChild(QWidget, 'reconstructedWindow')
         self.third_plot_widget = self.findChild(QWidget, 'differenceWindow')
         self.fourth_plot_widget = self.findChild(QWidget, 'frequencyWindow')
+        self.phase_slider = self.findChild(QSlider, 'phaseSlider')
+        self.phase_label = self.findChild(QLabel, 'phaseQuantity')
+        self.phase_slider.setRange(0, 360)
+        self.signal_type = self.findChild(QComboBox, 'waveCompobox')
+        self.signal_type.addItem('Sine')
+        self.signal_type.addItem('Cosine')
+
 
 
         
@@ -108,8 +115,10 @@ class MyWindow(QtWidgets.QMainWindow):
         # Composer Controls
 
         self.amplitude_slider = self.findChild(QSlider, 'amplitudeCombobox_3')
-        # self.amplitude_slider.setValue(1)
-        # self.amplitude_slider.setRange(1,10 )
+        self.amplitude_slider_value = 1
+        self.amplitude_slider.setValue(1)
+        self.amplitude_slider.setRange(1,10 )
+
         self.frequency_slider2 = self.findChild(QSlider, 'frequencyCombobox_3')
         # self.frequency_slider.setValue(1)
         # self.frequency_slider.setRange(1, 100)
@@ -153,12 +162,14 @@ class MyWindow(QtWidgets.QMainWindow):
         self.vertical_layout_8.addWidget(self.third_plot)
         self.vertical_layout_9.addWidget(self.fourth_plot)
 
-        self.mixer_window = SignalComposer(self.signals, self.first_plot, self.amplitude_slider, self.frequency_slider2,self.amplitude_label, self.frequency_label)
-        
+        self.mixer_window = SignalComposer(self, self.signals, self.first_plot,  self.frequency_slider2,
+                                           self.amplitude_label, self.frequency_label, self.phase_slider,
+                                           self.phase_label, self.signal_type)
 
-        self.add_button.clicked.connect(self.mixer_window.add_signal)
-        self.delete_button.clicked.connect(self.mixer_window.delete_signal)
+        self.add_button.clicked.connect(self.add_composed_signal)
+        self.delete_button.clicked.connect(self.delete_composed_signal)
         self.save_button.clicked.connect(self.save_composed_signal)
+        self.amplitude_slider.valueChanged.connect(self.update_amplitude)
 
         self.frequency_label = self.findChild(QLabel, 'frequencyQuantity')
 
@@ -287,19 +298,27 @@ class MyWindow(QtWidgets.QMainWindow):
         self.frequency_slider.setRange(1, 4 * int(self.current_original_signal.maximum_frequency))
         self.frequency_slider.setValue(int(self.current_original_signal.sampling_frequency))
 
+        self.set_axes_limits(self.current_original_signal.data_x, self.current_original_signal.data_y)
 
-        min_x = min(self.current_original_signal.data_x)
-        max_x = max(self.current_original_signal.data_x)
-        min_y = min(self.current_original_signal.data_y)
-        max_y = max(self.current_original_signal.data_y)
-
-        self.first_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
-        self.second_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
-        self.third_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
-        self.third_plot.setYRange(-0.05, 0.05)
         reconstruction_method = self.reconstruction_method.currentText()
         self.plot_signals(reconstruction_method)  # initial reconstruction method
         print(f"max freq: {self.current_original_signal.maximum_frequency}")
+
+    def set_axes_limits(self, data_x, data_y):
+        print("INSIDE SET AXES LIMITS")
+        min_x = min(data_x)
+        max_x = max(data_x)
+        min_y = min(data_y)
+        max_y = max(data_y)
+        print(f"min x: {min_x}")
+        print(f"max x: {max_x}")
+        print(f"min y: {min_y}")
+        print(f"max y: {max_y}")
+
+        self.first_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
+        self.second_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
+        self.first_plot.setXRange(min_x, max_x)
+        self.second_plot.setXRange(min_x,max_x)
 
 
     def plot_signals(self,reconstruction_method):
@@ -330,6 +349,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.frequency_label.setText(str(self.frequency_slider.value()))
         reconstruction_method = self.reconstruction_method.currentText()
         self.clear_plots()
+        self.set_axes_limits(self.current_original_signal.data_x, self.current_original_signal.data_y)
         self.plot_signals(reconstruction_method)
 
         print(f"sampling frequency: {self.current_original_signal.sampling_frequency}")
@@ -352,10 +372,14 @@ class MyWindow(QtWidgets.QMainWindow):
     #     self.mixer_window.show()
 
 
+
     def save_composed_signal(self):
         composed_data_x, composed_data_y, composed_max_freq = self.mixer_window.enter_file_name()
 
         self.handle_composed_signal(composed_data_x, composed_data_y, composed_max_freq)
+
+    def update_amplitude(self):
+        self.mixer_window.update_amplitude_slider(self.amplitude_slider.value())
 
     def handle_composed_signal(self, data_x, data_y, composed_max_freq):
         original_color = (20, 200, 150)
@@ -371,9 +395,50 @@ class MyWindow(QtWidgets.QMainWindow):
         new_signal_label = f"signal {self.signals_uploaded_count}"
         self.signalCombobox.addItem(new_signal_label)
         self.signalCombobox.setCurrentIndex(self.signalCombobox.count() - 1)
-        self.mixer_window = None
         self.clear_plots()
         self.initialise_signals()
+
+
+    def add_composed_signal(self):
+        self.mixer_window.add_signal()
+        composed_data_x, composed_data_y, composed_max_freq = self.mixer_window.return_composed_data()
+        self.handle_update_composed_signal(composed_data_x, composed_data_y, composed_max_freq)
+
+    def delete_composed_signal(self):
+        self.mixer_window.delete_signal()
+        composed_data_x, composed_data_y, composed_max_freq = self.mixer_window.return_composed_data()
+        self.handle_update_composed_signal(composed_data_x, composed_data_y, composed_max_freq)
+
+    def handle_update_composed_signal(self, data_x, data_y, composed_max_freq):
+        self.current_original_signal.update_data(data_x, data_y, composed_max_freq)
+        # self.current_original_signal.data_y = data_y
+        # self.current_original_signal.data_x = data_x
+        # self.current_original_signal.maximum_frequency = composed_max_freq
+        # self.current_original_signal.sampling_frequency = composed_max_freq * 2
+        # print(f'ay 7aga {self.current_original_signal.maximum_frequency}, {self.current_original_signal.sampling_frequency}')
+        # self.current_original_signal.sampling_period = 1 / self.current_original_signal.sampling_frequency
+        self.clear_plots()
+        self.initialise_signals()
+
+    def create_default_signal(self):
+        original_color = (20, 200, 150)
+        data_x, data_y, composed_max_freq = self.mixer_window.add_signal()
+        composed_signal = SignalClass(data_x, data_y, 'composed', self.first_plot, original_color,
+                                      self.signals_uploaded_count, f"signal {self.signals_uploaded_count}")
+        self.original_signals_list.append(composed_signal)
+        self.current_original_signal = composed_signal
+        self.current_original_signal.maximum_frequency = composed_max_freq
+        self.current_original_signal.sampling_frequency = composed_max_freq * 2
+        print(
+            f'ay 7aga {self.current_original_signal.maximum_frequency}, {self.current_original_signal.sampling_frequency}')
+        self.current_original_signal.sampling_period = 1 / self.current_original_signal.sampling_frequency
+        new_signal_label = f"signal {self.signals_uploaded_count}"
+        self.signalCombobox.addItem(new_signal_label)
+        self.signalCombobox.setCurrentIndex(self.signalCombobox.count() - 1)
+
+
+
+
 
 
     def snr_state(self,state):
@@ -472,6 +537,7 @@ class MyWindow(QtWidgets.QMainWindow):
         reconstruction_method = self.reconstruction_method.currentText()
         try:
             self.clear_plots()
+            self.set_axes_limits(self.current_original_signal.data_x, self.current_original_signal.data_y)
             self.plot_signals(reconstruction_method)
         except AttributeError:
             print(previous_value)

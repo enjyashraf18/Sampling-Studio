@@ -96,24 +96,30 @@ class SignalClass:
         self.plot_widget.plot(self.x_sampled, self.y_sampled, pen=None, symbol='o', symbolSize=4, symbolBrush='w')
 
     def plot_reconstructed_signal(self, second_plot_widget, method):
+        reconstructed_time = np.linspace(self.start_time, self.end_time, 1000)
+
         if method == 'Whittaker-Shannon':
             print("Reconstruction Method: Whittaker-Shannon")
-            reconstructed_time = np.linspace(self.start_time, self.end_time, 1000)
-            self.y_reconstructed = whittaker_shannon_interpolation(self.x_sampled, self.y_sampled,
-                                                                   reconstructed_time)
+            self.y_reconstructed = whittaker_shannon_interpolation(self.x_sampled, self.y_sampled, reconstructed_time)
         elif method == 'Lanczos':
             print("Reconstruction Method: Lanczos")
-            self.y_reconstructed = lanczos_interpolation(self.data_x, self.x_sampled, self.y_sampled, a=3)
+            self.y_reconstructed = lanczos_interpolation(reconstructed_time, self.x_sampled, self.y_sampled, a=3)
         elif method == 'Cubic Spline':
             print("Reconstruction Method: Cubic Spline")
-            self.y_reconstructed = cubic_spline_interpolation(self.data_x, self.x_sampled, self.y_sampled)
+            self.y_reconstructed = cubic_spline_interpolation(reconstructed_time, self.x_sampled, self.y_sampled)
         else:
-            raise ValueError("Invalid reconstruction method. Choose 'shannon' or 'lanczos'.")
-        second_plot_widget.plot(self.data_x, self.y_reconstructed, pen=(50, 100, 240))
+            raise ValueError("Invalid reconstruction method. Choose 'Whittaker-Shannon', 'Lanczos', or 'Cubic Spline'.")
+
+        # Plot the reconstructed signal
+        second_plot_widget.plot(reconstructed_time, self.y_reconstructed, pen=(50,100,240))
 
     def plot_difference(self, third_plot_widget):
         difference_y = self.noisy_data_y - self.y_reconstructed
-        third_plot_widget.plot(self.data_x, difference_y, pen=(200, 50, 50))
+        min_y = min(difference_y)
+        max_y = max(difference_y)
+        # third_plot_widget.getPlotItem().autoRange()
+        third_plot_widget.setLimits(xMin=min(self.data_x), xMax=max(self.data_x), yMin=min_y, yMax=max_y)
+        third_plot_widget.plot(self.data_x, difference_y, pen=(200,50,50))
 
     def create_frequency_domain(self, plot_widget_frequency_domain):
         # cal freq domain using fft
@@ -152,9 +158,18 @@ class SignalClass:
         self.noisy_data_y = self.data_y + noise
 
         # return noisy_y
+
+    def update_data(self, data_x, data_y, max_freq):
+        self.data_x = data_x
+        self.data_y = data_y
+        self.maximum_frequency = max_freq
+        self.sampling_frequency = 2*self.maximum_frequency
+        self.sampling_period = 1 / self.sampling_frequency
     
     def remove_noise(self):
         self.noisy_data_y = self.data_y
+
+
 
 
     # def update_amplitude(self, amplitude):
@@ -223,3 +238,5 @@ class SignalClass:
 #     samples_of_amplitude_at_time_domain = np.sum(interpolation, axis=1)
 #
 #     return time_domain, samples_of_amplitude_at_time_domain
+
+
