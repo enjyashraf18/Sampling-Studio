@@ -405,11 +405,13 @@ class MyWindow(QtWidgets.QMainWindow):
 
 
     def add_composed_signal(self):
-        print(f"hena current zeft 3{self.current_original_signal}")
+        if self.current_original_signal.type != 'composed':
+            self.create_default_signal()
+            self.current_original_signal.type = 'composed'
+
+
         self.mixer_window.add_signal()
-        print(f"hena current zeft {self.current_original_signal}")
         composed_data_x, composed_data_y, composed_max_freq = self.mixer_window.return_composed_data()
-        print(f"hena current zeft 2{self.current_original_signal}")
         self.handle_update_composed_signal(composed_data_x, composed_data_y, composed_max_freq)
 
     def delete_composed_signal(self):

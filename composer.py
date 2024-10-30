@@ -34,6 +34,7 @@ class SignalComposer(QMainWindow):
         self.amplitude_label = amplitude_label
         self.frequency_label = frequency_label
         self.components_count = 0
+        self.first_plot_cnt = 1
         self.composed_signals = []
         self.frequencies = []
         self.wave_type = None
@@ -184,6 +185,7 @@ class SignalComposer(QMainWindow):
             final_datay = self.composed_y_data
             max_freq = self.max_frequency
             self.reset_composer()
+            self.first_plot_cnt = 0
             return final_datax, final_datay, max_freq
 
     def update_phase_slider(self):
@@ -219,6 +221,9 @@ class SignalComposer(QMainWindow):
         # self.amplitude_slider.setRange(1,10 )
         self.frequency_slider.setValue(1)
         self.frequency_slider.setRange(1, 40)
+
+    def detect_first_plot(self):
+        return self.first_plot_cnt
 
 
 
