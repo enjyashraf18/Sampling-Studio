@@ -34,7 +34,6 @@ class SignalComposer(QMainWindow):
         self.amplitude_label = amplitude_label
         self.frequency_label = frequency_label
         self.components_count = 0
-
         self.composed_signals = []
         self.frequencies = []
         self.wave_type = None
@@ -181,7 +180,11 @@ class SignalComposer(QMainWindow):
             file_name = dialog.file_name
             self.max_frequency = max(self.frequencies)
             self.save_data_to_csv(file_name)
-            return self.data_x, self.composed_y_data, self.max_frequency
+            final_datax = self.data_x
+            final_datay = self.composed_y_data
+            max_freq = self.max_frequency
+            self.reset_composer()
+            return final_datax, final_datay, max_freq
 
     def update_phase_slider(self):
         try:
@@ -191,6 +194,32 @@ class SignalComposer(QMainWindow):
         self.phase_label.setText(str(self.phase_slider.value()))
     def return_composed_data(self):
         return self.data_x, self.composed_y_data, max(self.frequencies)
+
+    def reset_composer(self):
+        self.components_count = 0
+        self.composed_signals = []
+        self.frequencies = []
+        self.wave_type = None
+        self.amplitude = None
+        self.frequency = None
+        self.phase_shift = None
+        self.vertical_shift = None
+        self.max_frequency = None
+        self.signal_id = 0
+        self.cnt = 0
+        self.data_x = None
+        self.amplitude_slider_value = 1
+        self.frequency_slider_value = 1
+        self.data_x = np.linspace(0, 3, 1000)
+        self.composed_y_data = np.zeros_like(self.data_x)
+        self.save_enabled = False
+        self.add_default_signal()
+
+        # self.amplitude_slider.setValue(1)
+        # self.amplitude_slider.setRange(1,10 )
+        self.frequency_slider.setValue(1)
+        self.frequency_slider.setRange(1, 40)
+
 
 
 

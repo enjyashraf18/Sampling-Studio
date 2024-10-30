@@ -160,6 +160,7 @@ class SignalClass:
         # return noisy_y
 
     def update_data(self, data_x, data_y, max_freq):
+        self.type = 'composed'
         self.data_x = data_x
         self.data_y = data_y
         self.maximum_frequency = max_freq

@@ -296,7 +296,9 @@ class MyWindow(QtWidgets.QMainWindow):
         self.restore_states()
 
     def initialise_signals(self):
-        self.current_original_signal.calculate_maximum_frequency()
+        if self.current_original_signal.type != 'composed':
+            print('Not Composed')
+            self.current_original_signal.calculate_maximum_frequency()
         self.frequency_slider.setRange(1, 4 * int(self.current_original_signal.maximum_frequency))
         self.frequency_slider.setValue(int(self.current_original_signal.sampling_frequency))
 
@@ -377,7 +379,6 @@ class MyWindow(QtWidgets.QMainWindow):
 
     def save_composed_signal(self):
         composed_data_x, composed_data_y, composed_max_freq = self.mixer_window.enter_file_name()
-
         self.handle_composed_signal(composed_data_x, composed_data_y, composed_max_freq)
 
     def update_amplitude(self):
@@ -399,6 +400,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.signalCombobox.setCurrentIndex(self.signalCombobox.count() - 1)
         self.clear_plots()
         self.initialise_signals()
+        self.signals.clear()
+
 
 
     def add_composed_signal(self):
@@ -429,6 +432,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.current_original_signal = composed_signal
         self.current_original_signal.maximum_frequency = composed_max_freq
         self.current_original_signal.sampling_frequency = composed_max_freq * 2
+        self.frequency_slider.setValue(int(self.current_original_signal.sampling_frequency))
         print(
             f'ay 7aga {self.current_original_signal.maximum_frequency}, {self.current_original_signal.sampling_frequency}')
         self.current_original_signal.sampling_period = 1 / self.current_original_signal.sampling_frequency
