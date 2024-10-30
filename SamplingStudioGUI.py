@@ -400,8 +400,11 @@ class MyWindow(QtWidgets.QMainWindow):
 
 
     def add_composed_signal(self):
+        print(f"hena current zeft 3{self.current_original_signal}")
         self.mixer_window.add_signal()
+        print(f"hena current zeft {self.current_original_signal}")
         composed_data_x, composed_data_y, composed_max_freq = self.mixer_window.return_composed_data()
+        print(f"hena current zeft 2{self.current_original_signal}")
         self.handle_update_composed_signal(composed_data_x, composed_data_y, composed_max_freq)
 
     def delete_composed_signal(self):
@@ -410,13 +413,8 @@ class MyWindow(QtWidgets.QMainWindow):
         self.handle_update_composed_signal(composed_data_x, composed_data_y, composed_max_freq)
 
     def handle_update_composed_signal(self, data_x, data_y, composed_max_freq):
+        print("f handle_update_composed_signal")
         self.current_original_signal.update_data(data_x, data_y, composed_max_freq)
-        # self.current_original_signal.data_y = data_y
-        # self.current_original_signal.data_x = data_x
-        # self.current_original_signal.maximum_frequency = composed_max_freq
-        # self.current_original_signal.sampling_frequency = composed_max_freq * 2
-        # print(f'ay 7aga {self.current_original_signal.maximum_frequency}, {self.current_original_signal.sampling_frequency}')
-        # self.current_original_signal.sampling_period = 1 / self.current_original_signal.sampling_frequency
         self.clear_plots()
         self.initialise_signals()
 
