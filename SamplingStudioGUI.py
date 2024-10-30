@@ -110,7 +110,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.amplitude_slider = self.findChild(QSlider, 'amplitudeCombobox_3')
         # self.amplitude_slider.setValue(1)
         # self.amplitude_slider.setRange(1,10 )
-        self.frequency_slider = self.findChild(QSlider, 'frequencyCombobox_3')
+        self.frequency_slider2 = self.findChild(QSlider, 'frequencyCombobox_3')
         # self.frequency_slider.setValue(1)
         # self.frequency_slider.setRange(1, 100)
         self.frequency_label = self.findChild(QLabel, 'frequencyQuantity_3')
@@ -153,15 +153,13 @@ class MyWindow(QtWidgets.QMainWindow):
         self.vertical_layout_8.addWidget(self.third_plot)
         self.vertical_layout_9.addWidget(self.fourth_plot)
 
-        self.mixer_window = SignalComposer(self.signals, self.first_plot, self.amplitude_slider, self.frequency_slider,self.amplitude_label, self.frequency_label)
+        self.mixer_window = SignalComposer(self.signals, self.first_plot, self.amplitude_slider, self.frequency_slider2,self.amplitude_label, self.frequency_label)
         
 
         self.add_button.clicked.connect(self.mixer_window.add_signal)
         self.delete_button.clicked.connect(self.mixer_window.delete_signal)
         self.save_button.clicked.connect(self.save_composed_signal)
 
-        self.frequency_slider = self.findChild(QSlider, 'frequencyCombobox')
-        self.frequency_slider.valueChanged.connect(self.change_sampling_frequency)
         self.frequency_label = self.findChild(QLabel, 'frequencyQuantity')
 
         # the zoomin into the orignal signal
@@ -289,6 +287,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.frequency_slider.setRange(1, 4 * int(self.current_original_signal.maximum_frequency))
         self.frequency_slider.setValue(int(self.current_original_signal.sampling_frequency))
 
+
         min_x = min(self.current_original_signal.data_x)
         max_x = max(self.current_original_signal.data_x)
         min_y = min(self.current_original_signal.data_y)
@@ -354,16 +353,21 @@ class MyWindow(QtWidgets.QMainWindow):
 
 
     def save_composed_signal(self):
-        composed_data_x, composed_data_y = self.mixer_window.enter_file_name()
-        self.handle_composed_signal(composed_data_x, composed_data_y)
+        composed_data_x, composed_data_y, composed_max_freq = self.mixer_window.enter_file_name()
 
-    def handle_composed_signal(self, data_x, data_y):
+        self.handle_composed_signal(composed_data_x, composed_data_y, composed_max_freq)
+
+    def handle_composed_signal(self, data_x, data_y, composed_max_freq):
         original_color = (20, 200, 150)
         self.signals_uploaded_count += 1
         composed_signal = SignalClass(data_x, data_y, 'composed', self.first_plot, original_color,
                                       self.signals_uploaded_count,f"signal {self.signals_uploaded_count}")
         self.original_signals_list.append(composed_signal)
         self.current_original_signal = composed_signal
+        self.current_original_signal.maximum_frequency = composed_max_freq
+        self.current_original_signal.sampling_frequency = composed_max_freq * 2
+        print(f'ay 7aga {self.current_original_signal.maximum_frequency}, {self.current_original_signal.sampling_frequency}')
+        self.current_original_signal.sampling_period = 1 / self.current_original_signal.sampling_frequency
         new_signal_label = f"signal {self.signals_uploaded_count}"
         self.signalCombobox.addItem(new_signal_label)
         self.signalCombobox.setCurrentIndex(self.signalCombobox.count() - 1)

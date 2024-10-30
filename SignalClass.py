@@ -70,15 +70,17 @@ class SignalClass:
         self.name = name
 
     def calculate_maximum_frequency(self):
-        time = np.array(self.data_x)
-        magnitude = np.array(self.noisy_data_y)
-        fft_result = np.fft.fft(magnitude)  # time domain to freq domain
-        frequencies = np.fft.fftfreq(len(fft_result), time[1] - time[0])
-        positive_frequencies = frequencies[frequencies >= 0]
-        self.maximum_frequency = positive_frequencies[-1]
-        self.sampling_frequency = 2*self.maximum_frequency
-        print(f"SAMPLING FREQUENCY: {self.sampling_frequency}")
-        self.sampling_period = 1/self.sampling_frequency
+        if self.type != 'composed':
+            time = np.array(self.data_x)
+            magnitude = np.array(self.noisy_data_y)
+            fft_result = np.fft.fft(magnitude)  # time domain to freq domain
+            frequencies = np.fft.fftfreq(len(fft_result), time[1] - time[0])
+            positive_frequencies = frequencies[frequencies >= 0]
+            self.maximum_frequency = positive_frequencies[-1]
+            print(f"hena fmax composed {self.maximum_frequency}")
+            self.sampling_frequency = 2*self.maximum_frequency
+            print(f"SAMPLING FREQUENCY: {self.sampling_frequency}")
+            self.sampling_period = 1/self.sampling_frequency
 
     def plot_original_signal(self):
         self.plot_widget.plot(self.data_x, self.noisy_data_y, pen=self.color)

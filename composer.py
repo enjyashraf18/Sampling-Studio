@@ -36,17 +36,20 @@ class SignalComposer(QMainWindow):
         self.frequency_label = frequency_label
 
         self.composed_signals = []
+        self.frequencies = []
         self.wave_type = None
         self.amplitude = None
         self.frequency = None
         self.phase_shift = None
         self.vertical_shift = None
+        self.max_frequency = None
         self.signal_id = 0
         self.cnt = 0
-        self.data_x = np.linspace(0, 3, 1000)
+        self.data_x = None
         self.amplitude_slider_value = 1
         self.frequency_slider_value = 1
         self.composed_y_data = None
+        self.data_x = np.linspace(0, 3, 1000)
         self.save_enabled = False
 
         self.amplitude_slider.setValue(1)
@@ -56,7 +59,7 @@ class SignalComposer(QMainWindow):
 
         self.amplitude_slider.valueChanged.connect(self.update_amplitude_slider)
         self.frequency_slider.valueChanged.connect(self.update_frequency_slider)
-        self.add_default_signal()
+        # self.add_default_signal()
 
 
     def add_signal(self):
@@ -74,6 +77,8 @@ class SignalComposer(QMainWindow):
         self.phase_shift = 0
         self.vertical_shift = 0
         self.signal_id +=1
+
+
         
         if self.wave_type == 'sine':
             y_values = (self.amplitude * np.sin(self.frequency * self.data_x + self.phase_shift) + self.vertical_shift)
@@ -81,17 +86,19 @@ class SignalComposer(QMainWindow):
             y_values = (self.amplitude * np.cos(self.frequency * self.data_x + self.phase_shift) + self.vertical_shift)
         created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency, self.phase_shift, self.vertical_shift, self.signal_id)
         self.composed_signals.append(created_signal)
+        self.frequencies.append(self.frequency)
         self.signals.addItem(f'signal {self.signal_id}' )
         self.compose_and_plot()
 
     def add_default_signal(self):
         self.wave_type = 'sine'
         self.amplitude = 2
-        self.frequency = 8
+        self.frequency = 40
         self.phase_shift = 0
         self.vertical_shift = 0
         self.signal_id +=1
         y_values = (self.amplitude * np.sin(self.frequency * self.data_x + self.phase_shift) + self.vertical_shift)
+        self.frequencies.append(self.frequency)
 
         created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency, self.phase_shift, self.vertical_shift, self.signal_id)
         self.composed_signals.append(created_signal)
@@ -145,6 +152,7 @@ class SignalComposer(QMainWindow):
         file_path = os.path.join(save_directory, file_name)
         df.to_csv(file_path, index=False)
         print(f"Data saved to {file_path}")
+        print(self.frequencies)
         
 
 
@@ -154,8 +162,9 @@ class SignalComposer(QMainWindow):
         dialog.center_on_screen()
         if dialog.exec_():
             file_name = dialog.file_name
+            self.max_frequency = max(self.frequencies)
             self.save_data_to_csv(file_name)
-            return self.data_x, self.composed_y_data
+            return self.data_x, self.composed_y_data, max(self.frequencies)
 
 
 
