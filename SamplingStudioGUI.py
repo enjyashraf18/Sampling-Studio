@@ -173,6 +173,8 @@ class MyWindow(QtWidgets.QMainWindow):
 
         self.frequency_label = self.findChild(QLabel, 'frequencyQuantity')
 
+        self.create_default_signal()
+
         # the zoomin into the orignal signal
         self.zoomIn_originalSignal = self.findChild(QPushButton, 'zoomIn1')
         self.zoomOut_origninalSignal = self.findChild(QPushButton, 'zoomOut1')
@@ -240,7 +242,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.addNoiseCheckBox.setChecked(False)
         self.snrSlider.setValue(1)
         self.snrSlider.setEnabled(False)
-        self.frequency_slider.setValue(self.current_original_signal.sampling_frequency)
+        self.frequency_slider.setValue(int(self.current_original_signal.sampling_frequency))
         self.reconstruction_method.setCurrentIndex(0)  # Default to the first method
         self.normalize_frequency.setChecked(False)
 
@@ -420,7 +422,7 @@ class MyWindow(QtWidgets.QMainWindow):
 
     def create_default_signal(self):
         original_color = (20, 200, 150)
-        data_x, data_y, composed_max_freq = self.mixer_window.add_signal()
+        data_x, data_y, composed_max_freq = self.mixer_window.return_composed_data()
         composed_signal = SignalClass(data_x, data_y, 'composed', self.first_plot, original_color,
                                       self.signals_uploaded_count, f"signal {self.signals_uploaded_count}")
         self.original_signals_list.append(composed_signal)
