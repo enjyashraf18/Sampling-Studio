@@ -123,13 +123,13 @@ class SignalClass:
 
     def create_frequency_domain(self, plot_widget_frequency_domain):
         # cal freq domain using fft
-        self.frequencies = np.fft.fftfreq(len(self.data_y), d=(self.data_x[1] - self.data_x[0]))
         self.amplitude = np.abs(np.fft.fft(self.data_y))
-        # self.frequencies = np.fft.fftfreq(len(self.y_reconstructed), d=(self.x_sampled[1] - self.x_sampled[0]))
-        # self.amplitude = np.abs(np.fft.fft(self.y_reconstructed))
-        # print(f"Frequencies: {self.frequencies}")
-        # print(f"Amplitude: {self.amplitude}")
-        # plot the frequency domain signal
+        d = 0
+        if self.type == "composed" :
+            d = 1/(2*self.maximum_frequency)
+        else:
+            d = (self.data_x[1] - self.data_x[0])
+        self.frequencies = np.fft.fftfreq(len(self.data_y), d= d)
         self.frequency_line = plot_widget_frequency_domain.plot(
             self.frequencies,
             self.amplitude,

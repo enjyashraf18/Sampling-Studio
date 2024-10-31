@@ -219,7 +219,7 @@ class MyWindow(QtWidgets.QMainWindow):
             'snr_value': self.snrSlider.value(),
             'frequency': self.frequency_slider.value(),
             'reconstruction_method': self.reconstruction_method.currentText(),
-            'normalize_checkbox': self.normalize_frequency.isChecked()
+            'normalize_checkbox': self.normalize_frequency.isChecked(),
         }
 
     def restore_states(self):
