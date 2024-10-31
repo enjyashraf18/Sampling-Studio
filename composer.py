@@ -105,7 +105,7 @@ class SignalComposer(QMainWindow):
         created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency, self.phase_shift, self.vertical_shift, self.signal_id)
         self.composed_signals.append(created_signal)
         self.frequencies.append(self.frequency)
-        self.signals.addItem(f'Component {self.signal_id}')
+        self.signals.addItem(f'Component of {self.frequency}Hz')
         self.compose_and_plot()
 
 

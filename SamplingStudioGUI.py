@@ -449,7 +449,7 @@ class MyWindow(QtWidgets.QMainWindow):
 
     def snr_state(self,state):
         if state == Qt.Checked:  # checked, so apply noise
-            self.snrSlider.setRange(1,50)
+            self.snrSlider.setRange(1,30)
             self.snrSlider.setEnabled(True)
             self.snrSlider.setValue(100)
             self.snrLabel.setText(str(self.snrSlider.value()))
