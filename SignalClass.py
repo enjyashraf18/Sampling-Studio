@@ -121,15 +121,18 @@ class SignalClass:
         third_plot_widget.setLimits(xMin=min(self.data_x), xMax=max(self.data_x), yMin=min_y, yMax=max_y)
         third_plot_widget.plot(self.data_x, difference_y, pen=(200,50,50))
 
-    def create_frequency_domain(self, plot_widget_frequency_domain):
+    def create_frequency_domain(self, plot_widget_frequency_domain, calculates_freq):
         # cal freq domain using fft
         self.amplitude = np.abs(np.fft.fft(self.data_y))
+        print(f"the amp is {self.amplitude}")
         d = 0
-        if self.type == "composed" :
+        if self.type == "composed" or not calculates_freq:
             d = 1/(2*self.maximum_frequency)
         else:
             d = (self.data_x[1] - self.data_x[0])
-        self.frequencies = np.fft.fftfreq(len(self.data_y), d= d)
+        self.frequencies = np.fft.fftfreq(len(self.data_y), d= d)    
+        self.frequencies = np.fft.fftshift(self.frequencies) 
+        print(f"the freq  is {self.frequencies}")
         self.frequency_line = plot_widget_frequency_domain.plot(
             self.frequencies,
             self.amplitude,

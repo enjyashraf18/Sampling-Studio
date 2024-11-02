@@ -77,9 +77,10 @@ class SignalComposer(QMainWindow):
         self.first_add = 0
 
         if self.wave_type == 'Sine':
-            y_values = (self.amplitude * np.sin(2 * np.pi * self.frequency * self.data_x) + self.vertical_shift)
+            y_values = (self.amplitude * np.sin(2 * np.pi * self.frequency * self.data_x + self.phase_shift) + self.vertical_shift)
+
         elif self.wave_type == 'Cosine':
-            y_values = (self.amplitude * np.cos(2 * np.pi * self.frequency * self.data_x) + self.vertical_shift)
+            y_values = (self.amplitude * np.cos(2 * np.pi * self.frequency * self.data_x + self.phase_shift) + self.vertical_shift)
         created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency, self.phase_shift, self.vertical_shift, self.signal_id)
         self.composed_signals.append(created_signal)
         self.frequencies.append(self.frequency)
@@ -87,6 +88,7 @@ class SignalComposer(QMainWindow):
         self.signals.addItem(f'Component of {self.frequency}Hz')
         self.signals.setCurrentIndex(self.signals.count()-1)
         self.components_count += 1
+        self.main_window.set_axes_limits(self.data_x, y_values)
         self.compose_and_plot()
 
 
@@ -105,7 +107,7 @@ class SignalComposer(QMainWindow):
         created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency, self.phase_shift, self.vertical_shift, self.signal_id)
         self.composed_signals.append(created_signal)
         self.frequencies.append(self.frequency)
-        self.signals.addItem(f'Component {self.signal_id}')
+        self.signals.addItem(f'Component of {self.frequency} Hz')
         self.compose_and_plot()
 
 
@@ -161,9 +163,11 @@ class SignalComposer(QMainWindow):
     def save_data_to_csv(self, file_name):
         # convert it to csv file
         save_directory = 'composed_signals/'
+        max_freq = max(self.frequencies)
         df = pd.DataFrame({
             'X': self.data_x,
-            'Y': self.composed_y_data
+            'Y': self.composed_y_data,
+            'Frequency': max_freq
         })
         file_name = file_name
         file_path = os.path.join(save_directory, file_name)

@@ -23,6 +23,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.composed_datax = []
         self.composed_datay = []
         self.signal_states = {}
+        self.calculates_freq = True
 
         
 
@@ -254,19 +255,22 @@ class MyWindow(QtWidgets.QMainWindow):
                 data = pd.read_csv(path)
                 x = data.iloc[:, 0].values
                 y = data.iloc[:, 1].values
-                return x, y
+                freq = data.iloc[:, 2].values
+                print(f"EL FREQUENCY MN EL FILE: {freq}")
+                return x, y, freq
             except Exception as e:
                 print(f"Error, couldn't upload: {e}")
-                return None, None
+                return None, None, None
         else:
-            return None, None
+            return None, None, None
 
     def upload_signal(self):
         # Save the current state before changing to a new signal
         if self.current_original_signal is not None:
             self.save_states()
 
-        data_x, data_y = self.open_file()
+        data_x, data_y, max_freq = self.open_file()
+
         if len(data_x) != 1000:
             self.popup_messages("Please upload data of size <b>1000x2</b>.")
         elif data_x is not None and data_y is not None:
@@ -277,7 +281,11 @@ class MyWindow(QtWidgets.QMainWindow):
                                           self.signals_uploaded_count, new_signal_label)
             self.original_signals_list.append(original_signal)
             self.current_original_signal = original_signal
-
+            if max_freq is not None:
+                self.current_original_signal.maximum_frequency = max_freq[0]
+                self.current_original_signal.sampling_frequency = 2*max_freq[0]
+                self.calculates_freq = False
+                print(f"EL MAXIMUM FREQUENCY AFTER UPLOADING: {self.current_original_signal.maximum_frequency}")
             self.signalCombobox.addItem(new_signal_label)
             self.signalCombobox.setCurrentIndex(self.signalCombobox.count() - 1)
             self.clear_plots()
@@ -298,11 +306,14 @@ class MyWindow(QtWidgets.QMainWindow):
     def initialise_signals(self):
         if self.current_original_signal.type != 'composed':
             print('Not Composed')
-            self.current_original_signal.calculate_maximum_frequency()
+            if self.current_original_signal.maximum_frequency is None:
+                print("GOWA EL MAX FREQ")
+                self.current_original_signal.calculate_maximum_frequency()
         self.frequency_slider.setRange(1, 4 * int(self.current_original_signal.maximum_frequency))
         self.frequency_slider.setValue(int(self.current_original_signal.sampling_frequency))
 
         self.set_axes_limits(self.current_original_signal.data_x, self.current_original_signal.data_y)
+
 
         reconstruction_method = self.reconstruction_method.currentText()
         self.plot_signals(reconstruction_method)  # initial reconstruction method
@@ -330,7 +341,10 @@ class MyWindow(QtWidgets.QMainWindow):
         self.current_original_signal.plot_sample_points()
         self.current_original_signal.plot_reconstructed_signal(self.second_plot, reconstruction_method)  # replace with choice from dropdown
         self.current_original_signal.plot_difference(self.third_plot)
-        self.current_original_signal.create_frequency_domain(self.fourth_plot)
+        self.current_original_signal.create_frequency_domain(self.fourth_plot, self.calculates_freq)
+        self.first_plot.getPlotItem().autoRange()
+        self.second_plot.getPlotItem().autoRange()
+        self.third_plot.getPlotItem().autoRange()
 
 
     def clear_plots(self):
@@ -422,8 +436,8 @@ class MyWindow(QtWidgets.QMainWindow):
     def handle_update_composed_signal(self, data_x, data_y, composed_max_freq):
         print("f handle_update_composed_signal")
         self.current_original_signal.update_data(data_x, data_y, composed_max_freq)
-        self.clear_plots()
-        self.initialise_signals()
+        # self.clear_plots()
+        # self.initialise_signals()
 
     def create_default_signal(self):
         original_color = (20, 200, 150)
