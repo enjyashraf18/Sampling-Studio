@@ -8,6 +8,7 @@ from SignalClass import SignalClass
 from composer import SignalComposer
 import math
 
+
 class MyWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
@@ -24,6 +25,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.composed_datay = []
         self.signal_states = {}
         self.calculates_freq = True
+        self.composed_count = 0
 
         
 
@@ -139,9 +141,6 @@ class MyWindow(QtWidgets.QMainWindow):
         # self.plot_graph = pg.PlotWidget()
         # self.ay_7aga.addWidget(self.plot_graph)
 
-        
-        
-
         # Removing the QWidgets from ui file to add PlotWidgets
         self.vertical_layout_11.removeWidget(self.first_plot_widget)
         self.vertical_layout_10.removeWidget(self.second_plot_widget)
@@ -176,7 +175,7 @@ class MyWindow(QtWidgets.QMainWindow):
 
         self.create_default_signal()
 
-        # the zoomin into the orignal signal
+        # the zoomin into the original signal
         self.zoomIn_originalSignal = self.findChild(QPushButton, 'zoomIn1')
         self.zoomOut_origninalSignal = self.findChild(QPushButton, 'zoomOut1')
 
@@ -213,6 +212,7 @@ class MyWindow(QtWidgets.QMainWindow):
         # remove the plots
         self.remove_plots = self.findChild(QPushButton, "bin1")
         self.remove_plots.clicked.connect(lambda : self.clear_plots())
+
     def save_states(self):
         signal_id = int(self.current_original_signal.name.split()[1])-1
         self.signal_states[signal_id] = {
@@ -222,6 +222,7 @@ class MyWindow(QtWidgets.QMainWindow):
             'reconstruction_method': self.reconstruction_method.currentText(),
             'normalize_checkbox': self.normalize_frequency.isChecked(),
         }
+        # self.set_frequency_slider()
 
     def restore_states(self):
         signal_id = self.signalCombobox.currentIndex()
@@ -238,6 +239,9 @@ class MyWindow(QtWidgets.QMainWindow):
             self.frequency_slider.setValue(int(self.current_original_signal.sampling_frequency))
             self.reconstruction_method.setCurrentIndex(0)
             self.normalize_frequency.setChecked(False)
+        self.set_frequency_slider()
+
+
 
     def reset_controls(self):
         self.addNoiseCheckBox.setChecked(False)
@@ -271,8 +275,8 @@ class MyWindow(QtWidgets.QMainWindow):
 
         data_x, data_y, max_freq = self.open_file()
 
-        if len(data_x) != 1000:
-            self.popup_messages("Please upload data of size <b>1000x2</b>.")
+        if len(data_x) < 1000:
+            self.popup_messages("Please upload data of <b>1000</b> data points or more.")
         elif data_x is not None and data_y is not None:
             original_color = (20, 200, 150)
             self.signals_uploaded_count += 1
@@ -293,13 +297,19 @@ class MyWindow(QtWidgets.QMainWindow):
 
             # Reset controls to default values
             self.reset_controls()
+            self.mixer_window.reset_composer()
+            # self.delete_button.setEnabled(False)
 
     def update_signal(self):
         if self.current_original_signal is not None:
             self.save_states()
         self.clear_plots()
-        self.signal_id= self.signalCombobox.currentIndex()
+        self.signal_id = self.signalCombobox.currentIndex()
         self.current_original_signal = self.original_signals_list[self.signal_id]
+        print(f"idk lol: {self.current_original_signal.maximum_frequency}")
+        if self.current_original_signal.type == 'original':
+            print("ORIGINAL")
+            self.current_original_signal.calculate_maximum_frequency()
         self.initialise_signals()
         self.restore_states()
 
@@ -353,6 +363,11 @@ class MyWindow(QtWidgets.QMainWindow):
         self.third_plot.clear()
         self.fourth_plot.clear()
 
+    def set_frequency_slider(self):
+        print("INSIDE SET FREQUENCY SLIDER")
+        print(f"CURRENT ORIGIN max FREQ: {self.current_original_signal.maximum_frequency}")
+        self.frequency_slider.setRange(1, 4*int(self.current_original_signal.maximum_frequency))
+
     def change_sampling_frequency(self):
         try:
             self.current_original_signal.sampling_frequency = self.frequency_slider.value()
@@ -373,7 +388,6 @@ class MyWindow(QtWidgets.QMainWindow):
         print(f"sampling frequency: {self.current_original_signal.sampling_frequency}")
 
     def delete_signal(self):
-        
         self.original_signals_list.pop(self.signalCombobox.currentIndex())
         self.signalCombobox.removeItem(self.signalCombobox.currentIndex())
         self.clear_plots()
@@ -389,10 +403,9 @@ class MyWindow(QtWidgets.QMainWindow):
     #     self.mixer_window.composition_complete.connect(self.handle_composed_signal)
     #     self.mixer_window.show()
 
-
-
     def save_composed_signal(self):
         composed_data_x, composed_data_y, composed_max_freq = self.mixer_window.enter_file_name()
+        self.delete_button.setEnabled(False)
         self.handle_composed_signal(composed_data_x, composed_data_y, composed_max_freq)
 
     def update_amplitude(self):
@@ -419,10 +432,10 @@ class MyWindow(QtWidgets.QMainWindow):
 
 
     def add_composed_signal(self):
+        self.delete_button.setEnabled(True)
         if self.current_original_signal.type != 'composed':
-            self.create_default_signal()
+            # self.create_default_signal()
             self.current_original_signal.type = 'composed'
-
 
         self.mixer_window.add_signal()
         composed_data_x, composed_data_y, composed_max_freq = self.mixer_window.return_composed_data()
@@ -436,12 +449,15 @@ class MyWindow(QtWidgets.QMainWindow):
     def handle_update_composed_signal(self, data_x, data_y, composed_max_freq):
         print("f handle_update_composed_signal")
         self.current_original_signal.update_data(data_x, data_y, composed_max_freq)
-        # self.clear_plots()
-        # self.initialise_signals()
+        
 
     def create_default_signal(self):
         original_color = (20, 200, 150)
-        data_x, data_y, composed_max_freq = self.mixer_window.return_composed_data()
+        # data_x, data_y, composed_max_freq = self.mixer_window.return_composed_data()
+        data_x = self.mixer_window.data_x
+        self.mixer_window.add_signal()
+        data_y = self.mixer_window.data_y
+        composed_max_freq = max(self.mixer_window.frequencies)
         composed_signal = SignalClass(data_x, data_y, 'composed', self.first_plot, original_color,
                                       self.signals_uploaded_count, f"signal {self.signals_uploaded_count}")
         self.original_signals_list.append(composed_signal)
@@ -449,17 +465,12 @@ class MyWindow(QtWidgets.QMainWindow):
         self.current_original_signal.maximum_frequency = composed_max_freq
         self.current_original_signal.sampling_frequency = composed_max_freq * 2
         self.frequency_slider.setValue(int(self.current_original_signal.sampling_frequency))
-        print(
-            f'ay 7aga {self.current_original_signal.maximum_frequency}, {self.current_original_signal.sampling_frequency}')
+        print(f'ay 7aga {self.current_original_signal.maximum_frequency}, '
+              f'{self.current_original_signal.sampling_frequency}')
         self.current_original_signal.sampling_period = 1 / self.current_original_signal.sampling_frequency
         new_signal_label = f"signal {self.signals_uploaded_count}"
         self.signalCombobox.addItem(new_signal_label)
         self.signalCombobox.setCurrentIndex(self.signalCombobox.count() - 1)
-
-
-
-
-
 
     def snr_state(self,state):
         if state == Qt.Checked:  # checked, so apply noise

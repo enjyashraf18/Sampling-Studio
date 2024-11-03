@@ -51,10 +51,11 @@ class SignalComposer(QMainWindow):
         self.data_x = None
         self.amplitude_slider_value = 1
         self.frequency_slider_value = 1
+        self.data_y = None
         self.data_x = np.linspace(0, 3, 1000)
         self.composed_y_data = np.zeros_like(self.data_x)
         self.save_enabled = False
-        self.add_default_signal()
+        # self.add_default_signal()
 
         # self.amplitude_slider.setValue(1)
         # self.amplitude_slider.setRange(1,10 )
@@ -73,15 +74,19 @@ class SignalComposer(QMainWindow):
         self.frequency = int(self.frequency_slider_value)
         self.phase_shift = 0
         self.vertical_shift = 0
-        self.signal_id +=1
+        self.signal_id += 1
         self.first_add = 0
 
         if self.wave_type == 'Sine':
-            y_values = (self.amplitude * np.sin(2 * np.pi * self.frequency * self.data_x + self.phase_shift) + self.vertical_shift)
-
+            y_values = (self.amplitude * np.sin(2 * np.pi * self.frequency * self.data_x + self.phase_shift) +
+                        self.vertical_shift)
         elif self.wave_type == 'Cosine':
-            y_values = (self.amplitude * np.cos(2 * np.pi * self.frequency * self.data_x + self.phase_shift) + self.vertical_shift)
-        created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency, self.phase_shift, self.vertical_shift, self.signal_id)
+            y_values = (self.amplitude * np.cos(2 * np.pi * self.frequency * self.data_x + self.phase_shift) +
+                        self.vertical_shift)
+        created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency,
+                                               self.phase_shift, self.vertical_shift, self.signal_id)
+        self.data_y = y_values
+        self.data_x = np.linspace(0, 3, 1000)
         self.composed_signals.append(created_signal)
         self.frequencies.append(self.frequency)
         max_freq = max(self.frequencies)
@@ -131,11 +136,20 @@ class SignalComposer(QMainWindow):
 
 
     def delete_signal(self):
-        signal_id_to_delete = self.signals.currentIndex() + 1
+        signal_id_to_delete = self.signals.currentIndex()
+        print(f"CURRENT INDEX: {self.signals.currentIndex()}")
+        print(f"Items in signals: {self.signals.count()}")
+        for index in range(self.signals.count()):
+            item_text = self.signals.itemText(index)
+            print(f"Index: {index}, Item: {item_text}")
         if signal_id_to_delete is not None:
-            self.composed_signals.pop(self.signal_type.currentIndex())
-            self.signals.removeItem(signal_id_to_delete - 1)
-
+            for signal in self.composed_signals:
+                print(f"delete_signal before pop: {signal.frequency}")
+            self.composed_signals.pop(signal_id_to_delete)
+            for signal in self.composed_signals:
+                print(f"delete_signal after pop: {signal.frequency}")
+            self.signals.removeItem(signal_id_to_delete)
+            print(f"Items in signals after delete: {self.signals.count()}")
             self.compose_and_plot()
 
     # def compose_and_plot(self):
@@ -155,6 +169,7 @@ class SignalComposer(QMainWindow):
             self.main_window.first_plot.clear()
         self.composed_y_data = np.zeros_like(self.data_x)
         for signal in self.composed_signals:
+            print(f"compose and plot: {signal.frequency}")
             self.composed_y_data += signal.y_data
         self.main_window.set_axes_limits(self.data_x, self.composed_y_data)
         self.main_window.first_plot.plot(self.data_x, self.composed_y_data, pen='r', name='Composed Signal')
@@ -174,8 +189,6 @@ class SignalComposer(QMainWindow):
         df.to_csv(file_path, index=False)
         print(f"Data saved to {file_path}")
         print(self.frequencies)
-        
-
 
     def enter_file_name(self):
         print("enter file name")
@@ -198,6 +211,7 @@ class SignalComposer(QMainWindow):
         except AttributeError as e:
             print(e)
         self.phase_label.setText(str(self.phase_slider.value()))
+
     def return_composed_data(self):
         return self.data_x, self.composed_y_data, max(self.frequencies)
 
@@ -219,7 +233,7 @@ class SignalComposer(QMainWindow):
         self.data_x = np.linspace(0, 3, 1000)
         self.composed_y_data = np.zeros_like(self.data_x)
         self.save_enabled = False
-        self.add_default_signal()
+        # self.add_default_signal()
 
         # self.amplitude_slider.setValue(1)
         # self.amplitude_slider.setRange(1,10 )
