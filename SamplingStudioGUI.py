@@ -103,7 +103,10 @@ class MyWindow(QtWidgets.QMainWindow):
 
         
         self.signalCombobox.setEditable(False)
+        # self.signalCombobox.addItem("None Selected")
+        # self.signalCombobox.setCurrentIndex(0)
         self.signalCombobox.currentIndexChanged.connect(self.update_signal)
+
 
         self.removeButton = self.findChild(QPushButton, 'binButton')
         self.addNoiseCheckBox = self.findChild(QCheckBox, 'addNoise')
@@ -274,6 +277,7 @@ class MyWindow(QtWidgets.QMainWindow):
             self.save_states()
 
         data_x, data_y, max_freq = self.open_file()
+        self.mixer_window.reset_composer()
 
         if len(data_x) < 1000:
             self.popup_messages("Please upload data of <b>1000</b> data points or more.")
@@ -291,18 +295,22 @@ class MyWindow(QtWidgets.QMainWindow):
                 self.calculates_freq = False
                 print(f"EL MAXIMUM FREQUENCY AFTER UPLOADING: {self.current_original_signal.maximum_frequency}")
             self.signalCombobox.addItem(new_signal_label)
-            self.signalCombobox.setCurrentIndex(self.signalCombobox.count() - 1)
+            self.signalCombobox.setCurrentIndex(self.signalCombobox.count() -1)
             self.clear_plots()
             self.initialise_signals()
 
             # Reset controls to default values
             self.reset_controls()
-            self.mixer_window.reset_composer()
+            self.signals.clear()
+
             # self.delete_button.setEnabled(False)
+
+
 
     def update_signal(self):
         if self.current_original_signal is not None:
             self.save_states()
+
         self.clear_plots()
         self.signal_id = self.signalCombobox.currentIndex()
         self.current_original_signal = self.original_signals_list[self.signal_id]
@@ -437,6 +445,9 @@ class MyWindow(QtWidgets.QMainWindow):
             # self.create_default_signal()
             self.current_original_signal.type = 'composed'
 
+        self.second_plot.clear()
+        self.third_plot.clear()
+        self.fourth_plot.clear()
         self.mixer_window.add_signal()
         composed_data_x, composed_data_y, composed_max_freq = self.mixer_window.return_composed_data()
         self.handle_update_composed_signal(composed_data_x, composed_data_y, composed_max_freq)

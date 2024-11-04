@@ -98,7 +98,6 @@ class SignalComposer(QMainWindow):
 
 
 
-
     def add_default_signal(self):
         self.wave_type = 'sine'
         self.amplitude = 1
