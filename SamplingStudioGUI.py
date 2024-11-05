@@ -339,19 +339,18 @@ class MyWindow(QtWidgets.QMainWindow):
 
     def set_axes_limits(self, data_x, data_y):
         print("INSIDE SET AXES LIMITS")
-        min_x = min(data_x)
-        max_x = max(data_x)
         min_y = min(data_y)
         max_y = max(data_y)
-        print(f"min x: {min_x}")
-        print(f"max x: {max_x}")
-        print(f"min y: {min_y}")
-        print(f"max y: {max_y}")
-
-        self.first_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
-        self.second_plot.setLimits(xMin=min_x, xMax=max_x, yMin=min_y, yMax=max_y)
+        min_x = min(data_x)
+        max_x = data_x[700]
         self.first_plot.setXRange(min_x, max_x)
-        self.second_plot.setXRange(min_x,max_x)
+        self.first_plot.setYRange(min_y, max_y)
+        self.first_plot.setLimits(xMin=min_x, yMin=min_y, yMax=max_y)
+        self.second_plot.setLimits(xMin=min_x,  yMin=min_y,yMax=max_y)
+        self.second_plot.setXRange(min_x, data_x[700])
+        self.second_plot.setYRange(min_y, max_y)
+        self.third_plot.setXRange(min_x, data_x[700])
+        self.third_plot.setYRange(-1,1)
 
 
     def plot_signals(self,reconstruction_method):
@@ -360,9 +359,9 @@ class MyWindow(QtWidgets.QMainWindow):
         self.current_original_signal.plot_reconstructed_signal(self.second_plot, reconstruction_method)  # replace with choice from dropdown
         self.current_original_signal.plot_difference(self.third_plot)
         self.current_original_signal.create_frequency_domain(self.fourth_plot, self.calculates_freq)
-        self.first_plot.getPlotItem().autoRange()
-        self.second_plot.getPlotItem().autoRange()
-        self.third_plot.getPlotItem().autoRange()
+        # self.first_plot.getPlotItem().autoRange()
+        # self.second_plot.getPlotItem().autoRange()
+        # self.third_plot.getPlotItem().autoRange()
 
 
     def clear_plots(self):

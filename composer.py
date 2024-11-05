@@ -52,7 +52,7 @@ class SignalComposer(QMainWindow):
         self.amplitude_slider_value = 1
         self.frequency_slider_value = 1
         self.data_y = None
-        self.data_x = np.linspace(0, 3, 1000)
+        self.data_x = np.linspace(0, 10, 6000)
         self.composed_y_data = np.zeros_like(self.data_x)
         self.save_enabled = False
         # self.add_default_signal()
