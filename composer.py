@@ -51,6 +51,7 @@ class SignalComposer(QMainWindow):
         self.data_x = None
         self.amplitude_slider_value = 1
         self.frequency_slider_value = 1
+        self.amplitudes = []
         self.data_y = None
         self.data_x = np.linspace(0, 10, 6000)
         self.composed_y_data = np.zeros_like(self.data_x)
@@ -86,8 +87,9 @@ class SignalComposer(QMainWindow):
         created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency,
                                                self.phase_shift, self.vertical_shift, self.signal_id)
         self.data_y = y_values
-        self.data_x = np.linspace(0, 3, 1000)
+        self.data_x = np.linspace(0, 10, 6000)
         self.composed_signals.append(created_signal)
+        self.amplitudes.append(self.amplitude)
         self.frequencies.append(self.frequency)
         max_freq = max(self.frequencies)
         self.signals.addItem(f'Component of {self.frequency}Hz')
@@ -106,11 +108,11 @@ class SignalComposer(QMainWindow):
         self.vertical_shift = 0
         self.signal_id +=1
         y_values = (self.amplitude * np.sin(2 * np.pi * self.frequency * self.data_x) + self.vertical_shift)
+        self.amplitudes.append(self.amplitude)
         self.frequencies.append(self.frequency)
 
         created_signal = composed_signal_class(y_values, self.wave_type, self.amplitude, self.frequency, self.phase_shift, self.vertical_shift, self.signal_id)
         self.composed_signals.append(created_signal)
-        self.frequencies.append(self.frequency)
         self.signals.addItem(f'Component of {self.frequency} Hz')
         self.compose_and_plot()
 
@@ -136,6 +138,7 @@ class SignalComposer(QMainWindow):
 
     def delete_signal(self):
         signal_id_to_delete = self.signals.currentIndex()
+
         print(f"CURRENT INDEX: {self.signals.currentIndex()}")
         print(f"Items in signals: {self.signals.count()}")
         for index in range(self.signals.count()):
@@ -145,6 +148,8 @@ class SignalComposer(QMainWindow):
             for signal in self.composed_signals:
                 print(f"delete_signal before pop: {signal.frequency}")
             self.composed_signals.pop(signal_id_to_delete)
+            self.amplitudes.pop(signal_id_to_delete)
+            self.frequencies.pop(signal_id_to_delete)
             for signal in self.composed_signals:
                 print(f"delete_signal after pop: {signal.frequency}")
             self.signals.removeItem(signal_id_to_delete)
@@ -170,9 +175,10 @@ class SignalComposer(QMainWindow):
         for signal in self.composed_signals:
             print(f"compose and plot: {signal.frequency}")
             self.composed_y_data += signal.y_data
+        self.main_window.first_plot.plot(self.data_x[100:-100], self.composed_y_data[100:-100], pen='g', name='Composed Signal')
         self.main_window.set_axes_limits(self.data_x, self.composed_y_data)
-        self.main_window.first_plot.plot(self.data_x, self.composed_y_data, pen='r', name='Composed Signal')
-        self.main_window.first_plot.getPlotItem().autoRange()
+
+        # self.main_window.first_plot.getPlotItem().autoRange()
 
     def save_data_to_csv(self, file_name):
         # convert it to csv file
@@ -200,9 +206,11 @@ class SignalComposer(QMainWindow):
             final_datax = self.data_x
             final_datay = self.composed_y_data
             max_freq = self.max_frequency
+            frequencies = self.frequencies
+            amplitudes = self.amplitudes
             self.reset_composer()
             self.first_plot_cnt = 0
-            return final_datax, final_datay, max_freq
+            return final_datax, final_datay, max_freq, amplitudes, frequencies
 
     def update_phase_slider(self):
         try:
@@ -229,7 +237,7 @@ class SignalComposer(QMainWindow):
         self.data_x = None
         self.amplitude_slider_value = 1
         self.frequency_slider_value = 1
-        self.data_x = np.linspace(0, 3, 1000)
+        self.data_x = np.linspace(0, 10, 6000)
         self.composed_y_data = np.zeros_like(self.data_x)
         self.save_enabled = False
         # self.add_default_signal()

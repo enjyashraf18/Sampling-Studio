@@ -26,7 +26,9 @@ class MyWindow(QtWidgets.QMainWindow):
         self.signal_states = {}
         self.calculates_freq = True
         self.composed_count = 0
-
+        self.composed_amplitudes = []
+        self.composed_frequencies = []
+        # self.maximum_frequency_label = None
         
 
         self.upload_button = self.findChild(QPushButton, 'uploadButton')
@@ -284,7 +286,7 @@ class MyWindow(QtWidgets.QMainWindow):
         elif data_x is not None and data_y is not None:
             original_color = (20, 200, 150)
             self.signals_uploaded_count += 1
-            new_signal_label = f"signal {self.signals_uploaded_count}"
+            new_signal_label = f"Signal {self.signals_uploaded_count}"
             original_signal = SignalClass(data_x, data_y, 'original', self.first_plot, original_color,
                                           self.signals_uploaded_count, new_signal_label)
             self.original_signals_list.append(original_signal)
@@ -342,23 +344,30 @@ class MyWindow(QtWidgets.QMainWindow):
         min_y = min(data_y)
         max_y = max(data_y)
         min_x = min(data_x)
-        max_x = data_x[700]
-        self.first_plot.setXRange(min_x, max_x)
+        max_x = data_x[1000]
+        self.first_plot.setXRange(data_x[100], max_x)
         self.first_plot.setYRange(min_y, max_y)
-        self.first_plot.setLimits(xMin=min_x, yMin=min_y, yMax=max_y)
-        self.second_plot.setLimits(xMin=min_x,  yMin=min_y,yMax=max_y)
-        self.second_plot.setXRange(min_x, data_x[700])
+        self.first_plot.setLimits(xMin=data_x[100], yMin=min_y, xMax=data_x[-100],yMax=max_y)
+        self.second_plot.setLimits(xMin=data_x[100], yMin=min_y, xMax=data_x[-100],yMax=max_y)
+        self.second_plot.setXRange(data_x[100], max_x)
         self.second_plot.setYRange(min_y, max_y)
-        self.third_plot.setXRange(min_x, data_x[700])
-        self.third_plot.setYRange(-1,1)
+        self.third_plot.setXRange(data_x[100], max_x)
+        self.third_plot.setYRange(min_y, max_y)
+        self.third_plot.setLimits(xMin=data_x[100],yMin=min_y,xMax=data_x[-100],yMax=max_y)
+
 
 
     def plot_signals(self,reconstruction_method):
         self.current_original_signal.plot_original_signal()
         self.current_original_signal.plot_sample_points()
-        self.current_original_signal.plot_reconstructed_signal(self.second_plot, reconstruction_method)  # replace with choice from dropdown
-        self.current_original_signal.plot_difference(self.third_plot)
+        y_reco=self.current_original_signal.plot_reconstructed_signal(self.second_plot, reconstruction_method)  # replace with choice from dropdown
+        self.current_original_signal.plot_difference(self.third_plot,y_reco)
+        print(f"gowa el plot:{self.current_original_signal.frequencies_composed}")
         self.current_original_signal.create_frequency_domain(self.fourth_plot, self.calculates_freq)
+        print(f"gowa el plot 2:{self.current_original_signal.frequencies_composed}")
+
+
+
         # self.first_plot.getPlotItem().autoRange()
         # self.second_plot.getPlotItem().autoRange()
         # self.third_plot.getPlotItem().autoRange()
@@ -383,10 +392,13 @@ class MyWindow(QtWidgets.QMainWindow):
         if self.normalize_frequency.isChecked():
             self.current_original_signal.sampling_period = 1 / (
                         self.frequency_slider.value() * self.current_original_signal.maximum_frequency)
-            self.current_original_signal.sampling_frequency = self.frequency_slider.value() * self.current_original_signal.maximum_frequency
+            self.current_original_signal.sampling_frequency = (self.frequency_slider.value())*10
+            self.frequency_label.setText(str(self.frequency_slider.value()/10))
+            self.frequency_unit.setGeometry(220, 350, 40, 21)
+            self.frequency_unit.setText("fmax")
         else:
             self.current_original_signal.sampling_period = 1 / self.frequency_slider.value()
-        self.frequency_label.setText(str(self.frequency_slider.value()))
+            self.frequency_label.setText(str(self.frequency_slider.value()))
         reconstruction_method = self.reconstruction_method.currentText()
         self.clear_plots()
         self.set_axes_limits(self.current_original_signal.data_x, self.current_original_signal.data_y)
@@ -411,25 +423,30 @@ class MyWindow(QtWidgets.QMainWindow):
     #     self.mixer_window.show()
 
     def save_composed_signal(self):
-        composed_data_x, composed_data_y, composed_max_freq = self.mixer_window.enter_file_name()
+        (composed_data_x, composed_data_y, composed_max_freq, self.composed_amplitudes, self.composed_frequencies) = self.mixer_window.enter_file_name()
+        print(f"and fe el save comp {self.composed_frequencies}")
         self.delete_button.setEnabled(False)
-        self.handle_composed_signal(composed_data_x, composed_data_y, composed_max_freq)
+        self.handle_composed_signal(composed_data_x, composed_data_y, composed_max_freq, self.composed_frequencies, self.composed_amplitudes)
 
     def update_amplitude(self):
         self.mixer_window.update_amplitude_slider(self.amplitude_slider.value())
 
-    def handle_composed_signal(self, data_x, data_y, composed_max_freq):
+    def handle_composed_signal(self, data_x, data_y, composed_max_freq, composed_freq, compposed_amp):
         original_color = (20, 200, 150)
         self.signals_uploaded_count += 1
         composed_signal = SignalClass(data_x, data_y, 'composed', self.first_plot, original_color,
-                                      self.signals_uploaded_count,f"signal {self.signals_uploaded_count}")
+                                      self.signals_uploaded_count,f"signal with {composed_max_freq} Hz")
+        print(f"gowa wl handla: {composed_freq}")
+        composed_signal.frequencies_composed = composed_freq
+        print(f"gowa wl handla 2 : {composed_signal.frequencies_composed}")
+        composed_signal.amp_composed = compposed_amp
         self.original_signals_list.append(composed_signal)
         self.current_original_signal = composed_signal
         self.current_original_signal.maximum_frequency = composed_max_freq
         self.current_original_signal.sampling_frequency = composed_max_freq * 2
         print(f'ay 7aga {self.current_original_signal.maximum_frequency}, {self.current_original_signal.sampling_frequency}')
         self.current_original_signal.sampling_period = 1 / self.current_original_signal.sampling_frequency
-        new_signal_label = f"signal {self.signals_uploaded_count}"
+        new_signal_label = f"Signal with {composed_max_freq} Hz"
         self.signalCombobox.addItem(new_signal_label)
         self.signalCombobox.setCurrentIndex(self.signalCombobox.count() - 1)
         self.clear_plots()
@@ -557,18 +574,20 @@ class MyWindow(QtWidgets.QMainWindow):
     def update_frequency_range(self):
         if self.normalize_frequency.isChecked():
             current_value = self.frequency_slider.value()
-            self.frequency_slider.setRange(1, 4)
+            self.frequency_slider.setRange(1, 40)
             four_fmax = 4* self.current_original_signal.maximum_frequency
             # if current_value > (3/4) * four_fmax:
             #     self.frequency_slider.setValue(4)
             # elif (3 / 4) * four_fmax > current_value > (1 / 2) * four_fmax:
             #     self.frequency_slider.setValue(3)
-            mapped_value = (current_value - 1) * 4 // four_fmax + 1
+            mapped_value = (current_value) * 40 // four_fmax
+            print(f"MAPPED VALUE: {mapped_value}")
             self.frequency_slider.setValue(int(mapped_value))
             self.frequency_unit.setText('Fmax')
-            self.frequency_unit.setGeometry(200, 350, 40, 21)
+            self.frequency_unit.setGeometry(220, 350, 40, 21)
         else:
-            current_value = self.frequency_slider.value()
+            current_value = (self.frequency_slider.value())/ 10 #with respect to fmax
+            print(f"SLIDER VALUE: {self.frequency_slider.value()}")
             self.frequency_slider.setRange(1, 4 * int(self.current_original_signal.maximum_frequency))
             self.frequency_slider.setValue(int(current_value * self.current_original_signal.maximum_frequency))
             self.frequency_unit.setText('Hz')

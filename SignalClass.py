@@ -54,8 +54,8 @@ class SignalClass:
         self.y_reconstructed = None
         self.start_time = None
         self.end_time = None
-        self.frequencies = None
-        self.amplitude = None
+        self.frequencies = []
+        self.amplitude = []
         self.before_band_width_line = None
         self.after_band_width_line = None
         self.frequency_line = None
@@ -67,6 +67,9 @@ class SignalClass:
         self.current_reconstruction_method = "shannon"
         self.current_amplitude = 0
         self.current_normalize_checkbox = False
+        self.frequencies_composed = []
+        self.amp_composed = []
+
         self.name = name
 
     def calculate_maximum_frequency(self):
@@ -83,7 +86,7 @@ class SignalClass:
             self.sampling_period = 1/self.sampling_frequency
 
     def plot_original_signal(self):
-        self.plot_widget.plot(self.data_x, self.noisy_data_y, pen=self.color)
+        self.plot_widget.plot(self.data_x[100:-100], self.noisy_data_y[100:-100], pen=self.color)
 
     def plot_sample_points(self):
         self.start_time = np.min(self.data_x)
@@ -96,7 +99,7 @@ class SignalClass:
         self.plot_widget.plot(self.x_sampled, self.y_sampled, pen=None, symbol='o', symbolSize=4, symbolBrush='w')
 
     def plot_reconstructed_signal(self, second_plot_widget, method):
-        reconstructed_time = np.linspace(self.start_time, self.end_time, 1000)
+        reconstructed_time = np.linspace(self.start_time, self.end_time, len(self.data_x))
 
         if method == 'Whittaker-Shannon':
             print("Reconstruction Method: Whittaker-Shannon")
@@ -111,28 +114,51 @@ class SignalClass:
             raise ValueError("Invalid reconstruction method. Choose 'Whittaker-Shannon', 'Lanczos', or 'Cubic Spline'.")
 
         # Plot the reconstructed signal
-        second_plot_widget.plot(reconstructed_time, self.y_reconstructed, pen=(50,100,240))
+        second_plot_widget.plot(reconstructed_time[100:-100], self.y_reconstructed[100:-100], pen=(50,100,240))
+        return self.y_reconstructed
 
-    def plot_difference(self, third_plot_widget):
-        difference_y = self.noisy_data_y - self.y_reconstructed
+    import numpy as np
+
+    def plot_difference(self, third_plot_widget, y_reco):
+        difference_y = self.data_y - y_reco
         min_y = min(difference_y)
         max_y = max(difference_y)
-        # third_plot_widget.getPlotItem().autoRange()
-        third_plot_widget.setLimits(xMin=min(self.data_x), xMax=max(self.data_x), yMin=min_y, yMax=max_y)
-        third_plot_widget.plot(self.data_x, difference_y, pen=(200,50,50))
+
+        # Calculate the average of the specified range
+        avg_difference = np.mean(np.abs(self.data_y - self.y_reconstructed))
+        print(f"Average difference: {avg_difference}")
+
+        # Plot the difference
+        plot_item = third_plot_widget.getPlotItem()
+        plot_item.clear()  # Clear previous plots if necessary
+
+        # Add the plot for the difference
+        curve = plot_item.plot(self.data_x[100:-100], difference_y[100:-100], pen=(200, 50, 50), name="Difference")
+
+        # Add a legend
+
+        legend = plot_item.addLegend()
+        # Add the average difference to the legend
+        legend.clear()
+        legend.addItem(curve, f"Avg Difference: {avg_difference:.6f}")
+
+        # Uncomment the following lines if you want to set limits
+        # plot_item.autoRange()
+        # third_plot_widget.setLimits(xMin=min(self.data_x), xMax=max(self.data_x), yMin=min_y, yMax=max_y)
+
 
     def create_frequency_domain(self, plot_widget_frequency_domain, calculates_freq):
         # cal freq domain using fft
         self.amplitude = np.abs(np.fft.fft(self.data_y))
-    #    print(f"the amp is {self.amplitude}")
+        print(f"the amp is {self.amplitude}")
         d = 0
         if self.type == "composed" or not calculates_freq:
-            d = 1/(2*self.maximum_frequency)
+            d = (self.y_reconstructed[1] - self.y_reconstructed[0])
         else:
             d = (self.data_x[1] - self.data_x[0])
-        self.frequencies = np.fft.fftfreq(len(self.data_y), d= d)    
-        self.frequencies = np.fft.fftshift(self.frequencies) 
-      #  print(f"the freq  is {self.frequencies}")
+        self.frequencies = np.fft.fftfreq(len(self.y_reconstructed), d= d)
+        self.frequencies = np.fft.fftshift(self.frequencies)
+        print(f"the freq  is {self.frequencies}")
         self.frequency_line = plot_widget_frequency_domain.plot(
             self.frequencies,
             self.amplitude,

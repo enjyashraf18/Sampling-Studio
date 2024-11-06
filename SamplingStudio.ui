@@ -1279,7 +1279,7 @@ font-size: 18px;
 font-weight: 800</string>
            </property>
            <property name="text">
-            <string>Sample Controls</string>
+            <string>Sampling Controls</string>
            </property>
           </widget>
           <widget class="QLabel" name="iconFreq">
@@ -1287,7 +1287,7 @@ font-weight: 800</string>
             <rect>
              <x>50</x>
              <y>350</y>
-             <width>31</width>
+             <width>32</width>
              <height>21</height>
             </rect>
            </property>
