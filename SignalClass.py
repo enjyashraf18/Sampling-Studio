@@ -99,22 +99,22 @@ class SignalClass:
         self.plot_widget.plot(self.x_sampled, self.y_sampled, pen=None, symbol='o', symbolSize=4, symbolBrush='w')
 
     def plot_reconstructed_signal(self, second_plot_widget, method):
-        reconstructed_time = np.linspace(self.start_time, self.end_time, len(self.data_x))
+        self.reconstructed_time = np.linspace(self.start_time, self.end_time, len(self.data_x))
 
         if method == 'Whittaker-Shannon':
             print("Reconstruction Method: Whittaker-Shannon")
-            self.y_reconstructed = whittaker_shannon_interpolation(self.x_sampled, self.y_sampled, reconstructed_time)
+            self.y_reconstructed = whittaker_shannon_interpolation(self.x_sampled, self.y_sampled, self.reconstructed_time)
         elif method == 'Lanczos':
             print("Reconstruction Method: Lanczos")
-            self.y_reconstructed = lanczos_interpolation(reconstructed_time, self.x_sampled, self.y_sampled, a=3)
+            self.y_reconstructed = lanczos_interpolation(self.reconstructed_time, self.x_sampled, self.y_sampled, a=3)
         elif method == 'Cubic Spline':
             print("Reconstruction Method: Cubic Spline")
-            self.y_reconstructed = cubic_spline_interpolation(reconstructed_time, self.x_sampled, self.y_sampled)
+            self.y_reconstructed = cubic_spline_interpolation(self.reconstructed_time, self.x_sampled, self.y_sampled)
         else:
             raise ValueError("Invalid reconstruction method. Choose 'Whittaker-Shannon', 'Lanczos', or 'Cubic Spline'.")
 
         # Plot the reconstructed signal
-        second_plot_widget.plot(reconstructed_time[100:-100], self.y_reconstructed[100:-100], pen=(50,100,240))
+        second_plot_widget.plot(self.reconstructed_time[100:-100], self.y_reconstructed[100:-100], pen=(50,100,240))
         return self.y_reconstructed
 
     import numpy as np
@@ -123,53 +123,35 @@ class SignalClass:
         difference_y = self.data_y - y_reco
         min_y = min(difference_y)
         max_y = max(difference_y)
-
-        # Calculate the average of the specified range
         avg_difference = np.mean(np.abs(self.data_y - self.y_reconstructed))
         print(f"Average difference: {avg_difference}")
-
-        # Plot the difference
         plot_item = third_plot_widget.getPlotItem()
-        plot_item.clear()  # Clear previous plots if necessary
-
+        plot_item.clear()
         # Add the plot for the difference
         curve = plot_item.plot(self.data_x[100:-100], difference_y[100:-100], pen=(200, 50, 50), name="Difference")
-
-        # Add a legend
-
         legend = plot_item.addLegend()
-        # Add the average difference to the legend
         legend.clear()
         legend.addItem(curve, f"Avg Difference: {avg_difference:.6f}")
 
-        # Uncomment the following lines if you want to set limits
-        # plot_item.autoRange()
-        # third_plot_widget.setLimits(xMin=min(self.data_x), xMax=max(self.data_x), yMin=min_y, yMax=max_y)
-
-
     def create_frequency_domain(self, plot_widget_frequency_domain, calculates_freq):
-        # cal freq domain using fft
-        self.amplitude = np.abs(np.fft.fft(self.data_y))
-        print(f"the amp is {self.amplitude}")
-        d = 0
-        if self.type == "composed" or not calculates_freq:
-            d = (self.y_reconstructed[1] - self.y_reconstructed[0])
-        else:
-            d = (self.data_x[1] - self.data_x[0])
-        self.frequencies = np.fft.fftfreq(len(self.y_reconstructed), d= d)
-        self.frequencies = np.fft.fftshift(self.frequencies)
+        fft_result = np.fft.fft(self.data_y)
+        frequencies = np.fft.fftfreq(len(fft_result), self.reconstructed_time[1]-self.reconstructed_time[0])
+        magnitude = (np.abs(fft_result)[:len(fft_result)])/3000
+        frequencies = frequencies[:len(frequencies)]
         print(f"the freq  is {self.frequencies}")
         self.frequency_line = plot_widget_frequency_domain.plot(
-            self.frequencies,
-            self.amplitude,
+            frequencies,
+            magnitude,
             pen=pg.mkPen(color="green", width=2.5),
         )
         self.after_band_width_line = plot_widget_frequency_domain.plot(
-            self.frequencies + self.sampling_frequency, self.amplitude, pen=pg.mkPen(color="red")
+            frequencies + self.sampling_frequency+0.1, magnitude, pen=pg.mkPen(color="red")
         )
         self.before_band_width_line = plot_widget_frequency_domain.plot(
-            self.frequencies - self.sampling_frequency , self.amplitude , pen = pg.mkPen(color = "red")
+            frequencies - self.sampling_frequency-0.1 , magnitude , pen = pg.mkPen(color = "red")
         )
+        plot_widget_frequency_domain.autoRange()
+
     def adding_noise(self):
         snr_db = float(self.snr)
         # snr range from -10 to 50 dB
@@ -198,75 +180,5 @@ class SignalClass:
     
     def remove_noise(self):
         self.noisy_data_y = self.data_y
-
-
-
-
-    # def update_amplitude(self, amplitude):
-    #     self.amplitude_data = [amplitude + val for val in self.amplitude_data]
-    #     self.amplitude = int(max(self.amplitude_data))
-    #     self.line.setData(self.x_data, self.amplitude_data)
-
-# class reconstructed_signal_class:
-#     def __init__(self, data_x, data_y, signal_type):
-#         self.x = data_x
-#         self.y = data_y
-#         self.type = signal_type  # original, reconstructed, difference
-#         # self.plot_widget = plot_widget
-#         self.color = None
-
-
-# def plot_original(self):
-#
-#     # Sampling parameters
-#     sampling_frequency = 250
-#     sampling_period = 1 / sampling_frequency
-#     self.x_sampled = np.arange(np.min(signal_x), np.max(signal_x), sampling_period)
-#
-#     # Sampled signal using interpolation
-#     self.y_sampled = np.interp(self.x_sampled, signal_x, self.signal_y)
-#
-#     # Plot the sampled points on the first plot widget
-#     self.first_plot_widget.plot(self.x_sampled, self.y_sampled, pen=None, symbol='o', symbolSize=5, symbolBrush='w')
-#
-#     # Plot the reconstructed sampled signal on the second plot widget
-#     # self.second_plot_widget.plot(self.x_sampled, self.y_sampled, pen='g')
-#
-#     # Reconstruct signal on original `signal_x` using Whittaker-Shannon interpolation
-#     # Calculate and plot the difference on the third plot widget
-#     difference = self.signal_y - self.y_reconstructed
-#
-#     self.third_plot_widget.plot(signal_x, difference, pen='r')
-#
-# def reconstruct_signal(self, data_x, x_sampled, y_sampled, sampling_frequency):
-#     reconstructed_signal = Signal(x_sampled, y_sampled, 'reconstructed')
-#     recovered_y, recovered_x = scipy.signal.resample(self.x_sampled)
-#     self.y_reconstructed = whittaker_shannon_interpolation(data_x, self.x_sampled, self.y_sampled)
-#     main_window.second_plot_widget.plot(data_x, self.y_reconstructed, pen='r')
-#
-# def plot_difference(self):
-#     pass
-
-
-# def reconstruct_signal(self, signal, time_sampled, sampled_signal):
-#     time_domain = np.linspace(0, signal.x[-1], len(signal.x))
-#     # Creating a 2D matrix with len(time_sampled) rows and len(time_domain) coloumns
-#     resizing = np.resize(time_domain, (len(time_sampled), len(time_domain)))
-#     Fs = 1 / (time_sampled[1] - time_sampled[0])
-#     # Subtract the sample time within the time domain from the 2 columns
-#     pre_interpolation = (resizing.T - time_sampled) * Fs
-#     '''Get the sinc value for each value in the resizing matrix so within 0 the value will be 1 and for large
-#     values it will be zero then multiply these values with its real amplitudes'''
-#     interpolation = sampled_signal * np.sinc(pre_interpolation)
-#
-#     # x(t)=∑ n=−∞ ---> ∞ [x[n]⋅sinc(fs * (t-nTs))
-#     # t ---> time domain
-#     # X[n] ---> samples
-#     # Ts ---> 1/fs
-#
-#     # Get the sum of the columns within one column only with the required data
-#     samples_of_amplitude_at_time_domain = np.sum(interpolation, axis=1)
-#
-#     return time_domain, samples_of_amplitude_at_time_domain
 
 
