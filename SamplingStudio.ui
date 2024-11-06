@@ -54,9 +54,9 @@ background-color: rgb(42, 42, 42);</string>
         <widget class="QPushButton" name="uploadButton">
          <property name="geometry">
           <rect>
-           <x>50</x>
+           <x>60</x>
            <y>20</y>
-           <width>191</width>
+           <width>161</width>
            <height>50</height>
           </rect>
          </property>
@@ -99,7 +99,7 @@ border-radius: 25px;</string>
           <rect>
            <x>130</x>
            <y>100</y>
-           <width>51</width>
+           <width>21</width>
            <height>20</height>
           </rect>
          </property>
@@ -117,7 +117,7 @@ font-weight:600;</string>
           <rect>
            <x>70</x>
            <y>140</y>
-           <width>161</width>
+           <width>151</width>
            <height>31</height>
           </rect>
          </property>
@@ -134,7 +134,7 @@ font-weight: 800</string>
         <widget class="QSlider" name="frequencyCombobox_3">
          <property name="geometry">
           <rect>
-           <x>50</x>
+           <x>40</x>
            <y>330</y>
            <width>211</width>
            <height>22</height>
@@ -167,7 +167,7 @@ QSlider::handle:horizontal {
         <widget class="QSlider" name="amplitudeCombobox_3">
          <property name="geometry">
           <rect>
-           <x>50</x>
+           <x>40</x>
            <y>270</y>
            <width>211</width>
            <height>22</height>
@@ -200,7 +200,7 @@ QSlider::handle:horizontal {
         <widget class="QLabel" name="ampLabel_3">
          <property name="geometry">
           <rect>
-           <x>90</x>
+           <x>80</x>
            <y>250</y>
            <width>81</width>
            <height>21</height>
@@ -249,7 +249,7 @@ font-weight:800;</string>
         <widget class="QLabel" name="hz_3">
          <property name="geometry">
           <rect>
-           <x>250</x>
+           <x>240</x>
            <y>310</y>
            <width>21</width>
            <height>21</height>
@@ -268,7 +268,7 @@ border-color: transparent;</string>
         <widget class="QLabel" name="label_8">
          <property name="geometry">
           <rect>
-           <x>250</x>
+           <x>240</x>
            <y>250</y>
            <width>21</width>
            <height>21</height>
@@ -287,7 +287,7 @@ border-color: transparent;</string>
         <widget class="QLabel" name="iconFreq_3">
          <property name="geometry">
           <rect>
-           <x>50</x>
+           <x>40</x>
            <y>310</y>
            <width>31</width>
            <height>21</height>
@@ -306,7 +306,7 @@ border-color: transparent;</string>
         <widget class="QLabel" name="frequencyLabel_3">
          <property name="geometry">
           <rect>
-           <x>90</x>
+           <x>80</x>
            <y>310</y>
            <width>81</width>
            <height>21</height>
@@ -325,7 +325,7 @@ border-color: transparent;</string>
         <widget class="QLabel" name="ampQuantity_3">
          <property name="geometry">
           <rect>
-           <x>230</x>
+           <x>220</x>
            <y>250</y>
            <width>21</width>
            <height>21</height>
@@ -344,7 +344,7 @@ border-color: transparent;</string>
         <widget class="QLabel" name="frequencyQuantity_3">
          <property name="geometry">
           <rect>
-           <x>220</x>
+           <x>210</x>
            <y>310</y>
            <width>21</width>
            <height>21</height>
@@ -363,7 +363,7 @@ border-color:transparent;</string>
         <widget class="QLabel" name="iconAmp_3">
          <property name="geometry">
           <rect>
-           <x>50</x>
+           <x>40</x>
            <y>240</y>
            <width>31</width>
            <height>41</height>
@@ -383,7 +383,7 @@ border-color:transparent;</string>
         <widget class="QLabel" name="phaseQuantity">
          <property name="geometry">
           <rect>
-           <x>230</x>
+           <x>220</x>
            <y>380</y>
            <width>21</width>
            <height>21</height>
@@ -402,7 +402,7 @@ border-color:transparent;</string>
         <widget class="QLabel" name="phaseLabel">
          <property name="geometry">
           <rect>
-           <x>90</x>
+           <x>80</x>
            <y>380</y>
            <width>81</width>
            <height>21</height>
@@ -421,7 +421,7 @@ border-color: transparent;</string>
         <widget class="QSlider" name="phaseSlider">
          <property name="geometry">
           <rect>
-           <x>50</x>
+           <x>40</x>
            <y>400</y>
            <width>211</width>
            <height>22</height>
@@ -454,7 +454,7 @@ QSlider::handle:horizontal {
         <widget class="QLabel" name="degree">
          <property name="geometry">
           <rect>
-           <x>250</x>
+           <x>240</x>
            <y>380</y>
            <width>21</width>
            <height>21</height>
@@ -473,7 +473,7 @@ border-color: transparent;</string>
         <widget class="QLabel" name="iconPhase">
          <property name="geometry">
           <rect>
-           <x>60</x>
+           <x>50</x>
            <y>380</y>
            <width>31</width>
            <height>21</height>
@@ -492,7 +492,7 @@ border-color: transparent;</string>
         <widget class="QLabel" name="waveType">
          <property name="geometry">
           <rect>
-           <x>50</x>
+           <x>40</x>
            <y>440</y>
            <width>101</width>
            <height>21</height>
@@ -511,7 +511,7 @@ border-color: transparent;</string>
         <widget class="QComboBox" name="waveCompobox">
          <property name="geometry">
           <rect>
-           <x>40</x>
+           <x>30</x>
            <y>470</y>
            <width>231</width>
            <height>31</height>
@@ -553,7 +553,7 @@ border-color: transparent;</string>
         <widget class="QPushButton" name="pushButton">
          <property name="geometry">
           <rect>
-           <x>110</x>
+           <x>100</x>
            <y>660</y>
            <width>81</width>
            <height>31</height>
@@ -583,7 +583,7 @@ font-weight:800;</string>
         <widget class="QComboBox" name="reconstructionComboBox_3">
          <property name="geometry">
           <rect>
-           <x>40</x>
+           <x>30</x>
            <y>610</y>
            <width>231</width>
            <height>31</height>
@@ -625,7 +625,7 @@ font-weight:800;</string>
         <widget class="QLabel" name="componentLabel">
          <property name="geometry">
           <rect>
-           <x>50</x>
+           <x>40</x>
            <y>580</y>
            <width>101</width>
            <height>21</height>
@@ -645,7 +645,7 @@ border-color: transparent;</string>
          <property name="geometry">
           <rect>
            <x>80</x>
-           <y>760</y>
+           <y>720</y>
            <width>121</width>
            <height>31</height>
           </rect>
@@ -1287,7 +1287,7 @@ font-weight: 800</string>
             <rect>
              <x>50</x>
              <y>350</y>
-             <width>32</width>
+             <width>31</width>
              <height>21</height>
             </rect>
            </property>

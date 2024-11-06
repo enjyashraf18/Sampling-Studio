@@ -154,8 +154,7 @@ class SignalClass:
 
     def adding_noise(self):
         snr_db = float(self.snr)
-        # snr range from -10 to 50 dB
-        # Calculate signal power as the mean square of the signal
+
         signal_power = np.mean(self.data_y ** 2)
 
         # Calculate noise power based on desired SNR
