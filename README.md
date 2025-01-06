@@ -34,7 +34,7 @@ All developers are more than welcomed to contribute to this repository
    ```
 2. Commit your changes:
    ```bash
-   git commit -m "Add feature description"
+   git commit -m "Feature description"
    ```
 3. Push to the branch:
    ```bash
@@ -65,4 +65,4 @@ All developers are more than welcomed to contribute to this repository
     </tr>
   </table>
 </div>
-For questions or feedback, please contact [your email or other contact information].
+
