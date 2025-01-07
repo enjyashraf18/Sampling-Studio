@@ -11,10 +11,15 @@ Sampling-Theory Studio is a desktop application designed to illustrate the conce
 - **Signal Loading**: Load signals from files.
 - **Signal Mixer**: Add multiple sinusoidal signals with different frequencies and magnitudes.
 
+https://github.com/user-attachments/assets/759d1e1f-15bc-420f-8a1d-cce56c965ec0
+
 ### 2. Sample & Recover
 - **Sampling Frequencies**: Sample signals at different frequencies.
 
+https://github.com/user-attachments/assets/1f1cb156-8aef-481e-ad2b-c5c53ee79d62
+
 ### 3. Additive Noise
+https://github.com/user-attachments/assets/4514948c-70d4-4b6c-9212-311636db21b1
 
 
 ### 4. Different Reconstruction Methods
@@ -24,7 +29,25 @@ Sampling-Theory Studio is a desktop application designed to illustrate the conce
 
 
 
+## Installation 
 
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/enjyashraf18/Sampling-Studio
+   
+   ```
+
+2. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Run the simulator:
+   ```bash
+   python SamplingStudioGUI.py
+   ```
+
+   
 
 ## Contribution
 All developers are more than welcomed to contribute to this repository 
@@ -41,6 +64,10 @@ All developers are more than welcomed to contribute to this repository
    git push origin feature-name
    ```
 4. Submit a pull request.
+
+
+## Acknowledgments 
+This project was supervised by Dr. Tamer Basha & Eng. Omar, who provided invaluable guidance and expertise throughout its development as a part of the Digital Signal Processing course at Cairo University Faculty of Engineering.
 
 ## Team Members
 <div align="center">
